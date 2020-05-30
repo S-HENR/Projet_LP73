@@ -1,2 +1,2 @@
-# Projet_LP73_docs : Schémas, diagrammes et documentation.
+# Projet_LP73 : Schémas, diagrammes et documentation.
 Simulation d'une fourmilière
