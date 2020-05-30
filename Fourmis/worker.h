@@ -1,8 +1,8 @@
 #ifndef WORKER_H
 #define WORKER_H
+#include "fullgrownant.h"
 
-
-class Worker : public FullGrownAnt
+class Worker : public Full_grown_ant
 {
 public:
     Worker();

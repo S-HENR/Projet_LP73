@@ -5,17 +5,17 @@ Environnement::Environnement()
 
 }
 
-~Environnement()
+Environnement::~Environnement()
 {
 
 }
 
-void generate_ground()
+void Environnement::generate_ground()
 {
 
 }
 
-void display_ground()
+void Environnement::display_ground()
 {
 
 }

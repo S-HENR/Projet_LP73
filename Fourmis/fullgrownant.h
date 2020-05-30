@@ -1,6 +1,6 @@
 #ifndef FULL_GROWN_ANT_H
 #define FULL_GROWN_ANT_H
-
+#include "ant.h"
 
 class Full_grown_ant : public Ant
 {
