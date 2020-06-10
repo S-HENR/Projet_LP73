@@ -6,6 +6,12 @@ class Larva : public Ant
 {
 public:
     Larva();
+    ~Larva();
+
+    // Ant interface
+public:
+    int increase_food_need();
+    void eat();
 };
 
 #endif // LARVA_H
