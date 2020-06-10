@@ -1,6 +1,6 @@
 #include "anthill.h"
 
-Anthill::Anthill()
+Anthill::Anthill(int coordinateX, int coordinateY, bool crossable) : Ground(coordinateX, coordinateY, crossable)
 {
 
 }

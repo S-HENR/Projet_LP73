@@ -16,10 +16,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    anthill.cpp \
+#    anthill.cpp \
     dirt.cpp \
     environnement.cpp \
-    food.cpp \
+#    food.cpp \
     ground.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -32,10 +32,10 @@ SOURCES += \
     worker.cpp
 
 HEADERS += \
-    anthill.h \
+#    anthill.h \
     dirt.h \
     environnement.h \
-    food.h \
+#    food.h \
     ground.h \
     mainwindow.h \
     obstacle.h \

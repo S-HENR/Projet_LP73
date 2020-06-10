@@ -5,7 +5,7 @@
 class Food : public Ground
 {
 public:
-    Food();
+    Food(int coordinateX, int coordinateY, bool crossable);
     ~Food();
     void decrease_quantity(int amount);
 private:

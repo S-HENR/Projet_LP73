@@ -5,7 +5,7 @@
 class Anthill : public Ground
 {
 public:
-    Anthill();
+    Anthill(int coordinateX, int coordinateY, bool crossable);
 };
 
 #endif // ANTHILL_H

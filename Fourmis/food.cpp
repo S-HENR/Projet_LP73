@@ -1,6 +1,6 @@
 #include "food.h"
 
-Food::Food()
+Food::Food(int coordinateX, int coordinateY, bool crossable) : Ground(coordinateX, coordinateY, crossable)
 {
     //random de 8 à 12 à affecter à quantity?
 }
