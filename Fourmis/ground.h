@@ -1,16 +1,15 @@
 #ifndef GROUND_H
 #define GROUND_H
 
-
 class Ground
 {
 public:
-    Ground();
+    Ground(bool crossable);
     ~Ground();
+    bool getCrossable();
+    virtual void getValue() = 0;
 private:
-    int coordinates[2];
     bool crossable;
-
 };
 
 #endif // GROUND_H

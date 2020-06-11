@@ -1,6 +1,16 @@
 #include "anthill.h"
 
-Anthill::Anthill()
+Anthill::Anthill() : Ground(true)
 {
 
+}
+
+Anthill::~Anthill()
+{
+
+}
+
+void Anthill::getValue()
+{
+    std::cout << "X";
 }

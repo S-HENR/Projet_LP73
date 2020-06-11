@@ -1,6 +1,7 @@
 #include "obstacle.h"
 
-Obstacle::Obstacle()
+
+Obstacle::Obstacle() : Ground(false)
 {
 
 }
@@ -10,3 +11,7 @@ Obstacle::~Obstacle()
 
 }
 
+void Obstacle::getValue()
+{
+    std::cout << "#";
+}

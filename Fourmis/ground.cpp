@@ -1,6 +1,6 @@
 #include "ground.h"
 
-Ground::Ground()
+Ground::Ground( bool crossable) : crossable(crossable)
 {
 
 }
@@ -8,4 +8,9 @@ Ground::Ground()
 Ground::~Ground()
 {
 
+}
+
+bool Ground::getCrossable()
+{
+    return crossable;
 }

@@ -1,22 +1,22 @@
 #ifndef ENVIRONNEMENT_H
 #define ENVIRONNEMENT_H
-
-#include "ground.h"
-
+#include <vector>
 #include <array>
 #include <memory>
-
+#include "ground.h"
 
 class Environnement
 {
 public:
-    Environnement();
+    Environnement(int height,int length, int food, int obstacle);
     ~Environnement();
     void generate_ground();
     void display_ground();
-
-private :
-    std::array<std::array<std::unique_ptr<Ground>, 50>, 100> myMap;
+private:
+    int size[2];
+    int food_number;
+    int obstacle_number;
+    std::vector<std::vector<Ground*>> board;
 };
 
 #endif // ENVIRONNEMENT_H
