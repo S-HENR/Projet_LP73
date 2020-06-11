@@ -2,7 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -21,6 +21,7 @@ SOURCES += \
     environnement.cpp \
     food.cpp \
     ground.cpp \
+    idle.cpp \
     main.cpp \
     mainwindow.cpp \
     obstacle.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
     fullgrownant.cpp \
     larva.cpp \
     queen.cpp \
+    state.cpp \
     warrior.cpp \
     worker.cpp
 
@@ -37,12 +39,14 @@ HEADERS += \
     environnement.h \
     food.h \
     ground.h \
+    idle.h \
     mainwindow.h \
     obstacle.h \
     ant.h \
     fullgrownant.h \
     larva.h \
     queen.h \
+    state.h \
     warrior.h \
     worker.h
 
