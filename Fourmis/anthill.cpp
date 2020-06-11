@@ -1,6 +1,16 @@
 #include "anthill.h"
 
-Anthill::Anthill(int coordinateX, int coordinateY, bool crossable) : Ground(coordinateX, coordinateY, crossable)
+Anthill::Anthill() : Ground(true)
 {
 
+}
+
+Anthill::~Anthill()
+{
+
+}
+
+void Anthill::getValue()
+{
+    std::cout << "X";
 }

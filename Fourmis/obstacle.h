@@ -6,7 +6,7 @@
 class Obstacle : public Ground
 {
 public:
-    Obstacle(int coordinateX, int coordinateY);
+    Obstacle();
     ~Obstacle();
     virtual void getValue();
 };

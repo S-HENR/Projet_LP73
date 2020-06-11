@@ -1,11 +1,14 @@
 #ifndef ANTHILL_H
 #define ANTHILL_H
+#include <iostream>
 #include "ground.h"
 
 class Anthill : public Ground
 {
 public:
-    Anthill(int coordinateX, int coordinateY, bool crossable);
+    Anthill();
+    ~Anthill();
+    virtual void getValue();
 };
 
 #endif // ANTHILL_H

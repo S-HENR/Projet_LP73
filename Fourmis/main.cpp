@@ -8,8 +8,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();*/
 
-
-    Environnement env(1,2);
+    Environnement env(5,5,10,5);
 
     //return a.exec();
     env.generate_ground();
