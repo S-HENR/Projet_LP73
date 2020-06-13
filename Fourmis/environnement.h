@@ -3,7 +3,13 @@
 #include <vector>
 #include <array>
 #include <memory>
+#include <ctime>
 #include "ground.h"
+#include "dirt.h"
+#include "obstacle.h"
+#include "food.h"
+#include "anthill.h"
+#include "map_display.h"
 
 class Environnement
 {
@@ -12,11 +18,19 @@ public:
     ~Environnement();
     void generate_ground();
     void display_ground();
+    Ground* getTile(int x,int y);
+    int getSizeX();
+    int getSizeY();
 private:
     int size[2];
     int food_number;
     int obstacle_number;
     std::vector<std::vector<Ground*>> board;
+    void generate_anthill(int x, int y);
+    void generate_obstacle();
+    void template_obstacle(int x, int y);
+    void generate_food();
+    void generate_dirt();
 };
 
 #endif // ENVIRONNEMENT_H

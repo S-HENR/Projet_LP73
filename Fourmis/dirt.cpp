@@ -20,3 +20,8 @@ void Dirt::getValue()
 {
     std::cout << "O";
 }
+
+int Dirt::getType()
+{
+    return 1;
+}

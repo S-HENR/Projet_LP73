@@ -9,6 +9,9 @@ public:
     Anthill();
     ~Anthill();
     virtual void getValue();
+    virtual int getType();
+private:
+    int coordinates[2];
 };
 
 #endif // ANTHILL_H

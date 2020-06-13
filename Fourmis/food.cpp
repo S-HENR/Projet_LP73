@@ -20,3 +20,13 @@ void Food::getValue()
 {
     std::cout << "F";
 }
+
+int Food::getType()
+{
+    return 3;
+}
+
+int Food::get_quantity_food()
+{
+    return quantity;
+}

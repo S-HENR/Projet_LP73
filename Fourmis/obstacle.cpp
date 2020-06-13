@@ -15,3 +15,8 @@ void Obstacle::getValue()
 {
     std::cout << "#";
 }
+
+int Obstacle::getType()
+{
+    return 2;
+}
