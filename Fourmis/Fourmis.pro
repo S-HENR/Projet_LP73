@@ -23,6 +23,7 @@ SOURCES += \
     ground.cpp \
     main.cpp \
     mainwindow.cpp \
+    map_display.cpp \
     obstacle.cpp \
     ant.cpp \
     fullgrownant.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     food.h \
     ground.h \
     mainwindow.h \
+    map_display.h \
     obstacle.h \
     ant.h \
     fullgrownant.h \

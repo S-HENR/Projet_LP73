@@ -9,6 +9,7 @@ public:
     Obstacle();
     ~Obstacle();
     virtual void getValue();
+    virtual int getType();
 };
 
 #endif // OBSTACLE_H

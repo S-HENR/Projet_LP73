@@ -10,6 +10,7 @@ class Dirt : public Ground
         ~Dirt();
         void apply_disappearance_rate();
         virtual void getValue();
+        virtual int getType();
     private:
         float pheromone_rate;
 };
