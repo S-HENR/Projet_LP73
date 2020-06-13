@@ -1,8 +1,10 @@
 #ifndef WORKER_H
 #define WORKER_H
-#include "fullgrownant.h"
 
-class Worker : public FullGrownAnt
+#include "ant.h"
+
+
+class Worker : public Ant
 {
 public:
     Worker();
@@ -12,10 +14,6 @@ public:
 public:
     int increase_food_need();
     void eat();
-
-    // FullGrownAnt interface
-public:
-    void movement();
 };
 
 #endif // WORKER_H

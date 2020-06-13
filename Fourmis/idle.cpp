@@ -1,6 +1,5 @@
 #include "ant.h"
 #include "idle.h"
-#include <memory>
 
 Idle::Idle()
 {}

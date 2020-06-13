@@ -19,8 +19,3 @@ void Worker::eat()
 {
 
 }
-
-void Worker::movement()
-{
-
-}

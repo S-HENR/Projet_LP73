@@ -1,10 +1,9 @@
 #include "ant.h"
 
-#include "state.h"
-
-Ant::Ant()
+Ant::Ant() :
+    m_state(nullptr)
 {
-    m_state = std::make_unique<State>();
+    //std::make_unique<Idle>();
 }
 
 Ant::~Ant()
@@ -24,7 +23,7 @@ void Ant::Action()
 
 void Ant::FaireSonTraitement()
 {
-    auto newState = m_state->Action(this);
+    auto newState = m_state->Action(*this);
     if(newState)
         m_state = std::move(newState);
 }

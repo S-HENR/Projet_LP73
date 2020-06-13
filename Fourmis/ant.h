@@ -3,7 +3,7 @@
 
 #include <memory>
 
-class State;
+#include "state.h"
 
 class Ant
 {

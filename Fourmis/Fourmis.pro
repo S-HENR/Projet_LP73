@@ -24,9 +24,9 @@ SOURCES += \
     idle.cpp \
     main.cpp \
     mainwindow.cpp \
+    move.cpp \
     obstacle.cpp \
     ant.cpp \
-    fullgrownant.cpp \
     larva.cpp \
     queen.cpp \
     state.cpp \
@@ -41,9 +41,9 @@ HEADERS += \
     ground.h \
     idle.h \
     mainwindow.h \
+    move.h \
     obstacle.h \
     ant.h \
-    fullgrownant.h \
     larva.h \
     queen.h \
     state.h \

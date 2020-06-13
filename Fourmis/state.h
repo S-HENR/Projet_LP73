@@ -1,8 +1,9 @@
 #ifndef STATE_H
 #define STATE_H
 
-#include "ant.h"
 #include <memory>
+
+class Ant;
 
 class State
 {
