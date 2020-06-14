@@ -241,8 +241,21 @@ void Environnement::generate_dirt()
 
 void Environnement::display_ground()
 {
-    Map_display map;
     map.display(board, size[1], size[0]);
 }
 
-//dynamic_cast<Food*>(board[0][0])->get_quantity_food();
+int Environnement::get_typeof_tile(int x, int y)
+{
+    return board[x][y]->getType();
+}
+
+int Environnement::collect_food(int x, int y, int amount)
+{
+    int amount_food_collected = dynamic_cast<Food*>(board[x][y])->decrease_quantity(amount);
+    if(dynamic_cast<Food*>(board[x][y])->get_quantity_food() == 0)
+    {
+        board[x][y] = new Dirt();
+        map.refresh_display(0, x, y);
+    }
+    return amount_food_collected;
+}

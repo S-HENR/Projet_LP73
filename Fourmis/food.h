@@ -8,7 +8,7 @@ class Food : public Ground
 public:
     Food();
     ~Food();
-    void decrease_quantity(int amount);
+    int decrease_quantity(int amount);
     virtual void getValue();
     virtual int getType();
     int get_quantity_food();
