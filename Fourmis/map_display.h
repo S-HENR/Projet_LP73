@@ -5,7 +5,7 @@
 #include <QGridLayout>
 #include <QScrollArea>
 #include <QScrollBar>
-#include "environnement.h"
+#include "ground.h"
 
 class Map_display
 {
