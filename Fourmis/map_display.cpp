@@ -11,7 +11,7 @@ Map_display::Map_display()
 
 void Map_display::display(std::vector<std::vector<Ground*>>& board, int x, int y)
 {
-    //Initialize the grid with images
+    //Initialize the grid (board) with images
     for (int i = 0 ; i < x ; i++)
     {
         for (int j = 0; j < y ; j++)
@@ -31,7 +31,7 @@ void Map_display::display(std::vector<std::vector<Ground*>>& board, int x, int y
                     label_img->setPixmap(QPixmap("../img/food.png"));
                     break;
             }
-            gridLayout->addWidget(label_img, i, j, 0);
+            gridLayout->addWidget(label_img, i, j);
         }
     }
 
@@ -50,6 +50,15 @@ void Map_display::display(std::vector<std::vector<Ground*>>& board, int x, int y
 void Map_display::refresh_display(int choice, int x, int y)
 {
     label_img = new QLabel;
+
+    /* Choice :
+     * 0 : Set grid[x][y] to dirt
+     * 1 : Set grid[x][y] to food
+     * 2 : Put ant looking north on grid[x][y]
+     * 3 : Put ant looking east on grid[x][y]
+     * 4 : Put ant looking south on grid[x][y]
+     * 5 : Put ant looking west on grid[x][y]
+     */
 
     switch(choice)
     {
@@ -74,7 +83,7 @@ void Map_display::refresh_display(int choice, int x, int y)
     }
 
 
-    gridLayout->addWidget(label_img, x, y, 0);
+    gridLayout->addWidget(label_img, x, y);
     scrollArea->setWidget(widget);
     scrollArea->show();
 }
