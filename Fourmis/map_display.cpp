@@ -82,8 +82,9 @@ void Map_display::refresh_display(int choice, int x, int y)
         break;
     }
 
-
+    //update map[x][y]
     gridLayout->addWidget(label_img, x, y);
     scrollArea->setWidget(widget);
+    //display the map updated
     scrollArea->show();
 }
