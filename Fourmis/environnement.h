@@ -23,6 +23,7 @@ public:
     int getSizeY();
     int get_typeof_tile(int x, int y);
     int collect_food(int x, int y, int amount);
+    void regenerate_food(int amount);
 private:
     int size[2];
     int food_number;
