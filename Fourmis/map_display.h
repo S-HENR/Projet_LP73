@@ -4,14 +4,15 @@
 #include <QPixmap>
 #include <QGridLayout>
 #include <QScrollArea>
-#include <QWheelEvent>
-#include "environnement.h"
+#include <QScrollBar>
+#include "ground.h"
 
 class Map_display
 {
 public:
     Map_display();
     void display(std::vector<std::vector<Ground*>>& board, int x, int y);
+    void refresh_display(int choice, int x, int y);
 private:
     QWidget *widget;
     QLabel *label_img;

@@ -11,9 +11,16 @@ Food::~Food()
 
 }
 
-void Food::decrease_quantity(int amount)
+int Food::decrease_quantity(int amount)
 {
-
+   if(amount < quantity)
+       quantity -= amount;
+   else
+   {
+       amount = quantity;
+       quantity = 0;
+   }
+   return amount;
 }
 
 void Food::getValue()

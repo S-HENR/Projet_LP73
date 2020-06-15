@@ -21,13 +21,15 @@ public:
     Ground* getTile(int x,int y);
     int getSizeX();
     int getSizeY();
+    int get_typeof_tile(int x, int y);
+    int collect_food(int x, int y, int amount);
 private:
     int size[2];
     int food_number = 500;
     int obstacle_number = 1000;
     float pheromone_disappearance_rate = 0.95;
     std::vector<std::vector<Ground*>> board;
-
+    Map_display map;
     void generate_anthill(int x, int y);
     void generate_obstacle();
     void template_obstacle(int x, int y);
