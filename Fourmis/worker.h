@@ -8,6 +8,7 @@ class Worker : public Ant
 {
 public:
     Worker();
+    Worker(int _food_need = 0, int _max_food_need = 50, int _time_to_transition = 50, bool _is_queen = false);
     ~Worker();
 
     // Ant interface

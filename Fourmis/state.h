@@ -8,8 +8,8 @@ class Ant;
 class State
 {
 public:
-    State(){}
-    ~State(){}
+    State();
+    virtual ~State(){};
     virtual std::unique_ptr<State> Action(Ant& ant) = 0;
 };
 

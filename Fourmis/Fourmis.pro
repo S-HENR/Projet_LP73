@@ -18,37 +18,58 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     anthill.cpp \
     dirt.cpp \
+    egg.cpp \
     environnement.cpp \
+    feedingstate.cpp \
     food.cpp \
     ground.cpp \
-    idle.cpp \
+    idlelarva.cpp \
+    idlequeen.cpp \
+    idlewarrior.cpp \
+    idleworker.cpp \
+    layinganeggstate.cpp \
     main.cpp \
     mainwindow.cpp \
-    move.cpp \
+    map_display.cpp \
+    movingstate.cpp \
     obstacle.cpp \
     ant.cpp \
     larva.cpp \
+    pickingupfoodstate.cpp \
+    puttingdownfoodstate.cpp \
     queen.cpp \
     state.cpp \
     warrior.cpp \
-    worker.cpp
+    warrioreatingstate.cpp \
+    worker.cpp \
+    workereatingstate.cpp
 
 HEADERS += \
     anthill.h \
     dirt.h \
+    egg.h \
     environnement.h \
+    feedingstate.h \
     food.h \
     ground.h \
-    idle.h \
+    idlelarva.h \
+    idlequeen.h \
+    idlewarrior.h \
+    idleworker.h \
+    layinganeggstate.h \
     mainwindow.h \
-    move.h \
+    movingstate.h \
     obstacle.h \
     ant.h \
     larva.h \
+    pickingupfoodstate.h \
+    puttingdownfoodstate.h \
     queen.h \
     state.h \
     warrior.h \
-    worker.h
+    warrioreatingstate.h \
+    worker.h \
+    workereatingstate.h
 
 FORMS += \
     mainwindow.ui

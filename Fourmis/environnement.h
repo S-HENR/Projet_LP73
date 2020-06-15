@@ -23,9 +23,11 @@ public:
     int getSizeY();
 private:
     int size[2];
-    int food_number;
-    int obstacle_number;
+    int food_number = 500;
+    int obstacle_number = 1000;
+    float pheromone_disappearance_rate = 0.95;
     std::vector<std::vector<Ground*>> board;
+
     void generate_anthill(int x, int y);
     void generate_obstacle();
     void template_obstacle(int x, int y);
