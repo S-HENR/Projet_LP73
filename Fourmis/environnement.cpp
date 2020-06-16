@@ -218,14 +218,15 @@ void Environnement::generate_food()
 {
     int x;
     int y;
-    while(food_number > 0)
+    int fd_nb = food_number;
+    while(fd_nb > 0)
     {
         x = rand()%size[1];
         y = rand()%size[0];
         if(!board[x][y])
         {
             board[x][y] = new Food();
-            food_number--;
+            fd_nb--;
         }
     }
 }
@@ -255,8 +256,26 @@ int Environnement::collect_food(int x, int y, int amount)
     int amount_food_collected = dynamic_cast<Food*>(board[x][y])->decrease_quantity(amount);
     if(dynamic_cast<Food*>(board[x][y])->get_quantity_food() == 0)
     {
+        food_number--;
         board[x][y] = new Dirt();
         map.refresh_display(0, x, y);
     }
     return amount_food_collected;
+}
+
+void Environnement::regenerate_food(int amount)
+{
+    int x;
+    int y;
+    while(amount > 0)
+    {
+        x = rand()%size[1];
+        y = rand()%size[0];
+        if(board[x][y]->getType() == 1)
+        {
+            board[x][y] = new Food();
+            food_number++;
+            amount--;
+        }
+    }
 }
