@@ -5,8 +5,8 @@ Egg::Egg()
 
 }
 
-Egg::Egg(int _food_need, int _max_food_need, int _time_to_transition, bool _is_queen) :
-    Ant(_food_need, _max_food_need, _time_to_transition, _is_queen)
+Egg::Egg(bool _is_queen, int _food_need, int _max_food_need, int _time_to_transition) :
+    Ant(_is_queen, _food_need, _max_food_need, _time_to_transition)
 {
 
 }
@@ -16,9 +16,9 @@ Egg::~Egg()
 
 }
 
-int Egg::increase_food_need()
+void Egg::increase_food_need()
 {
-    return 0;
+
 }
 
 void Egg::eat()

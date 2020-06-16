@@ -6,11 +6,11 @@ Ant::Ant():
     //std::make_unique<Idle>();
 }
 
-Ant::Ant(int _food_need, int _max_food_need, int _time_to_transition, bool _is_queen) :
+Ant::Ant(bool _is_queen, int _food_need, int _max_food_need, int _time_to_transition) :
+    is_queen(_is_queen),
     food_need(_food_need),
     max_food_need(_max_food_need),
-    time_to_transition(_time_to_transition),
-    is_queen(_is_queen)
+    time_to_transition(_time_to_transition)
 {}
 
 Ant::~Ant()
@@ -18,9 +18,9 @@ Ant::~Ant()
 
 }
 
-int Ant::decrease_food_need()
+void Ant::decrease_food_need()
 {
-    return 0;
+
 }
 
 void Ant::Action()

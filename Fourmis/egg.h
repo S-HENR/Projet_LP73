@@ -9,12 +9,12 @@ class Egg : public Ant
 {
 public:
     Egg();
-    Egg(int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10, bool _is_queen = false);
+    Egg(bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
     ~Egg();
 
     // Ant interface
 public:
-    int increase_food_need();
+    void increase_food_need();
     void eat();
 };
 

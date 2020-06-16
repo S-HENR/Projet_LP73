@@ -25,7 +25,7 @@ std::unique_ptr<State> IdleQueen::Action(Ant& ant)
     {
         return std::make_unique<LayingAnEggState>();
     }
-    queen.set_food_need(queen.get_food_need() + 1 );
+    queen.increase_food_need();
 
 //    if(false) // Une condition pr passer à un nouvelle état
 //        return std::make_unique<UnAutreEtat>();

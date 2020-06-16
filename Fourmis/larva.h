@@ -7,7 +7,7 @@ class Larva : public Ant
 {
 public:
     Larva();
-    Larva(int _food_need = 0, int _max_food_need = 20, int _time_to_transition = 20, bool _is_queen = false);
+    Larva(bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
     ~Larva();
 
     bool get_is_hungry() const;
@@ -15,7 +15,7 @@ public:
 
     // Ant interface
 public:
-    int increase_food_need();
+    void increase_food_need();
     void eat();
 
 private:

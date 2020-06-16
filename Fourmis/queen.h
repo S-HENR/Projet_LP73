@@ -6,12 +6,12 @@ class Queen : public Ant
 {
 public:
     Queen();
-    Queen(int _food_need = 0, int _max_food_need = 100, int _time_to_transition = 500, bool _is_queen = true);
+    Queen(bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
     ~Queen();
 
     // Ant interface
 public:
-    int increase_food_need();
+    void increase_food_need();
     void eat();
 
     bool get_is_hungry() const;

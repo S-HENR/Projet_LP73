@@ -9,10 +9,10 @@ class Ant
 {
 public:
     Ant();
-    Ant(int _food_need, int _max_food_need, int _time_to_transition, bool _is_queen);
+    Ant(bool _is_queen, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
     ~Ant();
-    int decrease_food_need();
-    virtual int increase_food_need() = 0;
+    void decrease_food_need();
+    virtual void increase_food_need() = 0;
     virtual void eat() = 0;
 
     void Action();
@@ -32,10 +32,10 @@ public:
 
 private:
     int coordinates[2];
+    bool is_queen;
     int food_need;
     int max_food_need;
     int time_to_transition;
-    bool is_queen;
 
     std::unique_ptr<State> m_state = nullptr;
 };
