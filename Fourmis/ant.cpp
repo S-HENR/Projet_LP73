@@ -6,11 +6,13 @@ Ant::Ant():
     //std::make_unique<Idle>();
 }
 
-Ant::Ant(bool _is_queen, int _food_need, int _max_food_need, int _time_to_transition) :
+Ant::Ant(Anthill* _anthill, bool _is_queen, int _food_need, int _max_food_need, int _time_to_transition) :
     is_queen(_is_queen),
     food_need(_food_need),
     max_food_need(_max_food_need),
-    time_to_transition(_time_to_transition)
+    time_to_transition(_time_to_transition),
+    m_state(nullptr),
+    m_anthill(_anthill)
 {}
 
 Ant::~Ant()
@@ -25,7 +27,9 @@ void Ant::decrease_food_need()
 
 void Ant::Action()
 {
-    //current_state.Action();
+    auto newState = m_state->Action(*this);
+    if(newState)
+        m_state = std::move(newState);
 }
 
 int Ant::get_food_need() const
@@ -66,4 +70,14 @@ bool Ant::get_is_queen() const
 void Ant::set_is_queen(bool value)
 {
     is_queen = value;
+}
+
+Anthill* Ant::get_anthill() const
+{
+    return m_anthill;
+}
+
+void Ant::set_anthill(Anthill *anthill)
+{
+    m_anthill = anthill;
 }

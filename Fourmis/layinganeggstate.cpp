@@ -20,15 +20,15 @@ std::unique_ptr<State> LayingAnEggState::Action(Ant& ant)
     std::mt19937 generator(rand_dev());
     std::uniform_int_distribution<int> distr(range_from, range_to);
 
+    queen.increase_food_need();
     if( (distr(generator) == 0) )
     {
-        Egg(true);
+        Egg(queen.get_anthill(), true);
     }
     else
     {
-        Egg(false);
+        Egg(queen.get_anthill(), false);
     }
-    queen.increase_food_need();
     return std::make_unique<IdleQueen>();
 
 //    if(false) // Une condition pr passer à un nouvelle état

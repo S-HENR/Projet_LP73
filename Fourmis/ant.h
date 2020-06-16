@@ -1,6 +1,7 @@
 #ifndef ANT_H
 #define ANT_H
 
+#include "anthill.h"
 #include "state.h"
 
 #include <memory>
@@ -9,14 +10,13 @@ class Ant
 {
 public:
     Ant();
-    Ant(bool _is_queen, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
+    Ant(Anthill* _anthill, bool _is_queen, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
     ~Ant();
     void decrease_food_need();
     virtual void increase_food_need() = 0;
     virtual void eat() = 0;
 
     void Action();
-    void FaireSonTraitement();
 
     int get_food_need() const;
     void set_food_need(int value);
@@ -30,6 +30,9 @@ public:
     bool get_is_queen() const;
     void set_is_queen(bool value);
 
+    Anthill* get_anthill() const;
+    void set_anthill(Anthill *anthill);
+
 private:
     int coordinates[2];
     bool is_queen;
@@ -38,6 +41,7 @@ private:
     int time_to_transition;
 
     std::unique_ptr<State> m_state = nullptr;
+    Anthill* m_anthill = nullptr;
 };
 
 #endif // ANT_H

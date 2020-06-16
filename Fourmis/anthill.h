@@ -2,8 +2,10 @@
 #define ANTHILL_H
 #include <iostream>
 #include <vector>
-#include "ant.h"
+#include <memory>
 #include "ground.h"
+
+class Ant;
 
 class Anthill : public Ground
 {
@@ -13,6 +15,10 @@ public:
     ~Anthill();
     virtual void getValue();
     virtual int getType();
+    void generate_ants();
+    std::vector<std::shared_ptr<Ant>> get_ants() const;
+    void set_ants(const std::vector<std::shared_ptr<Ant>> &value);
+
 private:
     int coordinates[2];
     int max_ants_nb;

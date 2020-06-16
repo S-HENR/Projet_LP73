@@ -1,5 +1,8 @@
 #include "idleworker.h"
+#include "larva.h"
+#include "queen.h"
 #include "worker.h"
+#include <string.h>
 
 IdleWorker::IdleWorker()
 {
@@ -10,9 +13,13 @@ std::unique_ptr<State> IdleWorker::Action(Ant& ant)
 {
     Worker& worker = dynamic_cast<Worker&>(ant);
 
+    for(auto&& ant: worker.get_anthill()->get_ants())
+    {
+        if( ant->get_max_food_need() - ant->get_food_need() <= 10 && (std::dynamic_pointer_cast<Larva>(ant) != nullptr || std::dynamic_pointer_cast<Queen>(ant) != nullptr))
+        {
 
-
-
+        }
+    }
 
 
 

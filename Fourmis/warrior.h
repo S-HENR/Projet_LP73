@@ -8,7 +8,7 @@ class Warrior : public Ant
 {
 public:
     Warrior();
-    Warrior(bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
+    Warrior(Anthill* _anthill, bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
     ~Warrior();
     void movement();
     void lay_pheromone();
