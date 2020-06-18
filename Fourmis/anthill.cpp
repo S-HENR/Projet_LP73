@@ -4,9 +4,8 @@
 #include "queen.h"
 #include "warrior.h"
 #include "worker.h"
-#include <ostream>
 
-Anthill::Anthill(Environnement* env, int x, int y, Parameters& parameters) :
+Anthill::Anthill(Environnement env, int x, int y, Parameters& parameters) :
     Ground(true),
     coordinates({x,y}),
     max_ants_nb(parameters.nb_max_ants),
@@ -31,7 +30,7 @@ int Anthill::getType()
     return 0;
 }
 
-void Anthill::generate_ants(Environnement* env, int nb_workers, int nb_warriors)
+void Anthill::generate_ants(Environnement& env, int nb_workers, int nb_warriors)
 {
     //temp liste of ants for tests
 

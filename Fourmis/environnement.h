@@ -11,7 +11,7 @@
 #include "map_display.h"
 #include "parameters.h"
 
-class Anthill;
+//class Anthill;
 
 class Environnement
 {
