@@ -8,9 +8,10 @@
 #include "dirt.h"
 #include "obstacle.h"
 #include "food.h"
-#include "anthill.h"
 #include "map_display.h"
 #include "parameters.h"
+
+class Anthill;
 
 class Environnement
 {
@@ -26,6 +27,7 @@ public:
     int collect_food(int x, int y, int amount);
     void regenerate_food(int amount);
     void display_updated_ground(int x, int y);
+
 private:
     int size[2];
     int food_number = 500;

@@ -6,7 +6,12 @@
 #include "worker.h"
 #include <ostream>
 
-Anthill::Anthill(Environnement* env, int x, int y, Parameters& parameters) : Ground(true), coordinates({x,y}) ,max_ants_nb(parameters.nb_max_ants), max_quantity_food_stock(parameters.nb_max_food)
+Anthill::Anthill(Environnement* env, int x, int y, Parameters& parameters) :
+    Ground(true),
+    coordinates({x,y}),
+    max_ants_nb(parameters.nb_max_ants),
+    max_quantity_food_stock(parameters.nb_max_food),
+    m_env(env)
 {
     generate_ants(env, parameters.nb_init_workers, parameters.nb_init_warriors);
 }
@@ -30,28 +35,28 @@ void Anthill::generate_ants(Environnement* env, int nb_workers, int nb_warriors)
 {
     //temp liste of ants for tests
 
-    std::cout << nb_workers << " - " << nb_warriors << " - " << env->getSizeX();
+    //std::cout << nb_workers << " - " << nb_warriors << " - " << env->getSizeX();
     // for(int i = 0; i < 5; i++)
     // {
     //     auto e = std::make_shared<Egg>(this, false);
     //     ants.emplace_back(e);
     // }
-    // for(int i = 0; i < 7; i++)
-    // {
-    //     auto l = std::make_shared<Larva>(this, false);
-    //     ants.emplace_back(l);
-    // }
-    for(int i = 0; i < 10; i++)
+//     for(int i = 0; i < 7; i++)
+//     {
+//         auto l = std::make_shared<Larva>(env, this, false);
+//         ants.emplace_back(l);
+//     }
+    for(int i = 0; i < nb_workers; i++)
     {
-        auto wk = std::make_shared<Worker>(this, false);
+        auto wk = std::make_shared<Worker>(env, this, false);
         ants.emplace_back(wk);
     }
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < nb_warriors; i++)
     {
-        auto wr = std::make_shared<Warrior>(this, false);
+        auto wr = std::make_shared<Warrior>(env, this, false);
         ants.emplace_back(wr);
     }
-    auto q = std::make_shared<Queen>(this, false);
+    auto q = std::make_shared<Queen>(env, this, false);
     ants.emplace_back(q);
 }
 
@@ -97,4 +102,14 @@ int Anthill::get_quantity_food_stock() const
 void Anthill::set_quantity_food_stock(int value)
 {
     quantity_food_stock = value;
+}
+
+std::array<int, 2> Anthill::get_coordinates() const
+{
+    return coordinates;
+}
+
+void Anthill::set_coordinates(const std::array<int, 2> &value)
+{
+    coordinates = value;
 }

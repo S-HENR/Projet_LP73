@@ -1,4 +1,6 @@
 #include "environnement.h"
+#include "anthill.h"
+
 
 Environnement::Environnement(int height,int length, int obstacle, int food): food_number(food), obstacle_number(obstacle)
 {
@@ -56,7 +58,7 @@ int Environnement::getSizeY()
 
 void Environnement::generate_anthill(int x, int y, Parameters& parameters)
 {
-    board[x][y] = new Anthill(*this, x, y, parameters);
+    board[x][y] = new Anthill(this, x, y, parameters);
     board[x-1][y-1] = new Dirt();
     board[x-1][y] = new Dirt();
     board[x-1][y+1] = new Dirt();

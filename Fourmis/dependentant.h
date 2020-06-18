@@ -9,7 +9,7 @@ class DependentAnt : public Ant
 {
 public:
     DependentAnt();
-    DependentAnt(Anthill* _anthill, bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10, bool _is_being_fed = false);
+    DependentAnt(Environnement* _env, Anthill* _anthill, bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10, bool _is_being_fed = false);
     ~DependentAnt();
 
     // Ant interface

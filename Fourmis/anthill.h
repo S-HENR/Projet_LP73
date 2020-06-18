@@ -12,11 +12,11 @@ class Ant;
 class Anthill : public Ground
 {
 public:
-    Anthill(Environnement& env, int x, int y, Parameters& parameters);
+    Anthill(Environnement* env, int x, int y, Parameters& parameters);
     ~Anthill();
     virtual void getValue();
     virtual int getType();
-    void generate_ants(Environnement& env, int nb_workers, int nb_warriors);
+    void generate_ants(Environnement* env, int nb_workers, int nb_warriors);
     int queens_counter();
 
     std::vector<std::shared_ptr<Ant>> get_ants() const;
@@ -28,12 +28,16 @@ public:
     int get_quantity_food_stock() const;
     void set_quantity_food_stock(int value);
 
+    std::array<int, 2> get_coordinates() const;
+    void set_coordinates(const std::array<int, 2> &value);
+
 private:
     std::array<int, 2> coordinates;
     int max_ants_nb;
     int quantity_food_stock;
     int max_quantity_food_stock;
     std::vector<std::shared_ptr<Ant>> ants;
+    Environnement* m_env;
 };
 
 #endif // ANTHILL_H
