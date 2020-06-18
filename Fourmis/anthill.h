@@ -8,11 +8,13 @@
 #include "environnement.h"
 
 class Ant;
+class Parameters;
+class Environnement;
 
 class Anthill : public Ground
 {
 public:
-    Anthill(Environnement& env, int x, int y, Parameters& parameters);
+    Anthill(Environnement env, int x, int y, Parameters& parameters);
     ~Anthill();
     virtual void getValue();
     virtual int getType();
