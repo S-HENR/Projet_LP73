@@ -1,21 +1,18 @@
 #ifndef QUEEN_H
 #define QUEEN_H
-#include "ant.h"
+#include "dependentant.h"
 
-class Queen : public Ant
+class Queen : public DependentAnt
 {
 public:
     Queen();
-    Queen(Anthill* _anthill, bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
+    Queen(Anthill* _anthill, bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10, bool _is_being_fed = false);
     ~Queen();
 
     // Ant interface
 public:
     void increase_food_need();
     void eat();
-
-    bool get_is_hungry() const;
-    void set_is_hungry(bool value);
 };
 
 #endif // QUEEN_H

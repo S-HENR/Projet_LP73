@@ -58,6 +58,20 @@ void Anthill::generate_ants()
         ants.emplace_back(q);
 }
 
+int Anthill::queens_counter()
+{
+    int queens_nb = 0;
+
+    for(auto&& ant: this->ants)
+    {
+        if( std::dynamic_pointer_cast<Queen>(ant) != nullptr)
+        {
+            queens_nb++;
+        }
+    }
+    return queens_nb;
+}
+
 std::vector<std::shared_ptr<Ant> > Anthill::get_ants() const
 {
     return ants;
@@ -66,4 +80,24 @@ std::vector<std::shared_ptr<Ant> > Anthill::get_ants() const
 void Anthill::set_ants(const std::vector<std::shared_ptr<Ant> > &value)
 {
     ants = value;
+}
+
+int Anthill::get_max_ants_nb() const
+{
+    return max_ants_nb;
+}
+
+void Anthill::set_max_ants_nb(int value)
+{
+    max_ants_nb = value;
+}
+
+int Anthill::get_quantity_food_stock() const
+{
+    return quantity_food_stock;
+}
+
+void Anthill::set_quantity_food_stock(int value)
+{
+    quantity_food_stock = value;
 }

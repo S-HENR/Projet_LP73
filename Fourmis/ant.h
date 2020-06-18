@@ -12,7 +12,7 @@ public:
     Ant();
     Ant(Anthill* _anthill, bool _is_queen, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
     ~Ant();
-    void decrease_food_need();
+    void decrease_food_need(int quantity);
     virtual void increase_food_need() = 0;
     virtual void eat() = 0;
 

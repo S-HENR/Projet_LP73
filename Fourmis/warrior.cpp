@@ -18,6 +18,7 @@ Warrior::~Warrior()
 
 void Warrior::increase_food_need()
 {
+    this->set_food_need(this->get_food_need() + 1 );
 }
 
 void Warrior::eat()

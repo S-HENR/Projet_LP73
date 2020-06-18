@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     anthill.cpp \
+    dependentant.cpp \
     dirt.cpp \
     egg.cpp \
     environnement.cpp \
@@ -46,6 +47,7 @@ SOURCES += \
 
 HEADERS += \
     anthill.h \
+    dependentant.h \
     dirt.h \
     egg.h \
     environnement.h \

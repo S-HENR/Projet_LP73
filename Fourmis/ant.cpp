@@ -20,9 +20,9 @@ Ant::~Ant()
 
 }
 
-void Ant::decrease_food_need()
+void Ant::decrease_food_need(int quantity)
 {
-
+    this->food_need -= quantity;
 }
 
 void Ant::Action()
