@@ -13,7 +13,9 @@ Ant::Ant(Anthill* _anthill, bool _is_queen, int _food_need, int _max_food_need, 
     time_to_transition(_time_to_transition),
     m_state(nullptr),
     m_anthill(_anthill)
-{}
+{
+
+}
 
 Ant::~Ant()
 {

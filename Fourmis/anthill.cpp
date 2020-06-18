@@ -34,28 +34,28 @@ int Anthill::getType()
 void Anthill::generate_ants()
 {
     //temp liste of ants for tests
-        for(int i = 0; i < 5; i++)
-        {
-            auto e = std::make_shared<Egg>(this, false);
-            ants.emplace_back(e);
-        }
-        for(int i = 0; i < 7; i++)
-        {
-            auto l = std::make_shared<Larva>(this, false);
-            ants.emplace_back(l);
-        }
-        for(int i = 0; i < 10; i++)
-        {
-            auto wk = std::make_shared<Worker>(this, false);
-            ants.emplace_back(wk);
-        }
-        for(int i = 0; i < 10; i++)
-        {
-            auto wr = std::make_shared<Warrior>(this, false);
-            ants.emplace_back(wr);
-        }
-        auto q = std::make_shared<Queen>(this, false);
-        ants.emplace_back(q);
+//    for(int i = 0; i < 5; i++)
+//    {
+//        auto e = std::make_shared<Egg>(this, false);
+//        ants.emplace_back(e);
+//    }
+//    for(int i = 0; i < 7; i++)
+//    {
+//        auto l = std::make_shared<Larva>(this, false);
+//        ants.emplace_back(l);
+//    }
+    for(int i = 0; i < 10; i++)
+    {
+        auto wk = std::make_shared<Worker>(this, false);
+        ants.emplace_back(wk);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+        auto wr = std::make_shared<Warrior>(this, false);
+        ants.emplace_back(wr);
+    }
+    auto q = std::make_shared<Queen>(this, false);
+    ants.emplace_back(q);
 }
 
 int Anthill::queens_counter()

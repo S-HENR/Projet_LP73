@@ -66,6 +66,7 @@ void Environnement::generate_anthill(int x, int y)
     board[x+1][y-1] = new Dirt();
     board[x+1][y] = new Dirt();
     board[x+1][y+1] = new Dirt();
+
 }
 
 void Environnement::generate_obstacle()

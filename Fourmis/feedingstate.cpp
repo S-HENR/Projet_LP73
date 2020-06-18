@@ -17,6 +17,9 @@ std::unique_ptr<State> FeedingState::Action(Ant& ant)
 {
     Worker& worker = dynamic_cast<Worker&>(ant);
 
+    worker.increase_food_need();
+    worker.set_time_to_transition(-1);
+
     if(worker.get_anthill()->get_quantity_food_stock() > 0)
     {
         if(worker.get_anthill()->get_quantity_food_stock() >= this->hungry_ant->get_food_need())

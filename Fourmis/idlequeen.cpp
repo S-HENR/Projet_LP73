@@ -18,6 +18,7 @@ std::unique_ptr<State> IdleQueen::Action(Ant& ant)
     std::uniform_int_distribution<int> distr(range_from, range_to);
 
     queen.increase_food_need();
+    queen.set_time_to_transition(-1);
     if(distr(generator) == 0)
     {
         return std::make_unique<LayingAnEggState>();

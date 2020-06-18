@@ -24,6 +24,7 @@ SOURCES += \
     feedingstate.cpp \
     food.cpp \
     ground.cpp \
+    idleegg.cpp \
     idlelarva.cpp \
     idlequeen.cpp \
     idlewarrior.cpp \
@@ -54,6 +55,7 @@ HEADERS += \
     feedingstate.h \
     food.h \
     ground.h \
+    idleegg.h \
     idlelarva.h \
     idlequeen.h \
     idlewarrior.h \

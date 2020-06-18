@@ -34,7 +34,7 @@ public:
     void set_anthill(Anthill *anthill);
 
 private:
-    int coordinates[2];
+    std::array<int, 2> coordinates;
     bool is_queen;
     int food_need;
     int max_food_need;
