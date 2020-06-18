@@ -14,7 +14,7 @@
 class Environnement
 {
 public:
-    Environnement(int height,int length, int food, int obstacle);
+    Environnement(int height,int length, int obstacle, int food);
     ~Environnement();
     void generate_ground();
     void display_ground();

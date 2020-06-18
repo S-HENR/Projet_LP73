@@ -1,7 +1,7 @@
 #include "dirt.h"
 #include "environnement.h"
 
-Environnement::Environnement(int height,int length, int food, int obstacle): food_number(food), obstacle_number(obstacle)
+Environnement::Environnement(int height,int length, int obstacle, int food): food_number(food), obstacle_number(obstacle)
 {
     //Initialization of the map with nullptr
     size[0] = length;

@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "parameters.h"
 #include "environnement.h"
 #include <QApplication>
 #include <QLabel>
@@ -8,18 +8,13 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-//    MainWindow w;
-//    w.resize(100,50);
-//    w.show();
-    Environnement env(99,50,500,1000);
+    Parameters parameters;
+    parameters.show();
+    a.exec();
+    Environnement env(parameters.sizeX, parameters.sizeY, parameters.nb_obstacles, parameters.nb_foods);
     env.generate_ground();
     env.display_ground();
-
-    return a.exec();
-
-
-
-
+    a.exec();
 
     return 0;
 }

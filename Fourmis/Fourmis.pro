@@ -29,12 +29,12 @@ SOURCES += \
     idleworker.cpp \
     layinganeggstate.cpp \
     main.cpp \
-    mainwindow.cpp \
     map_display.cpp \
     movingstate.cpp \
     obstacle.cpp \
     ant.cpp \
     larva.cpp \
+    parameters.cpp \
     pickingupfoodstate.cpp \
     puttingdownfoodstate.cpp \
     queen.cpp \
@@ -57,11 +57,11 @@ HEADERS += \
     idlewarrior.h \
     idleworker.h \
     layinganeggstate.h \
-    mainwindow.h \
     movingstate.h \
     obstacle.h \
     ant.h \
     larva.h \
+    parameters.h \
     pickingupfoodstate.h \
     puttingdownfoodstate.h \
     queen.h \
@@ -72,7 +72,7 @@ HEADERS += \
     workereatingstate.h
 
 FORMS += \
-    mainwindow.ui
+    parameters.ui
 
 TRANSLATIONS += \
     Fourmis_en_GB.ts
