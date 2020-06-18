@@ -15,7 +15,7 @@ void Simulation::initialize_simulation()
     fill_in_parameters();
     application.exec();
     Environnement env(parameters.sizeX, parameters.sizeY, parameters.nb_obstacles, parameters.nb_foods);
-    env.generate_ground();
+    env.generate_ground(parameters);
     env.display_ground();
 }
 

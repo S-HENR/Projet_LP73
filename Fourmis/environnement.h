@@ -10,13 +10,14 @@
 #include "food.h"
 #include "anthill.h"
 #include "map_display.h"
+#include "parameters.h"
 
 class Environnement
 {
 public:
     Environnement(int height,int length, int obstacle, int food);
     ~Environnement();
-    void generate_ground();
+    void generate_ground(Parameters& parameter);
     void display_ground();
     Ground* getTile(int x,int y);
     int getSizeX();
@@ -32,7 +33,7 @@ private:
     float pheromone_disappearance_rate = 0.95;
     std::vector<std::vector<Ground*>> board;
     Map_display map;
-    void generate_anthill(int x, int y);
+    void generate_anthill(int x, int y, Parameters& parameters);
     void generate_obstacle();
     void template_obstacle(int x, int y);
     void generate_food();
