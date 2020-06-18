@@ -39,6 +39,7 @@ SOURCES += \
     pickingupfoodstate.cpp \
     puttingdownfoodstate.cpp \
     queen.cpp \
+    simulation.cpp \
     state.cpp \
     warrior.cpp \
     warrioreatingstate.cpp \
@@ -67,6 +68,7 @@ HEADERS += \
     pickingupfoodstate.h \
     puttingdownfoodstate.h \
     queen.h \
+    simulation.h \
     state.h \
     warrior.h \
     warrioreatingstate.h \

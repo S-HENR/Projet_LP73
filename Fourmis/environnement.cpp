@@ -246,6 +246,11 @@ void Environnement::display_ground()
     map.display(board, size[1], size[0]);
 }
 
+void Environnement::display_updated_ground(int x, int y)
+{
+    map.refresh_display(3, size[1] / 2 + 1 + x, size[0]/2 + y);
+}
+
 int Environnement::get_typeof_tile(int x, int y)
 {
     return board[x][y]->getType();
