@@ -6,14 +6,9 @@
 #include "worker.h"
 #include <ostream>
 
-Anthill::Anthill() : Ground(true)
+Anthill::Anthill(Environnement* env, int x, int y, Parameters& parameters) : Ground(true), coordinates({x,y}) ,max_ants_nb(parameters.nb_max_ants), max_quantity_food_stock(parameters.nb_max_food)
 {
-    generate_ants();
-}
-
-Anthill::Anthill(int _max_ants_nb, int _max_quantity_food_stock) : Ground(true), max_ants_nb(_max_ants_nb), max_quantity_food_stock(_max_quantity_food_stock)
-{
-
+    generate_ants(env, parameters.nb_init_workers, parameters.nb_init_warriors);
 }
 
 Anthill::~Anthill()
@@ -31,19 +26,21 @@ int Anthill::getType()
     return 0;
 }
 
-void Anthill::generate_ants()
+void Anthill::generate_ants(Environnement* env, int nb_workers, int nb_warriors)
 {
     //temp liste of ants for tests
-//    for(int i = 0; i < 5; i++)
-//    {
-//        auto e = std::make_shared<Egg>(this, false);
-//        ants.emplace_back(e);
-//    }
-//    for(int i = 0; i < 7; i++)
-//    {
-//        auto l = std::make_shared<Larva>(this, false);
-//        ants.emplace_back(l);
-//    }
+
+    std::cout << nb_workers << " - " << nb_warriors << " - " << env->getSizeX();
+    // for(int i = 0; i < 5; i++)
+    // {
+    //     auto e = std::make_shared<Egg>(this, false);
+    //     ants.emplace_back(e);
+    // }
+    // for(int i = 0; i < 7; i++)
+    // {
+    //     auto l = std::make_shared<Larva>(this, false);
+    //     ants.emplace_back(l);
+    // }
     for(int i = 0; i < 10; i++)
     {
         auto wk = std::make_shared<Worker>(this, false);

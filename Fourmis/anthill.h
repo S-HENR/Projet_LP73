@@ -3,19 +3,20 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <array>
 #include "ground.h"
+#include "environnement.h"
 
 class Ant;
 
 class Anthill : public Ground
 {
 public:
-    Anthill();
-    Anthill(int _max_ants_nb, int _max_quantity_food_stock);
+    Anthill(Environnement& env, int x, int y, Parameters& parameters);
     ~Anthill();
     virtual void getValue();
     virtual int getType();
-    void generate_ants();
+    void generate_ants(Environnement& env, int nb_workers, int nb_warriors);
     int queens_counter();
 
     std::vector<std::shared_ptr<Ant>> get_ants() const;
@@ -28,7 +29,7 @@ public:
     void set_quantity_food_stock(int value);
 
 private:
-    int coordinates[2];
+    std::array<int, 2> coordinates;
     int max_ants_nb;
     int quantity_food_stock;
     int max_quantity_food_stock;

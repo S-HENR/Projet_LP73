@@ -1,4 +1,3 @@
-#include "dirt.h"
 #include "environnement.h"
 
 Environnement::Environnement(int height,int length, int obstacle, int food): food_number(food), obstacle_number(obstacle)
@@ -19,13 +18,13 @@ Environnement::~Environnement()
 //        }
 }
 
-void Environnement::generate_ground()
+void Environnement::generate_ground(Parameters& parameters)
 {
     //Initialization of Anthill ground :
     //Put the anthill in the middle of the map
     int x = size[1]/2;
     int y = size[0]/2;
-    this->generate_anthill(x,y);
+    this->generate_anthill(x,y, parameters);
 
     //Initialization of Obstacle grounds :
     //Fill in the map with the amount of Obstacle ground wished
@@ -55,9 +54,9 @@ int Environnement::getSizeY()
     return size[1];
 }
 
-void Environnement::generate_anthill(int x, int y)
+void Environnement::generate_anthill(int x, int y, Parameters& parameters)
 {
-    board[x][y] = new Anthill();
+    board[x][y] = new Anthill(*this, x, y, parameters);
     board[x-1][y-1] = new Dirt();
     board[x-1][y] = new Dirt();
     board[x-1][y+1] = new Dirt();
@@ -245,6 +244,11 @@ void Environnement::generate_dirt()
 void Environnement::display_ground()
 {
     map.display(board, size[1], size[0]);
+}
+
+void Environnement::display_updated_ground(int x, int y)
+{
+    map.refresh_display(3, size[1] / 2 + 1 + x, size[0]/2 + y);
 }
 
 int Environnement::get_typeof_tile(int x, int y)
