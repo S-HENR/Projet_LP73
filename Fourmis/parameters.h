@@ -2,6 +2,8 @@
 #define PARAMETERS_H
 
 #include <QMainWindow>
+#include <fstream>
+#include <iostream>
 
 namespace Ui {
 class Parameters;
@@ -30,6 +32,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::Parameters *ui;
