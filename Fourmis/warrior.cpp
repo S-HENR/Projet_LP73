@@ -1,7 +1,8 @@
+#include "movingstate.h"
 #include "warrior.h"
 
 Warrior::Warrior(Environnement& _env, Anthill* _anthill, bool _is_queen, int _food_need, int _max_food_need, int _time_to_transition) :
-    Ant(_env, _anthill, _is_queen, _food_need, _max_food_need, _time_to_transition)
+    Ant(_env, _anthill, _is_queen, _food_need, _max_food_need, _time_to_transition, std::make_unique<MovingState>())
 {
 
 }
@@ -13,7 +14,7 @@ Warrior::~Warrior()
 
 void Warrior::increase_food_need()
 {
-    this->set_food_need(this->get_food_need() + 1 );
+    set_food_need(get_food_need() + 1 );
 }
 
 void Warrior::eat()
@@ -26,9 +27,14 @@ int Warrior::get_quantity_carried() const
     return quantity_carried;
 }
 
-void Warrior::set_quantity_carried(int value)
+void Warrior::increase_quantity_carried(int value)
 {
-    quantity_carried = value;
+    quantity_carried += value;
+}
+
+void Warrior::decrease_quantity_carried(int value)
+{
+    quantity_carried -= value;
 }
 
 int Warrior::get_carrying_capacity() const

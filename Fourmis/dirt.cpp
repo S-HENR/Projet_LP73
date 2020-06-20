@@ -20,3 +20,13 @@ int Dirt::getType()
 {
     return 1;
 }
+
+float Dirt::get_pheromone_rate() const
+{
+    return pheromone_rate;
+}
+
+void Dirt::set_pheromone_rate(float value)
+{
+    pheromone_rate = value;
+}
