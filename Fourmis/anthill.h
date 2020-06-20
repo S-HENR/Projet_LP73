@@ -28,10 +28,14 @@ public:
     void set_max_ants_nb(int value);
 
     int get_quantity_food_stock() const;
-    void set_quantity_food_stock(int value);
+    void increase_quantity_food_stock(int value);
+    void decrease_quantity_food_stock(int value);
 
     std::array<int, 2> get_coordinates() const;
     void set_coordinates(const std::array<int, 2> &value);
+
+    int get_max_quantity_food_stock() const;
+    void set_max_quantity_food_stock(int value);
 
 private:
     std::array<int, 2> coordinates;

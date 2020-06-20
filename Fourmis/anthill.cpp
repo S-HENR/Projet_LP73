@@ -56,13 +56,14 @@ void Anthill::generate_ants(Environnement env, int nb_workers, int nb_warriors)
     }
     auto q = std::make_shared<Queen>(env, this, false);
     ants.emplace_back(q);
+
 }
 
 int Anthill::queens_counter()
 {
     int queens_nb = 0;
 
-    for(auto&& ant: this->ants)
+    for(auto&& ant: ants)
     {
         if( std::dynamic_pointer_cast<Queen>(ant) != nullptr)
         {
@@ -97,9 +98,14 @@ int Anthill::get_quantity_food_stock() const
     return quantity_food_stock;
 }
 
-void Anthill::set_quantity_food_stock(int value)
+void Anthill::increase_quantity_food_stock(int value)
 {
-    quantity_food_stock = value;
+    quantity_food_stock += value;
+}
+
+void Anthill::decrease_quantity_food_stock(int value)
+{
+    quantity_food_stock -= value;
 }
 
 std::array<int, 2> Anthill::get_coordinates() const
@@ -110,4 +116,14 @@ std::array<int, 2> Anthill::get_coordinates() const
 void Anthill::set_coordinates(const std::array<int, 2> &value)
 {
     coordinates = value;
+}
+
+int Anthill::get_max_quantity_food_stock() const
+{
+    return max_quantity_food_stock;
+}
+
+void Anthill::set_max_quantity_food_stock(int value)
+{
+    max_quantity_food_stock = value;
 }
