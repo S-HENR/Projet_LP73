@@ -8,7 +8,6 @@ class Obstacle : public Ground
 public:
     Obstacle();
     ~Obstacle();
-    virtual void getValue();
     virtual int getType();
 };
 

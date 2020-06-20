@@ -23,6 +23,7 @@ SOURCES += \
     environnement.cpp \
     feedingstate.cpp \
     food.cpp \
+    gobackhomestate.cpp \
     ground.cpp \
     idleegg.cpp \
     idlelarva.cpp \
@@ -45,7 +46,8 @@ SOURCES += \
     warrior.cpp \
     warrioreatingstate.cpp \
     worker.cpp \
-    workereatingstate.cpp
+    workereatingstate.cpp \
+    AStar.cpp
 
 HEADERS += \
     anthill.h \
@@ -55,6 +57,7 @@ HEADERS += \
     environnement.h \
     feedingstate.h \
     food.h \
+    gobackhomestate.h \
     ground.h \
     idleegg.h \
     idlelarva.h \
@@ -75,7 +78,8 @@ HEADERS += \
     warrior.h \
     warrioreatingstate.h \
     worker.h \
-    workereatingstate.h
+    workereatingstate.h \
+    AStar.hpp
 
 FORMS += \
     parameters.ui

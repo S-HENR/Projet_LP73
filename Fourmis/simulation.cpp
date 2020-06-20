@@ -32,9 +32,9 @@ void Simulation::start()
         }
         std::this_thread::sleep_for (std::chrono::milliseconds(100));
         incr++;
-        if(incr == 100)
-        {
-            break;
-        }
+//        if(incr == 100)
+//        {
+//            break;
+//        }
     }
 }

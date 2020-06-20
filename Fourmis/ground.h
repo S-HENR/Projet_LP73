@@ -7,7 +7,6 @@ public:
     Ground(bool crossable);
     ~Ground();
     bool getCrossable();
-    virtual void getValue() = 0;
     virtual int getType() = 0;
 private:
     bool crossable;

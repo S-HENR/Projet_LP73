@@ -19,11 +19,6 @@ Anthill::~Anthill()
 
 }
 
-void Anthill::getValue()
-{
-    std::cout << "X";
-}
-
 int Anthill::getType()
 {
     return 0;

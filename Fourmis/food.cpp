@@ -1,6 +1,6 @@
 #include "food.h"
 
-Food::Food(): Ground(false)
+Food::Food(): Ground(true)
 {
     //random de 8 à 12 à affecter à quantity?
     quantity = rand() % 13 + 7;
@@ -23,10 +23,6 @@ int Food::decrease_quantity(int amount)
    return amount;
 }
 
-void Food::getValue()
-{
-    std::cout << "F";
-}
 
 int Food::getType()
 {

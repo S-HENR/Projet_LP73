@@ -16,7 +16,6 @@ class Anthill : public Ground
 public:
     Anthill(Environnement env, int x, int y, Parameters& parameters);
     ~Anthill();
-    virtual void getValue();
     virtual int getType();
     void generate_ants(Environnement env, int nb_workers, int nb_warriors);
     int queens_counter();

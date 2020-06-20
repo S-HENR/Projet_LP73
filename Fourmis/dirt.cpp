@@ -16,11 +16,6 @@ void Dirt::apply_disappearance_rate()
 
 }
 
-void Dirt::getValue()
-{
-    std::cout << "O";
-}
-
 int Dirt::getType()
 {
     return 1;
