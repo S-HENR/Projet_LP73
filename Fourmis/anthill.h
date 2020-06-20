@@ -18,7 +18,7 @@ public:
     ~Anthill();
     virtual void getValue();
     virtual int getType();
-    void generate_ants(Environnement* env, int nb_workers, int nb_warriors);
+    void generate_ants(Environnement env, int nb_workers, int nb_warriors);
     int queens_counter();
 
     std::vector<std::shared_ptr<Ant>> get_ants() const;
@@ -39,7 +39,6 @@ private:
     int quantity_food_stock;
     int max_quantity_food_stock;
     std::vector<std::shared_ptr<Ant>> ants;
-    Environnement* m_env;
 };
 
 #endif // ANTHILL_H

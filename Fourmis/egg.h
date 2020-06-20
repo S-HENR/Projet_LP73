@@ -8,8 +8,8 @@
 class Egg : public Ant
 {
 public:
-    Egg();
-    Egg(Environnement* _env, Anthill* _anthill, bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
+    Egg() = delete;
+    Egg(Environnement& _env, Anthill* _anthill, bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
     ~Egg();
 
     // Ant interface

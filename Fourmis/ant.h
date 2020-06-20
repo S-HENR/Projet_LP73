@@ -15,8 +15,8 @@ struct coord
 class Ant
 {
 public:
-    Ant();
-    Ant(Environnement* env, Anthill* _anthill, bool _is_queen, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
+    Ant() = delete;
+    Ant(Environnement& env, Anthill* _anthill, bool _is_queen, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
     ~Ant();
     void decrease_food_need(int quantity);
     virtual void increase_food_need() = 0;
@@ -39,11 +39,11 @@ public:
     Anthill* get_anthill() const;
     void set_anthill(Anthill *anthill);
 
-    Environnement *get_env() const;
-    void set_env(Environnement *env);
-
     std::array<int, 2> get_coordinates() const;
     void set_coordinates(const std::array<int, 2> &value);
+
+    Environnement &get_env() const;
+    void set_env(const Environnement &env);
 
 private:
     std::array<int, 2> coordinates;
@@ -54,7 +54,7 @@ private:
 
     std::unique_ptr<State> m_state = nullptr;
     Anthill* m_anthill = nullptr;
-    Environnement* m_env = nullptr;
+    Environnement& m_env;
 };
 
 #endif // ANT_H

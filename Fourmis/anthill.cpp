@@ -9,8 +9,7 @@ Anthill::Anthill(Environnement env, int x, int y, Parameters& parameters) :
     Ground(true),
     coordinates({x,y}),
     max_ants_nb(parameters.nb_max_ants),
-    max_quantity_food_stock(parameters.nb_max_food),
-    m_env(env)
+    max_quantity_food_stock(parameters.nb_max_food)
 {
     generate_ants(env, parameters.nb_init_workers, parameters.nb_init_warriors);
 }
@@ -30,7 +29,7 @@ int Anthill::getType()
     return 0;
 }
 
-void Anthill::generate_ants(Environnement& env, int nb_workers, int nb_warriors)
+void Anthill::generate_ants(Environnement env, int nb_workers, int nb_warriors)
 {
     //temp liste of ants for tests
 

@@ -58,7 +58,7 @@ int Environnement::getSizeY()
 
 void Environnement::generate_anthill(int x, int y, Parameters& parameters)
 {
-    board[x][y] = new Anthill(this, x, y, parameters);
+    board[x][y] = new Anthill(*this, x, y, parameters);
     board[x-1][y-1] = new Dirt();
     board[x-1][y] = new Dirt();
     board[x-1][y+1] = new Dirt();

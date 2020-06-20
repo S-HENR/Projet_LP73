@@ -1,12 +1,6 @@
 #include "ant.h"
 
-Ant::Ant():
-    m_state(nullptr)
-{
-    //std::make_unique<Idle>();
-}
-
-Ant::Ant(Environnement* _env, Anthill* _anthill, bool _is_queen, int _food_need, int _max_food_need, int _time_to_transition) :
+Ant::Ant(Environnement& _env, Anthill* _anthill, bool _is_queen, int _food_need, int _max_food_need, int _time_to_transition) :
     coordinates({_anthill->get_coordinates().at(0), _anthill->get_coordinates().at(1)}),
     is_queen(_is_queen),
     food_need(_food_need),
@@ -86,16 +80,6 @@ void Ant::set_anthill(Anthill *anthill)
     m_anthill = anthill;
 }
 
-Environnement *Ant::get_env() const
-{
-    return m_env;
-}
-
-void Ant::set_env(Environnement *env)
-{
-    m_env = env;
-}
-
 std::array<int, 2> Ant::get_coordinates() const
 {
     return coordinates;
@@ -104,4 +88,14 @@ std::array<int, 2> Ant::get_coordinates() const
 void Ant::set_coordinates(const std::array<int, 2> &value)
 {
     coordinates = value;
+}
+
+Environnement &Ant::get_env() const
+{
+    return m_env;
+}
+
+void Ant::set_env(const Environnement &env)
+{
+    m_env = env;
 }
