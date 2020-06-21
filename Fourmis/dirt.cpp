@@ -1,7 +1,9 @@
 #include "dirt.h"
 
 
-Dirt::Dirt() : Ground(true), pheromone_rate(0)
+Dirt::Dirt(int _x, int _y) :
+    Ground(true, _x, _y),
+    pheromone_rate(0)
 {
 
 }

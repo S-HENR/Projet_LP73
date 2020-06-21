@@ -15,6 +15,7 @@ public:
 private:
     QApplication application;
     Parameters parameters;
+    Environnement env;
     void fill_in_parameters();
     void generate_environnement();
 };

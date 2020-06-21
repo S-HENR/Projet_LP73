@@ -7,6 +7,7 @@ class Obstacle : public Ground
 {
 public:
     Obstacle();
+    Obstacle(int _x, int _y);
     ~Obstacle();
     virtual int getType();
 };

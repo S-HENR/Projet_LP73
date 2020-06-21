@@ -6,12 +6,6 @@
 
 #include <memory>
 
-struct coord
-{
-    int x;
-    int y;
-};
-
 class Ant
 {
 public:
@@ -39,14 +33,14 @@ public:
     Anthill* get_anthill() const;
     void set_anthill(Anthill *anthill);
 
-    std::array<int, 2> get_coordinates() const;
-    void set_coordinates(const std::array<int, 2> &value);
-
     Environnement &get_env() const;
     void set_env(const Environnement &env);
 
+    coord get_coordinates() const;
+    void set_coordinates(const int &x, const int &y);
+
 private:
-    std::array<int, 2> coordinates;
+    coord coordinates;
     bool is_queen;
     int food_need;
     int max_food_need;

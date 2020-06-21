@@ -1,6 +1,7 @@
 #include "food.h"
 
-Food::Food(): Ground(true)
+Food::Food(int _x, int _y) :
+    Ground(true, _x, _y)
 {
     //random de 8 à 12 à affecter à quantity?
     quantity = rand() % 13 + 7;

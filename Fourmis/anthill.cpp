@@ -5,9 +5,8 @@
 #include "warrior.h"
 #include "worker.h"
 
-Anthill::Anthill(Environnement env, int x, int y, Parameters& parameters) :
-    Ground(true),
-    coordinates({x,y}),
+Anthill::Anthill(Environnement env, Parameters& parameters, int _x, int _y) :
+    Ground(true, _x, _y),
     max_ants_nb(parameters.nb_max_ants),
     max_quantity_food_stock(parameters.nb_max_food)
 {
@@ -101,16 +100,6 @@ void Anthill::increase_quantity_food_stock(int value)
 void Anthill::decrease_quantity_food_stock(int value)
 {
     quantity_food_stock -= value;
-}
-
-std::array<int, 2> Anthill::get_coordinates() const
-{
-    return coordinates;
-}
-
-void Anthill::set_coordinates(const std::array<int, 2> &value)
-{
-    coordinates = value;
 }
 
 int Anthill::get_max_quantity_food_stock() const

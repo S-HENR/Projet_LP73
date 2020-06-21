@@ -5,17 +5,18 @@
 
 class Dirt : public Ground
 {
-    public:
-        Dirt();
-        ~Dirt();
-        void apply_disappearance_rate();
-        virtual int getType();
+public:
+    Dirt();
+    Dirt(int _x, int _y);
+    ~Dirt();
+    void apply_disappearance_rate();
+    virtual int getType();
 
-        float get_pheromone_rate() const;
-        void set_pheromone_rate(float value);
+    float get_pheromone_rate() const;
+    void set_pheromone_rate(float value);
 
 private:
-        float pheromone_rate;
+    float pheromone_rate;
 };
 
 #endif // DIRT_H

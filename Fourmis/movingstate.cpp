@@ -19,8 +19,8 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
     warrior.set_time_to_transition(-1);
 
     //warrior coordinates
-    int x = warrior.get_coordinates()[0];
-    int y = warrior.get_coordinates()[1];
+    int x = warrior.get_coordinates().x;
+    int y = warrior.get_coordinates().y;
 
     //coordinates of the cases around the warrior and the probabilities the ants will choose to move on this tile
     std::vector<nearby_tiles> tiles = get_nearby_tiles(&warrior);
@@ -30,8 +30,8 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
     {
         return std::make_unique<PuttingDownFoodState>();
     }
-    //if the warrior is outside the anthill and her carrying capacity is full, she's going back to the anthill to put down her food
-    else if(warrior.get_quantity_carried() >= warrior.get_carrying_capacity())
+    //if the warrior is outside the anthill and her carrying capacity is full AND she's not hungry, she's going back to the anthill to put down her food
+    else if((warrior.get_quantity_carried() >= warrior.get_carrying_capacity()) && !(warrior.get_max_food_need() - warrior.get_food_need() <= 10))
     {
         //return std::make_unique<GoBackHomeState>();
     }
@@ -101,7 +101,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
             upper_threshold += box.prob;
             if((distr(generator) >= lower_threshold) && (distr(generator) <= upper_threshold))
             {
-                warrior.movement();
+                warrior.movement(*box.tiles);
                 return nullptr;
             }
             lower_threshold += box.prob;
@@ -116,8 +116,8 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
 std::vector<nearby_tiles> MovingState::get_nearby_tiles(Warrior* _warrior)
 {
     //warrior coordinates
-    int x = _warrior->get_coordinates()[0];
-    int y = _warrior->get_coordinates()[1];
+    int x = _warrior->get_coordinates().x;
+    int y = _warrior->get_coordinates().y;
 
     std::vector<nearby_tiles> tiles;
     nearby_tiles tile1 = {_warrior->get_env().getTile(x-1,y), 0.25};

@@ -10,7 +10,7 @@ public:
     Warrior() = delete;
     Warrior(Environnement& _env, Anthill* _anthill, bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
     ~Warrior();
-    void movement();
+    void movement(const Ground& tile);
     void lay_pheromone();
 
     int get_carrying_capacity() const;

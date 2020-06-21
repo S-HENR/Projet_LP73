@@ -1,7 +1,8 @@
 #include "obstacle.h"
 
 
-Obstacle::Obstacle() : Ground(false)
+Obstacle::Obstacle(int _x, int _y) :
+    Ground(false, _x, _y)
 {
 
 }

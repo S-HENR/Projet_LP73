@@ -75,6 +75,7 @@ HEADERS += \
     queen.h \
     simulation.h \
     state.h \
+    useful_functions.h \
     warrior.h \
     warrioreatingstate.h \
     worker.h \

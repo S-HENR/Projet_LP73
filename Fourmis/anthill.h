@@ -14,7 +14,7 @@ class Environnement;
 class Anthill : public Ground
 {
 public:
-    Anthill(Environnement env, int x, int y, Parameters& parameters);
+    Anthill(Environnement env, Parameters& parameters, int _x, int _y);
     ~Anthill();
     virtual int getType();
     void generate_ants(Environnement env, int nb_workers, int nb_warriors);
@@ -30,14 +30,10 @@ public:
     void increase_quantity_food_stock(int value);
     void decrease_quantity_food_stock(int value);
 
-    std::array<int, 2> get_coordinates() const;
-    void set_coordinates(const std::array<int, 2> &value);
-
     int get_max_quantity_food_stock() const;
     void set_max_quantity_food_stock(int value);
 
 private:
-    std::array<int, 2> coordinates;
     int max_ants_nb;
     int quantity_food_stock;
     int max_quantity_food_stock;

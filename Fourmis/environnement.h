@@ -11,12 +11,12 @@
 #include "map_display.h"
 #include "parameters.h"
 
-//class Anthill;
+class Anthill;
 
 class Environnement
 {
 public:
-    Environnement(int height,int length, int obstacle, int food);
+    Environnement(int height = 100,int length = 50, int obstacle = 1000, int food = 500);
     ~Environnement();
     void generate_ground(Parameters& parameter);
     void display_ground();
@@ -28,11 +28,15 @@ public:
     void regenerate_food(int amount);
     void display_updated_ground(int x, int y);
 
+    Anthill *get_anthill() const;
+    void set_anthill(Anthill *value);
+
 private:
     int size[2];
-    int food_number = 500;
-    int obstacle_number = 1000;
+    int food_number;
+    int obstacle_number;
     float pheromone_disappearance_rate = 0.95;
+    Anthill* anthill;
     std::vector<std::vector<Ground*>> board;
     Map_display map;
     void generate_anthill(int x, int y, Parameters& parameters);

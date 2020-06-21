@@ -3,10 +3,12 @@
 #include "warrior.h"
 #include "AStar.hpp"
 #include "puttingdownfoodstate.h"
-#include "warrioreatingstate.h"
+#include "movingstate.h"
 
 
-GoBackHomeState::GoBackHomeState(std::array<int, 2> size, std::vector<std::vector<Ground*>> board, std::array<int, 2>& _coordinates_ant, std::array<int, 2>& _coordinates_anthill) : coordinates_ant(_coordinates_ant), coordinates_anthill(_coordinates_anthill)
+GoBackHomeState::GoBackHomeState(std::array<int, 2> size, std::vector<std::vector<Ground*>> board, coord& _coordinates_ant, coord& _coordinates_anthill) :
+    coordinates_ant{.x = _coordinates_ant.x, .y = _coordinates_ant.y},
+    coordinates_anthill{.x = _coordinates_anthill.x, .y = _coordinates_anthill.y}
 {
     AStar::Generator generator;
     // Set 2d map size.
@@ -22,7 +24,7 @@ GoBackHomeState::GoBackHomeState(std::array<int, 2> size, std::vector<std::vecto
                 generator.addCollision({i,j});
 
     // This method returns vector of coordinates from target to source.
-    auto path = generator.findPath({coordinates_anthill[0], coordinates_anthill[1]}, {coordinates_ant[0], coordinates_ant[1]});
+    auto path = generator.findPath({coordinates_anthill.x, coordinates_anthill.y}, {coordinates_ant.x, coordinates_ant.y});
 
     std::vector<int> coordinates(2);
 
@@ -39,15 +41,22 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     Warrior& warrior = dynamic_cast<Warrior&>(ant);
 
     warrior.increase_food_need();
+    warrior.set_time_to_transition(-1);
+
     if(warrior.get_food_need() < 10)
-        return std::make_unique<WarriorEatingState>();
-    warrior.movement(); //x : steps[0][0] ; y : steps[0][1]
+    {
+        //use to be warrioreatingstate but need to be near a food case to be able to eat
+        return std::make_unique<MovingState>();
+    }
+    //warrior.movement(); //x : steps[0][0] ; y : steps[0][1]
 
     //delete movement made
     steps.erase(steps.begin());
 
     if(steps.size() > 0)
+    {
         return nullptr;
+    }
     return std::make_unique<PuttingDownFoodState>();
 }
 

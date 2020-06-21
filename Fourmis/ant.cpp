@@ -1,7 +1,7 @@
 #include "ant.h"
 
 Ant::Ant(Environnement& _env, Anthill* _anthill, bool _is_queen, int _food_need, int _max_food_need, int _time_to_transition, std::unique_ptr<State> _state) :
-    coordinates({_anthill->get_coordinates()[0], _anthill->get_coordinates()[1]}),
+    coordinates(_anthill->get_coordinates()),
     is_queen(_is_queen),
     food_need(_food_need),
     max_food_need(_max_food_need),
@@ -21,6 +21,7 @@ Ant::~Ant()
 void Ant::decrease_food_need(int quantity)
 {
     food_need -= quantity;
+    coordinates.x = 2;
 }
 
 void Ant::Action()
@@ -80,16 +81,6 @@ void Ant::set_anthill(Anthill *anthill)
     m_anthill = anthill;
 }
 
-std::array<int, 2> Ant::get_coordinates() const
-{
-    return coordinates;
-}
-
-void Ant::set_coordinates(const std::array<int, 2> &value)
-{
-    coordinates = value;
-}
-
 Environnement &Ant::get_env() const
 {
     return m_env;
@@ -98,4 +89,15 @@ Environnement &Ant::get_env() const
 void Ant::set_env(const Environnement &env)
 {
     m_env = env;
+}
+
+coord Ant::get_coordinates() const
+{
+    return coordinates;
+}
+
+void Ant::set_coordinates(const int &x, const int &y)
+{
+    coordinates.x = x;
+    coordinates.y = y;
 }

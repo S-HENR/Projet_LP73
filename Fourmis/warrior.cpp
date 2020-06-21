@@ -47,9 +47,9 @@ void Warrior::set_carrying_capacity(int value)
     carrying_capacity = value;
 }
 
-void Warrior::movement()
+void Warrior::movement(const Ground& tile)
 {
-
+    set_coordinates(tile.get_coordinates().x, tile.get_coordinates().y);
 }
 
 void Warrior::lay_pheromone()
