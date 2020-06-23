@@ -13,9 +13,12 @@ Dirt::~Dirt()
 
 }
 
-void Dirt::apply_disappearance_rate()
+void Dirt::apply_disappearance_rate(float pheromone_disappearance_rate)
 {
-
+    if(pheromone_rate < 1)
+        pheromone_rate = 0;
+    else
+        pheromone_rate *= pheromone_disappearance_rate;
 }
 
 int Dirt::getType()
