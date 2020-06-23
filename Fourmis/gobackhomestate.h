@@ -8,7 +8,7 @@
 class GoBackHomeState : public State
 {
 public:
-    GoBackHomeState(std::array<int, 2> size, std::vector<std::vector<Ground*>> board, const coord& _coordinates_ant, const coord& _coordinates_anthill);
+    GoBackHomeState(std::array<int, 2> size, const std::vector<std::vector<Ground*>>& board, const coord& _coordinates_ant, const coord& _coordinates_anthill);
     ~GoBackHomeState(){};
 public:
     std::unique_ptr<State> Action(Ant &ant);

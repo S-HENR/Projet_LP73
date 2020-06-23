@@ -6,7 +6,7 @@
 #include "movingstate.h"
 
 
-GoBackHomeState::GoBackHomeState(std::array<int, 2> size, std::vector<std::vector<Ground*>> board, const coord& _coordinates_ant, const coord& _coordinates_anthill) :
+GoBackHomeState::GoBackHomeState(std::array<int, 2> size, const std::vector<std::vector<Ground*>>& board, const coord& _coordinates_ant, const coord& _coordinates_anthill) :
     coordinates_ant{.x = _coordinates_ant.x, .y = _coordinates_ant.y},
     coordinates_anthill{.x = _coordinates_anthill.x, .y = _coordinates_anthill.y}
 {
@@ -19,9 +19,14 @@ GoBackHomeState::GoBackHomeState(std::array<int, 2> size, std::vector<std::vecto
 
 
     for(int i = 0 ; i < size[1] ; i++)
-        for(int j = 0 ; j < size[0] ; i++)
+    {
+        for(int j = 0 ; j < size[0] ; j++)
+        {
             if(!board[i][j]->getCrossable())
                 generator.addCollision({i,j});
+        }
+    }
+
 
     // This method returns vector of coordinates from target to source.
     auto path = generator.findPath({coordinates_anthill.x, coordinates_anthill.y}, {coordinates_ant.x, coordinates_ant.y});
@@ -68,11 +73,18 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
          break;
        default:
          return nullptr;
-         std::cout << "Switch case 2 error in warrior moving state";
+         std::cout << "Switch case error in warrior moving state";
     }
 
+    //if tile is dirt then lay pheromone
+    if(warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType() == 1){
+        warrior.lay_pheromone();
+    }
+
+    //ant moves
     warrior.movement(steps[0][0], steps[0][1]);
-    warrior.lay_pheromone();
+
+    //if new tile is anthill, do not display ant picture
     if(warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType() != 0){
         warrior.get_env().get_map().refresh_display(3, steps[0][0], steps[0][1]);
     }

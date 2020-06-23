@@ -19,7 +19,6 @@ void Simulation::initialize_simulation()
     env = Environnement(parameters.sizeX, parameters.sizeY, parameters.nb_obstacles, parameters.nb_foods, parameters.pheromone_disappearance_rate);
     env.generate_ground(parameters);
     env.display_ground();
-    display_anthill_status();
 }
 
 void Simulation::start()
@@ -29,8 +28,9 @@ void Simulation::start()
     {
         application.processEvents();
 
-        //if(incr%20 == 0)
-        //{
+
+        if(incr%20 == 0)
+        {
             for(auto& ant : env.get_anthill()->get_ants())
             {
                 ant->Action();
@@ -42,8 +42,8 @@ void Simulation::start()
 //                                                     env->get_anthill()->get_ants().end()
 //                                                             );
 
+
             std::cout << "Tour : " << incr/20 << std::endl;
-            display_anthill_status();
         }
         std::this_thread::sleep_for (std::chrono::milliseconds(100));
         incr++;
@@ -52,14 +52,4 @@ void Simulation::start()
 //            break;
 //        }
     }
-}
-
-void Simulation::display_anthill_status()
-{
-        int nb_ant = env.get_anthill()->get_ants().size();
-        int nb_max_ant = env.get_anthill()->get_max_ants_nb();
-        int amount_food = env.get_anthill()->get_quantity_food_stock();
-        int max_amount_food = env.get_anthill()->get_max_quantity_food_stock();
-        anthill_status.display(nb_ant, nb_max_ant, amount_food, max_amount_food);
-        anthill_status.show();
 }
