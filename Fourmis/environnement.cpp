@@ -5,7 +5,8 @@
 Environnement::Environnement(int height,int length, int obstacle, int food, float _pheromone_rate):
     food_number(food),
     obstacle_number(obstacle),
-    pheromone_disappearance_rate(_pheromone_rate)
+    pheromone_disappearance_rate(_pheromone_rate),
+    generator((std::random_device())())
 {
     //Initialization of the map with nullptr
     size[0] = length;
@@ -277,6 +278,12 @@ std::vector<std::vector<Ground *> > Environnement::get_board() const
     return board;
 }
 
+int Environnement::generate_random(const int range_from, const int range_to)
+{
+    std::uniform_int_distribution<int> distr(range_from, range_to);
+    return distr(generator);
+}
+
 int Environnement::get_typeof_tile(int x, int y)
 {
     return board[x][y]->getType();
@@ -285,7 +292,7 @@ int Environnement::get_typeof_tile(int x, int y)
 int Environnement::collect_food(int x, int y, int amount)
 {
     int amount_food_collected = dynamic_cast<Food*>(board[x][y])->decrease_quantity(amount);
-    if(dynamic_cast<Food*>(board[x][y])->get_quantity_food() == 0)
+    if(dynamic_cast<Food*>(board[x][y])->get_quantity_food() <= 0)
     {
         food_number--;
         board[x][y] = new Dirt(x,y);

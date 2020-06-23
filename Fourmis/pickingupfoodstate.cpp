@@ -42,10 +42,10 @@ std::unique_ptr<State> PickingUpFoodState::Action(Ant& ant)
     }
 
     //if all the food had run out, the tile go back to dirt
-    if(food_tile.get_quantity_food() <= 0)
-    {
-        warrior.get_env().get_map().refresh_display(0, warrior.get_coordinates().x, warrior.get_coordinates().y);
-    }
+//    if(food_tile.get_quantity_food() <= 0)
+//    {
+//        warrior.get_env().get_map().refresh_display(0, warrior.get_coordinates().x, warrior.get_coordinates().y);
+//    }
 
     if(warrior.get_quantity_carried() >= warrior.get_carrying_capacity())
     {

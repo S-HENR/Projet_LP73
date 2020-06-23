@@ -8,7 +8,7 @@
 
 struct nearby_tiles
 {
-    Ground* tiles;
+    Ground* tile;
     float prob;
 };
 

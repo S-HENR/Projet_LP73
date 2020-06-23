@@ -8,7 +8,9 @@
 Anthill::Anthill(Environnement& env, Parameters& parameters, int _x, int _y) :
     Ground(true, _x, _y),
     max_ants_nb(parameters.nb_max_ants),
+    quantity_food_stock(0),
     max_quantity_food_stock(parameters.nb_max_food)
+
 {
     generate_ants(env, parameters.nb_init_workers, parameters.nb_init_warriors, parameters.amount_food_need, parameters.time_to_transition, parameters.carrying_capacity);
 }

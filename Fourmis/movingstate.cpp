@@ -33,7 +33,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
     };
 
     //if the warrior is inside the anthill, will put down the food she's carrying (if anthill capacity full or if the ant doesn't have any food on her back will be take care of in the next state
-    if((warrior.get_env().getTile(x,y)->getType() == 0) && warrior.get_quantity_carried() > 0)
+    if((warrior.get_env().getTile(x,y)->getType() == 0) && (warrior.get_quantity_carried() > 0))
     {
         return std::make_unique<PuttingDownFoodState>();
     }
@@ -49,10 +49,10 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
         for(auto& box: tiles)
         {
             //if tile is not dirt/food, the var will be null
-            Dirt* dirt_tile = dynamic_cast<Dirt*>(box.tiles);
-            Food* food_tile = dynamic_cast<Food*>(box.tiles);
+            Dirt* dirt_tile = dynamic_cast<Dirt*>(box.tile);
+            Food* food_tile = dynamic_cast<Food*>(box.tile);
 
-            switch (box.tiles->getType())
+            switch (box.tile->getType())
             {
                //case anthill, prob = 0, if its capacity is not full, we do not want her to go back inside
                case 0:
@@ -60,7 +60,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                   break;
                //case dirt, increase the prob according to presence of pheromone
                case 1:
-                  box.prob += box.prob * dirt_tile->get_pheromone_rate();
+                  //box.prob += box.prob * dirt_tile->get_pheromone_rate();
                   break;
               //case obstacle, prob = 0, cannot go
               case 2:
@@ -68,6 +68,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                   break;
               //case food
               case 3:
+                {
                   //if warrior is hungry
                   if (warrior.get_max_food_need() - warrior.get_food_need() <= 10)
                   {
@@ -80,9 +81,10 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                   }
 
                  break;
+                }
                default:
-                 return nullptr;
                  std::cout << "Switch case error in warrior moving state";
+                 return nullptr;
             }
         }
 
@@ -94,19 +96,14 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
         }
 
         //generating a random number to pick a tile according to the probs
-        const int range_from  = 1;
-        const int range_to    = 100;
-        std::random_device rand_dev;
-        std::mt19937 generator(rand_dev());
-        std::uniform_int_distribution<int> distr(range_from, range_to);
-        auto alea = distr(generator);
+        int rand = warrior.get_env().generate_random(1, 100);
 
         float lower_threshold = 1;
         float upper_threshold = 0;
         for(auto& box: tiles)
         {
             upper_threshold += box.prob;
-            if((alea >= lower_threshold) && (alea <= upper_threshold))
+            if((rand >= lower_threshold) && (rand <= upper_threshold))
             {
                 //display the ant's tile picture without the ant on it
                 switch (warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType())
@@ -131,9 +128,9 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                 }
 
                 //moving the ant
-                warrior.movement(box.tiles->get_coordinates().x, box.tiles->get_coordinates().y);
+                warrior.movement(box.tile->get_coordinates().x, box.tile->get_coordinates().y);
                 //displaying the ant pictures on its new tile
-                warrior.get_env().get_map().refresh_display(3, box.tiles->get_coordinates().x, box.tiles->get_coordinates().y);
+                warrior.get_env().get_map().refresh_display(3, box.tile->get_coordinates().x, box.tile->get_coordinates().y);
                 return nullptr;
             }
             lower_threshold += box.prob;
@@ -151,15 +148,28 @@ std::vector<nearby_tiles> MovingState::get_nearby_tiles(Warrior* _warrior)
     int x = _warrior->get_coordinates().x;
     int y = _warrior->get_coordinates().y;
 
+    int max_x = _warrior->get_env().getSizeX() - 1;
+    int max_y = _warrior->get_env().getSizeY() - 1;
+
+    coord new_coord1 = {x-1,y};
+    coord new_coord2 = {x,y+1};
+    coord new_coord3 = {x+1,y};
+    coord new_coord4 = {x,y-1};
+
     std::vector<nearby_tiles> tiles;
-    nearby_tiles tile1 = {_warrior->get_env().getTile(x-1,y), 0.25};
-    tiles.push_back(tile1);
-    nearby_tiles tile2 = {_warrior->get_env().getTile(x,y+1), 0.25};
-    tiles.push_back(tile2);
-    nearby_tiles tile3 = {_warrior->get_env().getTile(x+1,y), 0.25};
-    tiles.push_back(tile3);
-    nearby_tiles tile4 = {_warrior->get_env().getTile(x,y-1), 0.25};
-    tiles.push_back(tile4);
+
+    auto check_bounds = [max_x, max_y, _warrior, &tiles](const coord& new_coord){
+        if(new_coord.x >= 0 && new_coord.x <= max_x && new_coord.y >= 0 && new_coord.y <= max_y)
+        {
+            nearby_tiles tile = {_warrior->get_env().getTile(new_coord.x, new_coord.y), 0.25};
+            tiles.push_back(tile);
+        }
+    };
+
+    check_bounds(new_coord1);
+    check_bounds(new_coord2);
+    check_bounds(new_coord3);
+    check_bounds(new_coord4);
 
     return tiles;
 }

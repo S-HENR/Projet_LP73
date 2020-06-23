@@ -16,18 +16,22 @@ std::unique_ptr<State> WarriorEatingState::Action(Ant& ant)
 
     if(food_tile.get_quantity_food() > 0)
     {
-        if(food_tile.get_quantity_food() >= warrior.get_food_need())
-        {
-            //if the tile has enough food to fully satisfy the ant's needs
-            warrior.decrease_food_need(warrior.get_food_need());
-            food_tile.decrease_quantity(warrior.get_food_need());
-        }
-        else
-        {
-            //if the tile has not enough food to fully satisfy the ant's needs
-            warrior.decrease_food_need(food_tile.get_quantity_food());
-            food_tile.decrease_quantity(food_tile.get_quantity_food());
-        }
+//        if(food_tile.get_quantity_food() >= warrior.get_food_need())
+//        {
+//            //if the tile has enough food to fully satisfy the ant's needs
+//            warrior.decrease_food_need(warrior.get_food_need());
+//            food_tile.decrease_quantity(warrior.get_food_need());
+//        }
+//        else
+//        {
+//            //if the tile has not enough food to fully satisfy the ant's needs
+//            warrior.decrease_food_need(food_tile.get_quantity_food());
+//            food_tile.decrease_quantity(food_tile.get_quantity_food());
+//        }
+
+        int amount = warrior.get_env().collect_food(food_tile.get_coordinates().x, food_tile.get_coordinates().y, warrior.get_food_need());
+        warrior.decrease_food_need(amount);
+
     }
     return std::make_unique<MovingState>();
 

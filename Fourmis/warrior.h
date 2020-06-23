@@ -17,6 +17,8 @@ public:
     void set_carrying_capacity(int value);
 
     int get_quantity_carried() const;
+    void set_quantity_carried(int value);
+
     void increase_quantity_carried(int value);
     void decrease_quantity_carried(int value);
 

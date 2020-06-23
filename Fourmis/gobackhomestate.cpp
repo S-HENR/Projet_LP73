@@ -72,8 +72,8 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
           warrior.get_env().get_map().refresh_display(1, warrior.get_coordinates().x, warrior.get_coordinates().y);
          break;
        default:
-         return nullptr;
          std::cout << "Switch case error in warrior moving state";
+         return nullptr;
     }
 
     //if tile is dirt then lay pheromone
@@ -84,9 +84,10 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     //ant moves
     warrior.movement(steps[0][0], steps[0][1]);
 
-    //if new tile is anthill, do not display ant picture
+    //if new tile is anthill, do not display ant picture, if not, display ant
+    //not testing if obstacle because cannot be crossed by ants
     if(warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType() != 0){
-        warrior.get_env().get_map().refresh_display(3, steps[0][0], steps[0][1]);
+        warrior.get_env().get_map().refresh_display(3, warrior.get_coordinates().x, warrior.get_coordinates().y);
     }
 
     //delete movement made

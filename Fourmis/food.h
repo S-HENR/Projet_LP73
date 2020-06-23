@@ -1,6 +1,7 @@
 #ifndef FOOD_H
 #define FOOD_H
 #include <iostream>
+#include <random>
 #include "ground.h"
 
 class Food : public Ground
@@ -14,6 +15,7 @@ public:
     int get_quantity_food();
 private:
     int quantity;
+    std::mt19937 generator;
 };
 
 #endif // FOOD_H

@@ -4,6 +4,7 @@
 #include <array>
 #include <memory>
 #include <ctime>
+#include <random>
 #include "ground.h"
 #include "dirt.h"
 #include "obstacle.h"
@@ -35,6 +36,8 @@ public:
 
     std::vector<std::vector<Ground *> > get_board() const;
 
+    int generate_random(const int range_from, const int range_to);
+
 private:
     int size[2];
     int food_number;
@@ -43,6 +46,8 @@ private:
     Anthill* anthill;
     std::vector<std::vector<Ground*>> board;
     Map_display map;
+    std::mt19937 generator;
+
     void generate_anthill(int x, int y, Parameters& parameters);
     void generate_obstacle();
     void template_obstacle(int x, int y);

@@ -29,7 +29,7 @@ std::unique_ptr<State> PuttingDownFoodState::Action(Ant& ant)
             warrior.decrease_quantity_carried(warrior.get_quantity_carried());
         }
     }
-
+    warrior.set_quantity_carried(0);
     return std::make_unique<MovingState>();
 
 //    if(false) // Une condition pr passer à un nouvelle état
