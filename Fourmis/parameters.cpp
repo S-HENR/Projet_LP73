@@ -33,7 +33,7 @@ void Parameters::on_pushButton_clicked()
     pheromone_disappearance_rate = ui->lineEdit_5->text().toInt() ? ui->lineEdit_5->text().toFloat() : 0.95;
     save << pheromone_disappearance_rate << '\n';
 
-    nb_max_ants = ui->lineEdit_6->text().toInt() ? ui->lineEdit_6->text().toInt() : 5;
+    nb_max_ants = ui->lineEdit_6->text().toInt() ? ui->lineEdit_6->text().toInt() : 30;
     save << nb_max_ants << '\n';
 
     nb_max_food = ui->lineEdit_7->text().toInt() ? ui->lineEdit_7->text().toInt() : 30;

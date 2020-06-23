@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     anthill.cpp \
+    anthillstatus.cpp \
     dependentant.cpp \
     dirt.cpp \
     egg.cpp \
@@ -51,6 +52,7 @@ SOURCES += \
 
 HEADERS += \
     anthill.h \
+    anthillstatus.h \
     dependentant.h \
     dirt.h \
     egg.h \
@@ -67,6 +69,7 @@ HEADERS += \
     layinganeggstate.h \
     map_display.h \
     movingstate.h \
+    map_display.h \
     obstacle.h \
     ant.h \
     larva.h \
@@ -84,6 +87,7 @@ HEADERS += \
     AStar.hpp
 
 FORMS += \
+    anthillstatus.ui \
     parameters.ui
 
 TRANSLATIONS += \
