@@ -74,7 +74,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                       return std::make_unique<WarriorEatingState>(*food_tile);
                   }
                   //if warrior is not angry and can still pick up food
-                  else
+                  else if (warrior.get_quantity_carried() < warrior.get_carrying_capacity())
                   {
                       return std::make_unique<PickingUpFoodState>(*food_tile);
                   }

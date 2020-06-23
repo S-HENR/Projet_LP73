@@ -25,18 +25,26 @@ std::unique_ptr<State> PickingUpFoodState::Action(Ant& ant)
 
     if(food_tile.get_quantity_food() > 0)
     {
-        if(food_tile.get_quantity_food() <= rest_warrior_carrying_capacity)
-        {
-            //if the tile has not enough food to fill the carrying capacity of the ants
-            warrior.increase_quantity_carried(food_tile.get_quantity_food());
-            food_tile.decrease_quantity(food_tile.get_quantity_food());
-        }
-        else
-        {
-            //if the hut has enough food to fill the carrying capacity of the ants
-            warrior.increase_quantity_carried(rest_warrior_carrying_capacity);
-            food_tile.decrease_quantity(rest_warrior_carrying_capacity);
-        }
+          int amount = warrior.get_env().collect_food(food_tile.get_coordinates().x, food_tile.get_coordinates().y, rest_warrior_carrying_capacity);
+          warrior.increase_quantity_carried(amount);
+//        if(food_tile.get_quantity_food() <= rest_warrior_carrying_capacity)
+//        {
+//            //if the tile has not enough food to fill the carrying capacity of the ants
+//            warrior.increase_quantity_carried(food_tile.get_quantity_food());
+//            food_tile.decrease_quantity(food_tile.get_quantity_food());
+//        }
+//        else
+//        {
+//            //if the hut has enough food to fill the carrying capacity of the ants
+//            warrior.increase_quantity_carried(rest_warrior_carrying_capacity);
+//            food_tile.decrease_quantity(rest_warrior_carrying_capacity);
+//        }
+    }
+
+    //if all the food had run out, the tile go back to dirt
+    if(food_tile.get_quantity_food() <= 0)
+    {
+        warrior.get_env().get_map().refresh_display(0, warrior.get_coordinates().x, warrior.get_coordinates().y);
     }
 
     if(warrior.get_quantity_carried() >= warrior.get_carrying_capacity())
