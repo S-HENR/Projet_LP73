@@ -14,10 +14,10 @@ class Environnement;
 class Anthill : public Ground
 {
 public:
-    Anthill(Environnement env, Parameters& parameters, int _x, int _y);
+    Anthill(Environnement& env, Parameters& parameters, int _x, int _y);
     ~Anthill();
     virtual int getType();
-    void generate_ants(Environnement env, int nb_workers, int nb_warriors);
+    void generate_ants(Environnement& env, int nb_workers, int nb_warriors, int food_need, int time_to_trans, int carrying_cap);
     int queens_counter();
 
     std::vector<std::shared_ptr<Ant>> get_ants() const;

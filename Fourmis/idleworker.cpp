@@ -16,14 +16,14 @@ std::unique_ptr<State> IdleWorker::Action(Ant& ant)
     Worker& worker = dynamic_cast<Worker&>(ant);
 
     worker.increase_food_need();
-    worker.set_time_to_transition(-1);
+    worker.set_time_to_transition(worker.get_time_to_transition()-1);
 
     //seeking for a dependantAnt in need of food
-    for(auto&& ant: worker.get_anthill()->get_ants())
+    for(auto& ant: worker.get_anthill()->get_ants())
     {
         if(ant->get_max_food_need() - ant->get_food_need() <= 10)
         {
-            if(auto&& depAnt = std::dynamic_pointer_cast<DependentAnt>(ant))
+            if(auto depAnt = std::dynamic_pointer_cast<DependentAnt>(ant))
             {
                 if(depAnt->get_is_being_fed() == false)
                 {

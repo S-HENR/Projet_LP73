@@ -15,7 +15,7 @@ std::unique_ptr<State> LayingAnEggState::Action(Ant& ant)
     Queen& queen = dynamic_cast<Queen&>(ant);
 
     queen.increase_food_need();
-    queen.set_time_to_transition(-1);
+    queen.set_time_to_transition(queen.get_time_to_transition()-1);
 
     if( queen.get_anthill()->get_ants().size() == static_cast<size_t>(queen.get_anthill()->get_max_ants_nb() - 1) && (queen.get_anthill()->queens_counter() < 2))
     {

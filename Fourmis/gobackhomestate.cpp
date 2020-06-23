@@ -6,7 +6,7 @@
 #include "movingstate.h"
 
 
-GoBackHomeState::GoBackHomeState(std::array<int, 2> size, std::vector<std::vector<Ground*>> board, coord& _coordinates_ant, coord& _coordinates_anthill) :
+GoBackHomeState::GoBackHomeState(std::array<int, 2> size, std::vector<std::vector<Ground*>> board, const coord& _coordinates_ant, const coord& _coordinates_anthill) :
     coordinates_ant{.x = _coordinates_ant.x, .y = _coordinates_ant.y},
     coordinates_anthill{.x = _coordinates_anthill.x, .y = _coordinates_anthill.y}
 {
@@ -41,14 +41,41 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     Warrior& warrior = dynamic_cast<Warrior&>(ant);
 
     warrior.increase_food_need();
-    warrior.set_time_to_transition(-1);
+    warrior.set_time_to_transition(warrior.get_time_to_transition()-1);
 
     if(warrior.get_food_need() < 10)
     {
         //use to be warrioreatingstate but need to be near a food case to be able to eat
         return std::make_unique<MovingState>();
     }
-    //warrior.movement(); //x : steps[0][0] ; y : steps[0][1]
+
+    //display the ant's tile picture without the ant on it
+    switch (warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType())
+    {
+       //case anthill
+       case 0:
+          break;
+       //case dirt
+       case 1:
+          warrior.get_env().get_map().refresh_display(0, warrior.get_coordinates().x, warrior.get_coordinates().y);
+          break;
+      //case obstacle
+      case 2:
+          break;
+      //case food
+      case 3:
+          warrior.get_env().get_map().refresh_display(1, warrior.get_coordinates().x, warrior.get_coordinates().y);
+         break;
+       default:
+         return nullptr;
+         std::cout << "Switch case 2 error in warrior moving state";
+    }
+
+    warrior.movement(steps[0][0], steps[0][1]);
+    warrior.lay_pheromone();
+    if(warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType() != 0){
+        warrior.get_env().get_map().refresh_display(3, steps[0][0], steps[0][1]);
+    }
 
     //delete movement made
     steps.erase(steps.begin());

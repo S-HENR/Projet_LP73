@@ -5,12 +5,12 @@
 #include "warrior.h"
 #include "worker.h"
 
-Anthill::Anthill(Environnement env, Parameters& parameters, int _x, int _y) :
+Anthill::Anthill(Environnement& env, Parameters& parameters, int _x, int _y) :
     Ground(true, _x, _y),
     max_ants_nb(parameters.nb_max_ants),
     max_quantity_food_stock(parameters.nb_max_food)
 {
-    generate_ants(env, parameters.nb_init_workers, parameters.nb_init_warriors);
+    generate_ants(env, parameters.nb_init_workers, parameters.nb_init_warriors, parameters.amount_food_need, parameters.time_to_transition, parameters.carrying_capacity);
 }
 
 Anthill::~Anthill()
@@ -23,7 +23,7 @@ int Anthill::getType()
     return 0;
 }
 
-void Anthill::generate_ants(Environnement env, int nb_workers, int nb_warriors)
+void Anthill::generate_ants(Environnement& env, int nb_workers, int nb_warriors, int food_need, int time_to_trans, int carrying_cap)
 {
     //temp liste of ants for tests
 
@@ -38,26 +38,33 @@ void Anthill::generate_ants(Environnement env, int nb_workers, int nb_warriors)
 //         auto l = std::make_shared<Larva>(env, this, false);
 //         ants.emplace_back(l);
 //     }
-    for(int i = 0; i < nb_workers; i++)
-    {
-        auto wk = std::make_shared<Worker>(env, this, false);
-        ants.emplace_back(wk);
-    }
-    for(int i = 0; i < nb_warriors; i++)
-    {
-        auto wr = std::make_shared<Warrior>(env, this, false);
-        ants.emplace_back(wr);
-    }
-    auto q = std::make_shared<Queen>(env, this, false);
-    ants.emplace_back(q);
 
+    if((nb_workers + nb_warriors + 1) < max_ants_nb)
+    {
+        for(int i = 0; i < nb_workers; i++)
+        {
+            auto wk = std::make_shared<Worker>(env, this, false, food_need, time_to_trans);
+            ants.emplace_back(wk);
+        }
+        for(int i = 0; i < nb_warriors; i++)
+        {
+            auto wr = std::make_shared<Warrior>(env, this, false, food_need, time_to_trans, carrying_cap);
+            ants.emplace_back(wr);
+        }
+        auto q = std::make_shared<Queen>(env, this, false, food_need, time_to_trans);
+        ants.emplace_back(q);
+    }
+    else
+    {
+        std::cout << "Nombre de fourmis intialisé supérieur au nombre maximum de fourmis";
+    }
 }
 
 int Anthill::queens_counter()
 {
     int queens_nb = 0;
 
-    for(auto&& ant: ants)
+    for(auto& ant: ants)
     {
         if( std::dynamic_pointer_cast<Queen>(ant) != nullptr)
         {

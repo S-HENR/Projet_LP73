@@ -12,7 +12,7 @@ std::unique_ptr<State> PuttingDownFoodState::Action(Ant& ant)
 {
     Warrior& warrior = dynamic_cast<Warrior&>(ant);
     warrior.increase_food_need();
-    warrior.set_time_to_transition(-1);
+    warrior.set_time_to_transition(warrior.get_time_to_transition()-1);
 
     int rest_anthill_capacity_stock = warrior.get_anthill()->get_max_quantity_food_stock() - warrior.get_anthill()->get_quantity_food_stock();
 

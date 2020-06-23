@@ -10,7 +10,7 @@ class Ant
 {
 public:
     Ant() = delete;
-    Ant(Environnement& env, Anthill* _anthill, bool _is_queen, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10, std::unique_ptr<State> _state = nullptr);
+    Ant(Environnement& env, Anthill* _anthill, bool _is_queen, int _max_food_need = 0, int _time_to_transition = 10, int _food_need = 0, std::unique_ptr<State> _state = nullptr);
     ~Ant();
     void decrease_food_need(int quantity);
     virtual void increase_food_need() = 0;

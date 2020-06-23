@@ -1,5 +1,6 @@
 #include "simulation.h"
 #include "anthill.h"
+#include "ant.h"
 
 Simulation::Simulation(int argc, char *argv[]) : application(argc, argv)
 {
@@ -15,9 +16,9 @@ void Simulation::initialize_simulation()
 
     fill_in_parameters();
     application.exec();
-    *env = Environnement(parameters.sizeX, parameters.sizeY, parameters.nb_obstacles, parameters.nb_foods);
-    env->generate_ground(parameters);
-    env->display_ground();
+    env = Environnement(parameters.sizeX, parameters.sizeY, parameters.nb_obstacles, parameters.nb_foods, parameters.pheromone_disappearance_rate);
+    env.generate_ground(parameters);
+    env.display_ground();
 }
 
 void Simulation::start()
@@ -29,10 +30,16 @@ void Simulation::start()
 
         if(incr%20 == 0)
         {
-//            for(auto&& ant : env->get_anthill()->get_ants())
-//            {
-//                ant.Action();
-//            }
+            for(auto& ant : env.get_anthill()->get_ants())
+            {
+                ant->Action();
+            }
+//            env->get_anthill()->get_ants().erase(std::remove_if(
+//                                                     env->get_anthill()->get_ants().begin(),
+//                                                     env->get_anthill()->get_ants().end(),
+//                                                     [](Ant& _ant){return _ant.get_time_to_transition() <=0;}),
+//                                                     env->get_anthill()->get_ants().end()
+//                                                             );
 
 
             std::cout << "Tour : " << incr/20 << std::endl;

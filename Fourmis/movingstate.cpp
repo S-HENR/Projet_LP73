@@ -1,4 +1,5 @@
 #include "ant.h"
+#include "gobackhomestate.h"
 #include "movingstate.h"
 #include "pickingupfoodstate.h"
 #include "puttingdownfoodstate.h"
@@ -16,7 +17,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
 {
     Warrior& warrior = dynamic_cast<Warrior&>(ant);
     warrior.increase_food_need();
-    warrior.set_time_to_transition(-1);
+    warrior.set_time_to_transition(warrior.get_time_to_transition()-1);
 
     //warrior coordinates
     int x = warrior.get_coordinates().x;
@@ -25,26 +26,31 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
     //coordinates of the cases around the warrior and the probabilities the ants will choose to move on this tile
     std::vector<nearby_tiles> tiles = get_nearby_tiles(&warrior);
 
+    const auto& board = warrior.get_env().get_board();
+    std::array<int, 2> size = {
+        static_cast<int>(board.size()),
+        static_cast<int>(board[0].size())
+    };
+
     //if the warrior is inside the anthill, will put down the food she's carrying (if anthill capacity full or if the ant doesn't have any food on her back will be take care of in the next state
-    if(warrior.get_env().getTile(x,y)->getType() == 0)
+    if((warrior.get_env().getTile(x,y)->getType() == 0) && warrior.get_quantity_carried() > 0)
     {
         return std::make_unique<PuttingDownFoodState>();
     }
     //if the warrior is outside the anthill and her carrying capacity is full AND she's not hungry, she's going back to the anthill to put down her food
     else if((warrior.get_quantity_carried() >= warrior.get_carrying_capacity()) && !(warrior.get_max_food_need() - warrior.get_food_need() <= 10))
     {
-        //return std::make_unique<GoBackHomeState>();
+        return std::make_unique<GoBackHomeState>(size, board, warrior.get_coordinates(), warrior.get_anthill()->get_coordinates());
     }
-
     //if the warrior is outside the anthill and her carrying capacity is not full
     else
     {
         //examining the tiles around the ant to see if there is food, obstacle or pheromone on dirt tiles
-        for(auto&& box: tiles)
+        for(auto& box: tiles)
         {
             //if tile is not dirt/food, the var will be null
-            Dirt& dirt_tile = dynamic_cast<Dirt&>(*box.tiles);
-            Food& food_tile = dynamic_cast<Food&>(*box.tiles);
+            Dirt* dirt_tile = dynamic_cast<Dirt*>(box.tiles);
+            Food* food_tile = dynamic_cast<Food*>(box.tiles);
 
             switch (box.tiles->getType())
             {
@@ -54,7 +60,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                   break;
                //case dirt, increase the prob according to presence of pheromone
                case 1:
-                  box.prob += box.prob * dirt_tile.get_pheromone_rate();
+                  box.prob += box.prob * dirt_tile->get_pheromone_rate();
                   break;
               //case obstacle, prob = 0, cannot go
               case 2:
@@ -65,12 +71,12 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                   //if warrior is hungry
                   if (warrior.get_max_food_need() - warrior.get_food_need() <= 10)
                   {
-                      return std::make_unique<WarriorEatingState>(food_tile);
+                      return std::make_unique<WarriorEatingState>(*food_tile);
                   }
                   //if warrior is not angry and can still pick up food
                   else
                   {
-                      return std::make_unique<PickingUpFoodState>(food_tile);
+                      return std::make_unique<PickingUpFoodState>(*food_tile);
                   }
 
                  break;
@@ -82,9 +88,9 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
 
         //recalculating probs (because for now it can be over 100)
         float sum_prob = tiles[0].prob + tiles[1].prob + tiles[2].prob + tiles[3].prob;
-        for(auto&& box: tiles)
+        for(auto& box: tiles)
         {
-            box.prob = box.prob / sum_prob;
+            box.prob = (box.prob / sum_prob) * 100;
         }
 
         //generating a random number to pick a tile according to the probs
@@ -93,15 +99,41 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
         std::random_device rand_dev;
         std::mt19937 generator(rand_dev());
         std::uniform_int_distribution<int> distr(range_from, range_to);
+        auto alea = distr(generator);
 
         float lower_threshold = 1;
         float upper_threshold = 0;
-        for(auto&& box: tiles)
+        for(auto& box: tiles)
         {
             upper_threshold += box.prob;
-            if((distr(generator) >= lower_threshold) && (distr(generator) <= upper_threshold))
+            if((alea >= lower_threshold) && (alea <= upper_threshold))
             {
-                warrior.movement(*box.tiles);
+                //display the ant's tile picture without the ant on it
+                switch (warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType())
+                {
+                   //case anthill
+                   case 0:
+                      break;
+                   //case dirt
+                   case 1:
+                      warrior.get_env().get_map().refresh_display(0, warrior.get_coordinates().x, warrior.get_coordinates().y);
+                      break;
+                  //case obstacle
+                  case 2:
+                      break;
+                  //case food
+                  case 3:
+                      warrior.get_env().get_map().refresh_display(1, warrior.get_coordinates().x, warrior.get_coordinates().y);
+                     break;
+                   default:
+                     return nullptr;
+                     std::cout << "Switch case 2 error in warrior moving state";
+                }
+
+                //moving the ant
+                warrior.movement(box.tiles->get_coordinates().x, box.tiles->get_coordinates().y);
+                //displaying the ant pictures on its new tile
+                warrior.get_env().get_map().refresh_display(3, box.tiles->get_coordinates().x, box.tiles->get_coordinates().y);
                 return nullptr;
             }
             lower_threshold += box.prob;

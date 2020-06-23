@@ -2,6 +2,7 @@
 #include "ant.h"
 #include "warrior.h"
 #include "movingstate.h"
+#include "gobackhomestate.h"
 
 PickingUpFoodState::PickingUpFoodState(Food& tile) : food_tile(tile)
 {
@@ -12,9 +13,15 @@ std::unique_ptr<State> PickingUpFoodState::Action(Ant& ant)
 {
     Warrior& warrior = dynamic_cast<Warrior&>(ant);
     warrior.increase_food_need();
-    warrior.set_time_to_transition(-1);
+    warrior.set_time_to_transition(warrior.get_time_to_transition()-1);
 
     int rest_warrior_carrying_capacity = warrior.get_carrying_capacity() - warrior.get_quantity_carried();
+
+    const auto& board = warrior.get_env().get_board();
+    std::array<int, 2> size = {
+        static_cast<int>(board.size()),
+        static_cast<int>(board[0].size())
+    };
 
     if(food_tile.get_quantity_food() > 0)
     {
@@ -34,15 +41,12 @@ std::unique_ptr<State> PickingUpFoodState::Action(Ant& ant)
 
     if(warrior.get_quantity_carried() >= warrior.get_carrying_capacity())
     {
-        //return std::make_unique<GoBackHomeState>();
+        return std::make_unique<GoBackHomeState>(size, board, warrior.get_coordinates(), warrior.get_anthill()->get_coordinates());
     }
-    else
-    {
-        return std::make_unique<MovingState>();
-    }
+    return std::make_unique<MovingState>();
 
 
 //    if(false) // Une condition pr passer à un nouvelle état
 //        return std::make_unique<UnAutreEtat>();
-    return nullptr;
+//    return nullptr;
 }

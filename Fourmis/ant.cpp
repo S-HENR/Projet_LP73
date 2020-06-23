@@ -1,12 +1,12 @@
 #include "ant.h"
 
-Ant::Ant(Environnement& _env, Anthill* _anthill, bool _is_queen, int _food_need, int _max_food_need, int _time_to_transition, std::unique_ptr<State> _state) :
+Ant::Ant(Environnement& _env, Anthill* _anthill, bool _is_queen, int _max_food_need, int _time_to_transition, int _food_need, std::unique_ptr<State> _state) :
     coordinates(_anthill->get_coordinates()),
     is_queen(_is_queen),
     food_need(_food_need),
     max_food_need(_max_food_need),
     time_to_transition(_time_to_transition),
-    m_state(nullptr),
+    m_state(std::move(_state)),
     m_anthill(_anthill),
     m_env(_env)
 {

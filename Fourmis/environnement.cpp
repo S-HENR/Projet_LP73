@@ -2,9 +2,10 @@
 #include "anthill.h"
 
 
-Environnement::Environnement(int height,int length, int obstacle, int food):
+Environnement::Environnement(int height,int length, int obstacle, int food, float _pheromone_rate):
     food_number(food),
-    obstacle_number(obstacle)
+    obstacle_number(obstacle),
+    pheromone_disappearance_rate(_pheromone_rate)
 {
     //Initialization of the map with nullptr
     size[0] = length;
@@ -264,6 +265,16 @@ Anthill *Environnement::get_anthill() const
 void Environnement::set_anthill(Anthill *value)
 {
     anthill = value;
+}
+
+Map_display Environnement::get_map() const
+{
+    return map;
+}
+
+std::vector<std::vector<Ground *> > Environnement::get_board() const
+{
+    return board;
 }
 
 int Environnement::get_typeof_tile(int x, int y)

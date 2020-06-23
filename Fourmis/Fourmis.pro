@@ -65,6 +65,7 @@ HEADERS += \
     idlewarrior.h \
     idleworker.h \
     layinganeggstate.h \
+    map_display.h \
     movingstate.h \
     obstacle.h \
     ant.h \

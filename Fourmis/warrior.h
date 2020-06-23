@@ -8,9 +8,9 @@ class Warrior : public Ant
 {
 public:
     Warrior() = delete;
-    Warrior(Environnement& _env, Anthill* _anthill, bool _is_queen = false, int _food_need = 0, int _max_food_need = 0, int _time_to_transition = 10);
+    Warrior(Environnement& _env, Anthill* _anthill, bool _is_queen = false, int _max_food_need = 0, int _time_to_transition = 10, int _carrying_capacity = 20, int _food_need = 0);
     ~Warrior();
-    void movement(const Ground& tile);
+    void movement(const int x, const int y);
     void lay_pheromone();
 
     int get_carrying_capacity() const;
@@ -27,7 +27,7 @@ public:
 
 private :
     int carrying_capacity;
-    int quantity_carried;
+    int quantity_carried = 0;
 };
 
 #endif // WARRIOR_H

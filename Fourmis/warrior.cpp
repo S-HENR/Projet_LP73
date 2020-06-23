@@ -1,8 +1,8 @@
 #include "movingstate.h"
 #include "warrior.h"
 
-Warrior::Warrior(Environnement& _env, Anthill* _anthill, bool _is_queen, int _food_need, int _max_food_need, int _time_to_transition) :
-    Ant(_env, _anthill, _is_queen, _food_need, _max_food_need, _time_to_transition, std::make_unique<MovingState>())
+Warrior::Warrior(Environnement& _env, Anthill* _anthill, bool _is_queen, int _max_food_need, int _time_to_transition, int _carrying_capacity, int _food_need) :
+    Ant(_env, _anthill, _is_queen, _max_food_need, _time_to_transition,_food_need, std::make_unique<MovingState>()), carrying_capacity(_carrying_capacity)
 {
 
 }
@@ -47,12 +47,15 @@ void Warrior::set_carrying_capacity(int value)
     carrying_capacity = value;
 }
 
-void Warrior::movement(const Ground& tile)
+void Warrior::movement(const int x, const int y)
 {
-    set_coordinates(tile.get_coordinates().x, tile.get_coordinates().y);
+    set_coordinates(x, y);
 }
 
 void Warrior::lay_pheromone()
 {
+    auto* tile = get_env().getTile(get_coordinates().x, get_coordinates().y);
+    Dirt* dirt_tile = dynamic_cast<Dirt*>(tile);
 
+    dirt_tile->set_pheromone_rate(100);
 }
