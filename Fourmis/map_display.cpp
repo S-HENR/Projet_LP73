@@ -9,15 +9,15 @@ Map_display::Map_display()
     gridLayout->setSpacing(0);
 }
 
-void Map_display::display(std::vector<std::vector<Ground*>>& board, int x, int y)
+void Map_display::display(std::vector<std::vector<Ground*>>& board, int length, int height)
 {
     //Initialize the grid (board) with images
-    for (int i = 0 ; i < x ; i++)
+    for (int x = 0 ; x < length ; x++)
     {
-        for (int j = 0; j < y ; j++)
+        for (int y = 0; y < height ; y++)
         {
             label_img = new QLabel;
-            switch (board[i][j]->getType()) {
+            switch (board[y][x]->getType()) {
                 case 0:
                     label_img->setPixmap(QPixmap("../img/anthill.jpg"));
                     break;
@@ -31,7 +31,7 @@ void Map_display::display(std::vector<std::vector<Ground*>>& board, int x, int y
                     label_img->setPixmap(QPixmap("../img/food.jpg"));
                     break;
             }
-            gridLayout->addWidget(label_img, i, j);
+            gridLayout->addWidget(label_img, y, x);
         }
     }
 
@@ -83,7 +83,7 @@ void Map_display::refresh_display(int choice, int x, int y)
     }
 
     //update map[x][y]
-    gridLayout->addWidget(label_img, x, y);
+    gridLayout->addWidget(label_img, y, x);
     scrollArea->setWidget(widget);
     //display the map updated
     scrollArea->show();

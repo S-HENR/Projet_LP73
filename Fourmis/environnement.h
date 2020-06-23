@@ -28,7 +28,6 @@ public:
     int get_typeof_tile(int x, int y);
     int collect_food(int x, int y, int amount);
     void regenerate_food(int amount);
-    void display_updated_ground(int x, int y);
 
     Anthill *get_anthill() const;
     void set_anthill(Anthill *value);
