@@ -1,8 +1,7 @@
 #include "environnement.h"
 #include "anthill.h"
 
-
-Environnement::Environnement(int height,int length, int obstacle, int food, float _pheromone_rate):
+Environnement::Environnement(int height,int length, int obstacle, int food):
     food_number(food),
     obstacle_number(obstacle),
     pheromone_disappearance_rate(_pheromone_rate),

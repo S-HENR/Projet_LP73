@@ -21,6 +21,7 @@ private:
     void fill_in_parameters();
     void generate_environnement();
     void display_anthill_status();
+    void apply_disappearance_rate();
 };
 
 #endif // SIMULATION_H

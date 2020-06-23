@@ -17,7 +17,8 @@ class Anthill;
 class Environnement
 {
 public:
-    Environnement(int height = 100,int length = 50, int obstacle = 1000, int food = 500, float _pheromone_rate = 0.95);
+    Environnement(){};
+    Environnement(int height,int length, int obstacle, int food);
     ~Environnement();
     void generate_ground(Parameters& parameter);
     void display_ground();
@@ -42,7 +43,6 @@ private:
     int size[2];
     int food_number;
     int obstacle_number;
-    float pheromone_disappearance_rate;
     Anthill* anthill;
     std::vector<std::vector<Ground*>> board;
     Map_display map;
