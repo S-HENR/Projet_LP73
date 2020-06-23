@@ -4,7 +4,7 @@
 Environnement::Environnement(int height,int length, int obstacle, int food):
     food_number(food),
     obstacle_number(obstacle),
-    pheromone_disappearance_rate(_pheromone_rate),
+    //pheromone_disappearance_rate(_pheromone_rate),
     generator((std::random_device())())
 {
     //Initialization of the map with nullptr
