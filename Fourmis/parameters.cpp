@@ -33,7 +33,7 @@ void Parameters::on_pushButton_clicked()
     pheromone_disappearance_rate = ui->lineEdit_5->text().toInt() ? ui->lineEdit_5->text().toFloat() : 0.95;
     save << pheromone_disappearance_rate << '\n';
 
-    nb_max_ants = ui->lineEdit_6->text().toInt() ? ui->lineEdit_6->text().toInt() : 5;
+    nb_max_ants = ui->lineEdit_6->text().toInt() ? ui->lineEdit_6->text().toInt() : 30;
     save << nb_max_ants << '\n';
 
     nb_max_food = ui->lineEdit_7->text().toInt() ? ui->lineEdit_7->text().toInt() : 30;
@@ -48,10 +48,10 @@ void Parameters::on_pushButton_clicked()
     nb_init_warriors = ui->lineEdit_10->text().toInt() ? ui->lineEdit_10->text().toInt() : 3;
     save << nb_init_warriors << '\n';
 
-    amount_food_need = ui->lineEdit_11->text().toInt() ? ui->lineEdit_11->text().toInt() : 10;
+    amount_food_need = ui->lineEdit_11->text().toInt() ? ui->lineEdit_11->text().toInt() : 30;
     save << amount_food_need << '\n';
 
-    time_to_transition = ui->lineEdit_12->text().toInt() ? ui->lineEdit_12->text().toInt() : 30;
+    time_to_transition = ui->lineEdit_12->text().toInt() ? ui->lineEdit_12->text().toInt() : 100;
     save << time_to_transition << '\n';
 
     carrying_capacity = ui->lineEdit_13->text().toInt() ? ui->lineEdit_13->text().toInt() : 6;
