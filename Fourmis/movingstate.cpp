@@ -129,8 +129,33 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
 
                 //moving the ant
                 warrior.movement(box.tile->get_coordinates().x, box.tile->get_coordinates().y);
+
                 //displaying the ant pictures on its new tile
-                warrior.get_env().get_map().refresh_display(3, box.tile->get_coordinates().x, box.tile->get_coordinates().y);
+
+                switch(box.tile->get_coordinates().x - x)
+                {
+                case -1:
+                    warrior.get_env().get_map().refresh_display(5, box.tile->get_coordinates().x, box.tile->get_coordinates().y);
+                    break;
+                case 1:
+                    warrior.get_env().get_map().refresh_display(3, box.tile->get_coordinates().x, box.tile->get_coordinates().y);
+                    break;
+                default:
+                    break;
+                }
+
+                switch(box.tile->get_coordinates().y - y)
+                {
+                case -1:
+                    warrior.get_env().get_map().refresh_display(2, box.tile->get_coordinates().x, box.tile->get_coordinates().y);
+                    break;
+                case 1:
+                    warrior.get_env().get_map().refresh_display(4, box.tile->get_coordinates().x, box.tile->get_coordinates().y);
+                    break;
+                default:
+                    break;
+                }
+
                 return nullptr;
             }
             lower_threshold += box.prob;
