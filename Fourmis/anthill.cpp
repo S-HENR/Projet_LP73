@@ -81,6 +81,18 @@ std::vector<std::shared_ptr<Ant> > Anthill::get_ants()
     return ants;
 }
 
+int Anthill::get_nb_ant_type(int type)
+{
+    int size = ants.size();
+    int counter = 0;
+    for(int i = 0 ; i < size ; i++)
+    {
+        if(ants[i]->getType() == type)
+            counter++;
+    }
+    return counter;
+}
+
 void Anthill::set_ants(const std::vector<std::shared_ptr<Ant> > &value)
 {
     ants = value;

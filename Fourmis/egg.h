@@ -14,8 +14,9 @@ public:
 
     // Ant interface
 public:
-    void increase_food_need();
-    void eat();
+    virtual void increase_food_need();
+    virtual void eat();
+    virtual int getType();
 };
 
 #endif // EGG_H

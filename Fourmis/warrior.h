@@ -24,8 +24,9 @@ public:
 
     // Ant interface
 public:
-    void increase_food_need();
-    void eat();
+    virtual void increase_food_need();
+    virtual void eat();
+    virtual int getType();
 
 private :
     int carrying_capacity;

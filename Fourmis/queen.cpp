@@ -21,3 +21,8 @@ void Queen::eat()
 {
 
 }
+
+int Queen::getType()
+{
+    return 4;
+}

@@ -22,6 +22,11 @@ void Warrior::eat()
 
 }
 
+int Warrior::getType()
+{
+    return 3;
+}
+
 void Warrior::set_quantity_carried(int value)
 {
     quantity_carried = value;
