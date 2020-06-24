@@ -12,18 +12,18 @@ GoBackHomeState::GoBackHomeState(std::array<int, 2> size, const std::vector<std:
 {
     AStar::Generator generator;
     // Set 2d map size.
-    generator.setWorldSize({size[1],size[0]});
+    generator.setWorldSize({size[0],size[1]});
     // You can use a few heuristics : manhattan, euclidean or octagonal.
     generator.setHeuristic(AStar::Heuristic::euclidean);
     generator.setDiagonalMovement(false);
 
 
-    for(int i = 0 ; i < size[1] ; i++)
+    for(int x = 0 ; x < size[0] ; x++)
     {
-        for(int j = 0 ; j < size[0] ; j++)
+        for(int y = 0 ; y < size[1] ; y++)
         {
-            if(!board[i][j]->getCrossable())
-                generator.addCollision({i,j});
+            if(!board[x][y]->getCrossable())
+                generator.addCollision({x,y});
         }
     }
 
