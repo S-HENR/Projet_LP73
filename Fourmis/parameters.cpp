@@ -39,13 +39,13 @@ void Parameters::on_pushButton_clicked()
     nb_max_food = ui->lineEdit_7->text().toInt() ? ui->lineEdit_7->text().toInt() : 30;
     save << nb_max_food << '\n';
 
-    nb_init_larvas = ui->lineEdit_8->text().toInt() ? ui->lineEdit_8->text().toInt() : 2;
+    nb_init_larvas = ui->lineEdit_8->text().toInt() ? ui->lineEdit_8->text().toInt() : 0;
     save << nb_init_larvas << '\n';
 
-    nb_init_workers = ui->lineEdit_9->text().toInt() ? ui->lineEdit_9->text().toInt() : 3;
+    nb_init_workers = ui->lineEdit_9->text().toInt() ? ui->lineEdit_9->text().toInt() : 2;
     save << nb_init_workers << '\n';
 
-    nb_init_warriors = ui->lineEdit_10->text().toInt() ? ui->lineEdit_10->text().toInt() : 3;
+    nb_init_warriors = ui->lineEdit_10->text().toInt() ? ui->lineEdit_10->text().toInt() : 5;
     save << nb_init_warriors << '\n';
 
     amount_food_need = ui->lineEdit_11->text().toInt() ? ui->lineEdit_11->text().toInt() : 30;
@@ -54,7 +54,7 @@ void Parameters::on_pushButton_clicked()
     time_to_transition = ui->lineEdit_12->text().toInt() ? ui->lineEdit_12->text().toInt() : 100;
     save << time_to_transition << '\n';
 
-    carrying_capacity = ui->lineEdit_13->text().toInt() ? ui->lineEdit_13->text().toInt() : 6;
+    carrying_capacity = ui->lineEdit_13->text().toInt() ? ui->lineEdit_13->text().toInt() : 10;
     save << carrying_capacity << '\n';
 
     save.close();

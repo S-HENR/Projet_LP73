@@ -48,7 +48,7 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     warrior.increase_food_need();
     warrior.set_time_to_transition(warrior.get_time_to_transition()-1);
 
-    if(warrior.get_food_need() < 10)
+    if((warrior.get_max_food_need() - warrior.get_food_need()) <= 5)
     {
         //use to be warrioreatingstate but need to be near a food case to be able to eat
         return std::make_unique<MovingState>();

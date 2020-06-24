@@ -37,5 +37,5 @@ std::unique_ptr<State> WarriorEatingState::Action(Ant& ant)
 
 //    if(false) // Une condition pr passer à un nouvelle état
 //        return std::make_unique<UnAutreEtat>();
-    return nullptr;
+    //return nullptr;
 }

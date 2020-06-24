@@ -21,7 +21,7 @@ std::unique_ptr<State> IdleWorker::Action(Ant& ant)
     //seeking for a dependantAnt in need of food
     for(auto& ant: worker.get_anthill()->get_ants())
     {
-        if(ant->get_max_food_need() - ant->get_food_need() <= 10)
+        if(ant->get_max_food_need() - ant->get_food_need() <= 5)
         {
             if(auto depAnt = std::dynamic_pointer_cast<DependentAnt>(ant))
             {
@@ -37,7 +37,7 @@ std::unique_ptr<State> IdleWorker::Action(Ant& ant)
     }
 
     //if the worker is hungry
-    if (worker.get_max_food_need() - worker.get_food_need() <= 10)
+    if ((worker.get_max_food_need() - worker.get_food_need()) <= 5)
     {
         return std::make_unique<WorkerEatingState>();
     }

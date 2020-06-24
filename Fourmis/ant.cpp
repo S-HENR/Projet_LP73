@@ -21,7 +21,6 @@ Ant::~Ant()
 void Ant::decrease_food_need(int quantity)
 {
     food_need -= quantity;
-    coordinates.x = 2;
 }
 
 void Ant::Action()

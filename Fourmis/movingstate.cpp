@@ -38,7 +38,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
         return std::make_unique<PuttingDownFoodState>();
     }
     //if the warrior is outside the anthill and her carrying capacity is full AND she's not hungry, she's going back to the anthill to put down her food
-    else if((warrior.get_quantity_carried() >= warrior.get_carrying_capacity()) && !(warrior.get_max_food_need() - warrior.get_food_need() <= 10))
+    else if((warrior.get_quantity_carried() >= warrior.get_carrying_capacity()) && !(warrior.get_max_food_need() - warrior.get_food_need() <= 5))
     {
         return std::make_unique<GoBackHomeState>(size, board, warrior.get_coordinates(), warrior.get_anthill()->get_coordinates());
     }
@@ -70,7 +70,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
               case 3:
                 {
                   //if warrior is hungry
-                  if (warrior.get_max_food_need() - warrior.get_food_need() <= 10)
+                  if ((warrior.get_max_food_need() - warrior.get_food_need()) <= 5)
                   {
                       return std::make_unique<WarriorEatingState>(*food_tile);
                   }
