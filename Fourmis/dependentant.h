@@ -9,7 +9,7 @@ class DependentAnt : public Ant
 {
 public:
     DependentAnt() = delete;
-    DependentAnt(Environnement& _env, Anthill* _anthill, bool _is_queen = false, int _max_food_need = 0, int _time_to_transition = 10, int _food_need = 0,  bool _is_being_fed = false, std::unique_ptr<State> _state = nullptr);
+    DependentAnt(Environnement& _env, Anthill* _anthill, bool _is_queen = false, int _max_food_need = 0, int _time_to_transition = 10, float _food_need = 0,  bool _is_being_fed = false, std::unique_ptr<State> _state = nullptr);
     ~DependentAnt();
 
     // Ant interface

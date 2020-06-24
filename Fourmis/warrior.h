@@ -8,7 +8,7 @@ class Warrior : public Ant
 {
 public:
     Warrior() = delete;
-    Warrior(Environnement& _env, Anthill* _anthill, bool _is_queen = false, int _max_food_need = 0, int _time_to_transition = 10, int _carrying_capacity = 20, int _food_need = 0);
+    Warrior(Environnement& _env, Anthill* _anthill, bool _is_queen = false, int _max_food_need = 0, int _time_to_transition = 10, int _carrying_capacity = 20, float _food_need = 0);
     ~Warrior();
     void movement(const int x, const int y);
     void lay_pheromone();

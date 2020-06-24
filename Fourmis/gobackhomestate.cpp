@@ -60,21 +60,21 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     }
 
     //display the ant's tile picture without the ant on it
-    switch (warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType())
+    switch (warrior.get_env().getTile(x,y)->getType())
     {
        //case anthill
        case 0:
           break;
        //case dirt
        case 1:
-          warrior.get_env().get_map().refresh_display(0, warrior.get_coordinates().x, warrior.get_coordinates().y);
+          warrior.get_env().get_map().refresh_display(0, x,y);
           break;
       //case obstacle
       case 2:
           break;
       //case food
       case 3:
-          warrior.get_env().get_map().refresh_display(1, warrior.get_coordinates().x, warrior.get_coordinates().y);
+          warrior.get_env().get_map().refresh_display(1,x,y);
          break;
        default:
          std::cout << "Switch case error in warrior moving state";
@@ -82,7 +82,7 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     }
 
     //if tile is dirt then lay pheromone
-    if(warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType() == 1){
+    if(warrior.get_env().getTile(x,y)->getType() == 1){
         warrior.lay_pheromone();
     }
 
@@ -120,7 +120,7 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     //delete movement made
     steps.erase(steps.begin());
 
-    if(steps.size() > 0)
+    if(!steps.empty())
     {
         return nullptr;
     }

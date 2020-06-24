@@ -76,7 +76,7 @@ int Anthill::queens_counter()
     return queens_nb;
 }
 
-std::vector<std::shared_ptr<Ant> > Anthill::get_ants() const
+std::vector<std::shared_ptr<Ant> > Anthill::get_ants()
 {
     return ants;
 }

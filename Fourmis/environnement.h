@@ -29,7 +29,7 @@ public:
     int collect_food(int x, int y, int amount);
     void regenerate_food(int amount);
 
-    Anthill *get_anthill() const;
+    Anthill *get_anthill();
     void set_anthill(Anthill *value);
 
     Map_display get_map() const;

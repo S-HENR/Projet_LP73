@@ -252,7 +252,7 @@ void Environnement::display_ground()
     map.display(board, size[0], size[1]);
 }
 
-Anthill *Environnement::get_anthill() const
+Anthill *Environnement::get_anthill()
 {
     return anthill;
 }

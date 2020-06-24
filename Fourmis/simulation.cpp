@@ -30,16 +30,22 @@ void Simulation::start()
 
         if(incr%10 == 0)
         {
+            std::vector<int> toRecreate;
             for(auto& ant : env.get_anthill()->get_ants())
             {
                 ant->Action();
+                if((ant->get_max_food_need() - ant->get_food_need()) <=0)
+                {
+                    //toRecreate.push_back(ant.);
+                }
             }
-////            env->get_anthill()->get_ants().erase(std::remove_if(
-////                                                     env->get_anthill()->get_ants().begin(),
-////                                                     env->get_anthill()->get_ants().end(),
-////                                                     [](Ant& _ant){return _ant.get_time_to_transition() <=0;}),
-////                                                     env->get_anthill()->get_ants().end()
-////                                                             );
+
+//            env.get_anthill()->get_ants().erase(std::remove_if(
+//                                                     env.get_anthill()->get_ants().begin(),
+//                                                     env.get_anthill()->get_ants().end(),
+//                                                     [](Ant& _ant){return (_ant.get_max_food_need() - _ant.get_food_need()) <=0;}),
+//                                                     env.get_anthill()->get_ants().end()
+//                                               );
 
 
             std::cout << "Tour : " << incr/10 << std::endl;

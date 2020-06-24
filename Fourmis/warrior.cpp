@@ -1,7 +1,7 @@
 #include "movingstate.h"
 #include "warrior.h"
 
-Warrior::Warrior(Environnement& _env, Anthill* _anthill, bool _is_queen, int _max_food_need, int _time_to_transition, int _carrying_capacity, int _food_need) :
+Warrior::Warrior(Environnement& _env, Anthill* _anthill, bool _is_queen, int _max_food_need, int _time_to_transition, int _carrying_capacity, float _food_need) :
     Ant(_env, _anthill, _is_queen, _max_food_need, _time_to_transition,_food_need, std::make_unique<MovingState>()), carrying_capacity(_carrying_capacity)
 {
 
@@ -14,7 +14,7 @@ Warrior::~Warrior()
 
 void Warrior::increase_food_need()
 {
-    set_food_need(get_food_need() + 1 );
+    set_food_need(get_food_need() + 0.25 );
 }
 
 void Warrior::eat()

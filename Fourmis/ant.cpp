@@ -1,6 +1,6 @@
 #include "ant.h"
 
-Ant::Ant(Environnement& _env, Anthill* _anthill, bool _is_queen, int _max_food_need, int _time_to_transition, int _food_need, std::unique_ptr<State> _state) :
+Ant::Ant(Environnement& _env, Anthill* _anthill, bool _is_queen, int _max_food_need, int _time_to_transition, float _food_need, std::unique_ptr<State> _state) :
     coordinates(_anthill->get_coordinates()),
     is_queen(_is_queen),
     food_need(_food_need),
@@ -30,12 +30,12 @@ void Ant::Action()
         m_state = std::move(newState);
 }
 
-int Ant::get_food_need() const
+float Ant::get_food_need() const
 {
     return food_need;
 }
 
-void Ant::set_food_need(int value)
+void Ant::set_food_need(float value)
 {
     food_need = value;
 }

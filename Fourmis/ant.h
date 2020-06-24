@@ -10,7 +10,7 @@ class Ant
 {
 public:
     Ant() = delete;
-    Ant(Environnement& env, Anthill* _anthill, bool _is_queen, int _max_food_need = 0, int _time_to_transition = 10, int _food_need = 0, std::unique_ptr<State> _state = nullptr);
+    Ant(Environnement& env, Anthill* _anthill, bool _is_queen, int _max_food_need = 0, int _time_to_transition = 10, float _food_need = 0, std::unique_ptr<State> _state = nullptr);
     ~Ant();
     void decrease_food_need(int quantity);
     virtual void increase_food_need() = 0;
@@ -18,8 +18,8 @@ public:
 
     void Action();
 
-    int get_food_need() const;
-    void set_food_need(int value);
+    float get_food_need() const;
+    void set_food_need(float value);
 
     int get_max_food_need() const;
     void set_max_food_need(int value);
@@ -42,7 +42,7 @@ public:
 private:
     coord coordinates;
     bool is_queen;
-    int food_need;
+    float food_need;
     int max_food_need;
     int time_to_transition;
 

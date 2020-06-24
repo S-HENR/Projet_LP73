@@ -20,7 +20,7 @@ public:
     void generate_ants(Environnement& env, int nb_workers, int nb_warriors, int food_need, int time_to_trans, int carrying_cap);
     int queens_counter();
 
-    std::vector<std::shared_ptr<Ant>> get_ants() const;
+    std::vector<std::shared_ptr<Ant>> get_ants();
     void set_ants(const std::vector<std::shared_ptr<Ant>> &value);
 
     int get_max_ants_nb() const;
