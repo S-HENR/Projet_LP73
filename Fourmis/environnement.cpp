@@ -121,8 +121,8 @@ void Environnement::template_obstacle(int x, int y) {
         if(!board[x][y])
            board[x][y] = new Obstacle(x,y);
 
-        if(x+1 < size[0] && !board[y][x+1])
-           board[y][x+1] = new Obstacle(x+1,y);
+        if(x+1 < size[0] && !board[x+1][y])
+           board[x+1][y] = new Obstacle(x+1,y);
 
         obstacle_number -= 2;
         break;
