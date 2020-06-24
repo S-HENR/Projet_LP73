@@ -38,12 +38,17 @@ GoBackHomeState::GoBackHomeState(std::array<int, 2> size, const std::vector<std:
         coordinates[1] = coordinate.y;
         steps.push_back(coordinates);
     }
+    steps.erase(steps.begin());
 }
 
 
 std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
 {
     Warrior& warrior = dynamic_cast<Warrior&>(ant);
+
+    //warrior coordinates
+    int x = warrior.get_coordinates().x;
+    int y = warrior.get_coordinates().y;
 
     warrior.increase_food_need();
     warrior.set_time_to_transition(warrior.get_time_to_transition()-1);
@@ -87,7 +92,29 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     //if new tile is anthill, do not display ant picture, if not, display ant
     //not testing if obstacle because cannot be crossed by ants
     if(warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType() != 0){
-        warrior.get_env().get_map().refresh_display(3, warrior.get_coordinates().x, warrior.get_coordinates().y);
+        switch(warrior.get_coordinates().x - x)
+        {
+        case -1:
+            warrior.get_env().get_map().refresh_display(5, warrior.get_coordinates().x, warrior.get_coordinates().y);
+            break;
+        case 1:
+            warrior.get_env().get_map().refresh_display(3, warrior.get_coordinates().x, warrior.get_coordinates().y);
+            break;
+        default:
+            break;
+        }
+
+        switch(warrior.get_coordinates().y - y)
+        {
+        case -1:
+            warrior.get_env().get_map().refresh_display(2, warrior.get_coordinates().x, warrior.get_coordinates().y);
+            break;
+        case 1:
+            warrior.get_env().get_map().refresh_display(4, warrior.get_coordinates().x, warrior.get_coordinates().y);
+            break;
+        default:
+            break;
+        }
     }
 
     //delete movement made

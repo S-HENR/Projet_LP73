@@ -46,6 +46,10 @@ void Simulation::start()
             display_anthill_status();
             //apply_disappearance_rate();
         }
+
+        if(incr%200 == 0)
+            env.regenerate_food(2);
+
         std::this_thread::sleep_for (std::chrono::milliseconds(100));
         incr++;
 //        if(incr == 100)

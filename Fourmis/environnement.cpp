@@ -306,6 +306,7 @@ void Environnement::regenerate_food(int amount)
         if(board[x][y]->getType() == 1)
         {
             board[x][y] = new Food(x,y);
+            map.refresh_display(1, x, y);
             food_number++;
             amount--;
         }
