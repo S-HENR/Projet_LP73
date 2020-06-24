@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>283</width>
-    <height>239</height>
+    <height>243</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,7 +47,7 @@
      </font>
     </property>
     <property name="text">
-     <string>5/30</string>
+     <string/>
     </property>
     <property name="scaledContents">
      <bool>false</bool>
@@ -86,7 +86,7 @@
      </font>
     </property>
     <property name="text">
-     <string>5/30</string>
+     <string/>
     </property>
     <property name="scaledContents">
      <bool>false</bool>
@@ -161,7 +161,7 @@
      </font>
     </property>
     <property name="text">
-     <string>1</string>
+     <string/>
     </property>
     <property name="scaledContents">
      <bool>false</bool>
@@ -182,7 +182,7 @@
      </font>
     </property>
     <property name="text">
-     <string>1</string>
+     <string/>
     </property>
     <property name="scaledContents">
      <bool>false</bool>
@@ -203,7 +203,7 @@
      </font>
     </property>
     <property name="text">
-     <string>2</string>
+     <string/>
     </property>
     <property name="scaledContents">
      <bool>false</bool>

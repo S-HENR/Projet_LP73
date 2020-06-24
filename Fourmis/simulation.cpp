@@ -28,24 +28,23 @@ void Simulation::start()
     {
         application.processEvents();
 
-
         if(incr%10 == 0)
         {
             for(auto& ant : env.get_anthill()->get_ants())
             {
                 ant->Action();
             }
-//            env->get_anthill()->get_ants().erase(std::remove_if(
-//                                                     env->get_anthill()->get_ants().begin(),
-//                                                     env->get_anthill()->get_ants().end(),
-//                                                     [](Ant& _ant){return _ant.get_time_to_transition() <=0;}),
-//                                                     env->get_anthill()->get_ants().end()
-//                                                             );
+////            env->get_anthill()->get_ants().erase(std::remove_if(
+////                                                     env->get_anthill()->get_ants().begin(),
+////                                                     env->get_anthill()->get_ants().end(),
+////                                                     [](Ant& _ant){return _ant.get_time_to_transition() <=0;}),
+////                                                     env->get_anthill()->get_ants().end()
+////                                                             );
 
 
-            std::cout << "Tour : " << incr/20 << std::endl;
+            std::cout << "Tour : " << incr/10 << std::endl;
             display_anthill_status();
-            apply_disappearance_rate();
+            //apply_disappearance_rate();
         }
         std::this_thread::sleep_for (std::chrono::milliseconds(100));
         incr++;

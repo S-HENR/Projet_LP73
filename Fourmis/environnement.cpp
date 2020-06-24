@@ -1,7 +1,7 @@
 #include "environnement.h"
 #include "anthill.h"
 
-Environnement::Environnement(int height,int length, int obstacle, int food):
+Environnement::Environnement(int length,int height, int obstacle, int food):
     food_number(food),
     obstacle_number(obstacle),
     //pheromone_disappearance_rate(_pheromone_rate),
@@ -10,8 +10,8 @@ Environnement::Environnement(int height,int length, int obstacle, int food):
     //Initialization of the map with nullptr
     size[0] = length;
     size[1] = height;
-    std::vector<Ground*> lines(size[0], nullptr);
-    board = std::vector<std::vector<Ground*>>(size[1], lines);
+    std::vector<Ground*> lines(size[1], nullptr);
+    board = std::vector<std::vector<Ground*>>(size[0], lines);
 }
 
 Environnement::~Environnement()
@@ -27,8 +27,8 @@ void Environnement::generate_ground(Parameters& parameters)
 {
     //Initialization of Anthill ground :
     //Put the anthill in the middle of the map
-    int x = size[1]/2;
-    int y = size[0]/2;
+    int x = size[0]/2;
+    int y = size[1]/2;
     this->generate_anthill(x,y, parameters);
 
     //Initialization of Obstacle grounds :
@@ -80,8 +80,8 @@ void Environnement::generate_obstacle()
     int y;
     while(obstacle_number > 0)
     {
-        x = rand()%size[1];
-        y = rand()%size[0];
+        x = rand()%size[0];
+        y = rand()%size[1];
         template_obstacle(x,y);
     }
 }
@@ -121,8 +121,8 @@ void Environnement::template_obstacle(int x, int y) {
         if(!board[x][y])
            board[x][y] = new Obstacle(x,y);
 
-        if(y+1 < size[0] && !board[x][y+1])
-           board[x][y+1] = new Obstacle(x,y);
+        if(x+1 < size[0] && !board[y][x+1])
+           board[y][x+1] = new Obstacle(x+1,y);
 
         obstacle_number -= 2;
         break;
@@ -132,11 +132,11 @@ void Environnement::template_obstacle(int x, int y) {
         if(!board[x][y])
            board[x][y] = new Obstacle(x,y);
 
-        if(y+1 < size[0] && !board[x][y+1])
-           board[x][y+1] = new Obstacle(x,y);
+        if(x+1 < size[0] && !board[x+1][y])
+           board[x+1][y] = new Obstacle(x+1,y);
 
-        if(y+2 < size[0] && !board[x][y+2])
-           board[x][y+2] = new Obstacle(x,y);
+        if(x+2 < size[0] && !board[x+2][y])
+           board[x+2][y] = new Obstacle(x+2,y);
 
         obstacle_number -= 3;
         break;
@@ -149,11 +149,11 @@ void Environnement::template_obstacle(int x, int y) {
         if(!board[x][y])
             board[x][y] = new Obstacle(x,y);
 
-        if(x+1 < size[1] && !board[x+1][y])
-            board[x+1][y] = new Obstacle(x,y);
+        if(y+1 < size[1] && !board[x][y+1])
+            board[x][y+1] = new Obstacle(x,y+1);
 
-        if(x+2 < size[1] && !board[x+2][y])
-            board[x+2][y] = new Obstacle(x,y);
+        if(y+2 < size[1] && !board[x][y+2])
+            board[x][y+2] = new Obstacle(x,y+2);
 
         obstacle_number -= 3;
         break;
@@ -166,14 +166,14 @@ void Environnement::template_obstacle(int x, int y) {
         if(!board[x][y])
             board[x][y] = new Obstacle(x,y);
 
-        if(x+1 < size[1] && !board[x+1][y])
-            board[x+1][y] = new Obstacle(x,y);
+        if(y+1 < size[1] && !board[x][y+1])
+            board[x][y+1] = new Obstacle(x,y+1);
 
-        if(x+2 < size[1] && !board[x+2][y])
-            board[x+2][y] = new Obstacle(x,y);
+        if(y+2 < size[1] && !board[x][y+2])
+            board[x][y+2] = new Obstacle(x,y+2);
 
-        if(x+2 < size[1] && y+1 < size[0] && !board[x+2][y+1])
-            board[x+2][y+1] = new Obstacle(x,y);
+        if(y+2 < size[1] && x+1 < size[0] && !board[x+1][y+2])
+            board[x+1][y+2] = new Obstacle(x+1,y+2);
 
         obstacle_number -= 4;
         break;
@@ -185,14 +185,14 @@ void Environnement::template_obstacle(int x, int y) {
         if(!board[x][y])
             board[x][y] = new Obstacle(x,y);
 
-        if(y+1 < size[0] && !board[x][y+1])
-            board[x][y+1] = new Obstacle(x,y);
+        if(y+1 < size[1] && !board[x][y+1])
+            board[x][y+1] = new Obstacle(x,y+1);
 
-        if(x+1 < size[1] && !board[x+1][y])
-            board[x+1][y] = new Obstacle(x,y);
+        if(x+1 < size[0] && !board[x+1][y])
+            board[x+1][y] = new Obstacle(x+1,y);
 
-        if(x+1 < size[1] && y+1 < size[0] && !board[x+1][y+1])
-            board[x+1][y+1] = new Obstacle(x,y);
+        if(x+1 < size[0] && y+1 < size[1] && !board[x+1][y+1])
+            board[x+1][y+1] = new Obstacle(x+1,y+1);
 
         obstacle_number -= 4;
         break;
@@ -206,14 +206,14 @@ void Environnement::template_obstacle(int x, int y) {
         if(!board[x][y])
             board[x][y] = new Obstacle(x,y);
 
-        if(x+1 < size[1] && y+1 < size[0] && !board[x+1][y+1])
-            board[x+1][y+1] = new Obstacle(x,y);
+        if(x+1 < size[0] && y+1 < size[1] && !board[x+1][y+1])
+            board[x+1][y+1] = new Obstacle(x+1,y+1);
 
-        if(x+2 < size[1] && y+1 < size[0] && !board[x+2][y+1])
-            board[x+2][y+1] = new Obstacle(x,y);
+        if(x+1 < size[0] && y+2 < size[1] && !board[x+1][y+2])
+            board[x+1][y+2] = new Obstacle(x+1,y+2);
 
-        if(x+3 < size[1] && y+1 < size[0] && !board[x+3][y+1])
-            board[x+3][y+1] = new Obstacle(x,y);
+        if(x+1 < size[0] && y+3 < size[1] && !board[x+1][y+3])
+            board[x+1][y+3] = new Obstacle(x+1,y+3);
 
         obstacle_number -= 4;
         break;
@@ -227,8 +227,8 @@ void Environnement::generate_food()
     int fd_nb = food_number;
     while(fd_nb > 0)
     {
-        x = rand()%size[1];
-        y = rand()%size[0];
+        x = rand()%size[0];
+        y = rand()%size[1];
         if(!board[x][y])
         {
             board[x][y] = new Food(x,y);
@@ -239,22 +239,17 @@ void Environnement::generate_food()
 
 void Environnement::generate_dirt()
 {
-    for (int i = 0 ; i < size[1]; i++)
-        for (int j = 0; j < size[0]; j++)
+    for (int x = 0 ; x < size[0]; x++)
+        for (int y = 0; y < size[1]; y++)
         {
-            if(!board[i][j])
-                board[i][j] = new Dirt(i,j);
+            if(!board[x][y])
+                board[x][y] = new Dirt(x,y);
         }
 }
 
 void Environnement::display_ground()
 {
-    map.display(board, size[1], size[0]);
-}
-
-void Environnement::display_updated_ground(int x, int y)
-{
-    map.refresh_display(3, size[1] / 2 + 1 + x, size[0]/2 + y);
+    map.display(board, size[0], size[1]);
 }
 
 Anthill *Environnement::get_anthill() const
@@ -306,8 +301,8 @@ void Environnement::regenerate_food(int amount)
     int y;
     while(amount > 0)
     {
-        x = rand()%size[1];
-        y = rand()%size[0];
+        x = rand()%size[0];
+        y = rand()%size[1];
         if(board[x][y]->getType() == 1)
         {
             board[x][y] = new Food(x,y);
