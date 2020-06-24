@@ -17,7 +17,7 @@ void Map_display::display(std::vector<std::vector<Ground*>>& board, int length, 
         for (int y = 0; y < height ; y++)
         {
             label_img = new QLabel;
-            switch (board[y][x]->getType()) {
+            switch (board[x][y]->getType()) {
                 case 0:
                     label_img->setPixmap(QPixmap("../img/anthill.jpg"));
                     break;
