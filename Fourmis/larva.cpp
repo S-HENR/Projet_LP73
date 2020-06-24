@@ -21,3 +21,8 @@ void Larva::eat()
 {
 
 }
+
+int Larva::getType()
+{
+    return 1;
+}

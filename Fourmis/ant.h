@@ -15,6 +15,7 @@ public:
     void decrease_food_need(int quantity);
     virtual void increase_food_need() = 0;
     virtual void eat() = 0;
+    virtual int getType() = 0;
 
     void Action();
 

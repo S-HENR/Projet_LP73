@@ -21,3 +21,8 @@ void Worker::eat()
 {
 
 }
+
+int Worker::getType()
+{
+    return 2;
+}

@@ -21,3 +21,8 @@ void Egg::eat()
 {
 
 }
+
+int Egg::getType()
+{
+    return 0;
+}

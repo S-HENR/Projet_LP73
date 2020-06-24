@@ -21,6 +21,7 @@ public:
     int queens_counter();
 
     std::vector<std::shared_ptr<Ant>> get_ants() const;
+    int get_nb_ant_type(int type);
     void set_ants(const std::vector<std::shared_ptr<Ant>> &value);
 
     int get_max_ants_nb() const;
