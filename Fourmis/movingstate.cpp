@@ -38,7 +38,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
         return std::make_unique<PuttingDownFoodState>();
     }
     //if the warrior is outside the anthill and her carrying capacity is full AND she's not hungry, she's going back to the anthill to put down her food
-    else if((warrior.get_quantity_carried() >= warrior.get_carrying_capacity()) && !(warrior.get_max_food_need() - warrior.get_food_need() <= 5))
+    else if((warrior.get_quantity_carried() >= warrior.get_carrying_capacity()) && !((warrior.get_max_food_need() - warrior.get_food_need()) <= 5))
     {
         return std::make_unique<GoBackHomeState>(size, board, warrior.get_coordinates(), warrior.get_anthill()->get_coordinates());
     }
@@ -60,7 +60,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                   break;
                //case dirt, increase the prob according to presence of pheromone
                case 1:
-                  //box.prob += box.prob * dirt_tile->get_pheromone_rate();
+                  box.prob += box.prob * (dirt_tile->get_pheromone_rate() / 100);
                   break;
               //case obstacle, prob = 0, cannot go
               case 2:

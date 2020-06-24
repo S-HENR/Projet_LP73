@@ -45,7 +45,7 @@ void Parameters::on_pushButton_clicked()
     nb_init_workers = ui->lineEdit_9->text().toInt() ? ui->lineEdit_9->text().toInt() : 2;
     save << nb_init_workers << '\n';
 
-    nb_init_warriors = ui->lineEdit_10->text().toInt() ? ui->lineEdit_10->text().toInt() : 5;
+    nb_init_warriors = ui->lineEdit_10->text().toInt() ? ui->lineEdit_10->text().toInt() : 3;
     save << nb_init_warriors << '\n';
 
     amount_food_need = ui->lineEdit_11->text().toInt() ? ui->lineEdit_11->text().toInt() : 30;
