@@ -61,13 +61,13 @@ void Simulation::start()
 
 void Simulation::apply_disappearance_rate()
 {
-    for (int i = 0 ; i < env.getSizeY() ; i++)
+    for (int x = 0 ; x < env.getSizeX() ; x++)
     {
-        for (int j = 0; j < env.getSizeX() ; j++)
+        for (int y = 0; y < env.getSizeY() ; y++)
         {
-            if(env.getTile(i,j)->getType() == 1 && dynamic_cast<Dirt*>(env.getTile(i,j))->get_pheromone_rate() != 0)
+            if(env.getTile(x,y)->getType() == 1 && dynamic_cast<Dirt*>(env.getTile(x,y))->get_pheromone_rate() != 0)
             {
-                dynamic_cast<Dirt*>(env.getTile(i,j))->apply_disappearance_rate(parameters.pheromone_disappearance_rate);
+                dynamic_cast<Dirt*>(env.getTile(x,y))->apply_disappearance_rate(parameters.pheromone_disappearance_rate);
             }
         }
     }
