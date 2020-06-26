@@ -12,7 +12,6 @@ std::unique_ptr<State> WarriorEatingState::Action(Ant& ant)
 {
     Warrior& warrior = dynamic_cast<Warrior&>(ant);
     warrior.increase_food_need();
-    warrior.set_time_to_transition(warrior.get_time_to_transition()-1);
 
     if(food_tile.get_quantity_food() > 0)
     {

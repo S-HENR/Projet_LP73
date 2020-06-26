@@ -17,7 +17,6 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
 {
     Warrior& warrior = dynamic_cast<Warrior&>(ant);
     warrior.increase_food_need();
-    warrior.set_time_to_transition(warrior.get_time_to_transition()-1);
 
     //warrior coordinates
     int x = warrior.get_coordinates().x;
@@ -106,14 +105,11 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
 
         float lower_threshold = 1;
         float upper_threshold = 0;
-        std::cout << "-----------------------" << std::endl;
+
         for(auto& box: tiles)
         {
             upper_threshold += box.prob;
-            std::cout << "random number : " << rand << std::endl;
-            std::cout << "lower_treshold : " << lower_threshold << std::endl;
-            std::cout << "upper_threshold : " << upper_threshold << std::endl;
-            std::cout << "prob : " << box.prob << std::endl;
+
             if((rand >= lower_threshold) && (rand <= upper_threshold))
             {
                 //display the ant's tile picture without the ant on it
@@ -175,7 +171,6 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
             lower_threshold += box.prob;
         }
     }
-    std::cout << "-----------------------" << std::endl;
     //    if(false) // Une condition pr passer à un nouvelle état
     //        return std::make_unique<UnAutreEtat>();
         return nullptr;

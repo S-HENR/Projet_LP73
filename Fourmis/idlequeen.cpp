@@ -14,7 +14,6 @@ std::unique_ptr<State> IdleQueen::Action(Ant& ant)
     int rand = queen.get_env().generate_random(0, 1000);
 
     queen.increase_food_need();
-    queen.set_time_to_transition(queen.get_time_to_transition()-1);
     if(rand == 0)
     {
         return std::make_unique<LayingAnEggState>();
