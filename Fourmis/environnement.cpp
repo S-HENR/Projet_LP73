@@ -111,34 +111,49 @@ void Environnement::template_obstacle(int x, int y) {
     //pattern : ■
     case 0:
         if(!board[x][y])
+        {
            board[x][y] = new Obstacle(x,y);
+           obstacle_number--;
+        }
 
-        obstacle_number--;
         break;
 
     //pattern : ■■
     case 1:
         if(!board[x][y])
+        {
            board[x][y] = new Obstacle(x,y);
+           obstacle_number--;
+        }
 
         if(x+1 < size[0] && !board[x+1][y])
+        {
            board[x+1][y] = new Obstacle(x+1,y);
+           obstacle_number--;
+        }
 
-        obstacle_number -= 2;
         break;
 
     //pattern : ■■■
     case 2:
         if(!board[x][y])
+        {
            board[x][y] = new Obstacle(x,y);
+           obstacle_number--;
+        }
 
         if(x+1 < size[0] && !board[x+1][y])
+        {
            board[x+1][y] = new Obstacle(x+1,y);
+           obstacle_number--;
+        }
 
         if(x+2 < size[0] && !board[x+2][y])
+        {
            board[x+2][y] = new Obstacle(x+2,y);
+           obstacle_number--;
+        }
 
-        obstacle_number -= 3;
         break;
 
     //pattern :
@@ -147,15 +162,23 @@ void Environnement::template_obstacle(int x, int y) {
     //■
     case 3:
         if(!board[x][y])
+        {
             board[x][y] = new Obstacle(x,y);
+            obstacle_number--;
+         }
 
         if(y+1 < size[1] && !board[x][y+1])
+        {
             board[x][y+1] = new Obstacle(x,y+1);
+            obstacle_number--;
+         }
 
         if(y+2 < size[1] && !board[x][y+2])
+        {
             board[x][y+2] = new Obstacle(x,y+2);
+            obstacle_number--;
+         }
 
-        obstacle_number -= 3;
         break;
 
     //pattern :
@@ -164,18 +187,29 @@ void Environnement::template_obstacle(int x, int y) {
     //■■
     case 4:
         if(!board[x][y])
+        {
             board[x][y] = new Obstacle(x,y);
+            obstacle_number--;
+         }
 
         if(y+1 < size[1] && !board[x][y+1])
+        {
             board[x][y+1] = new Obstacle(x,y+1);
+            obstacle_number--;
+         }
 
         if(y+2 < size[1] && !board[x][y+2])
+        {
             board[x][y+2] = new Obstacle(x,y+2);
+            obstacle_number--;
+         }
 
         if(y+2 < size[1] && x+1 < size[0] && !board[x+1][y+2])
+        {
             board[x+1][y+2] = new Obstacle(x+1,y+2);
+            obstacle_number--;
+         }
 
-        obstacle_number -= 4;
         break;
 
     //pattern :
@@ -183,18 +217,29 @@ void Environnement::template_obstacle(int x, int y) {
     //■■
     case 5:
         if(!board[x][y])
+        {
             board[x][y] = new Obstacle(x,y);
+            obstacle_number--;
+         }
 
         if(y+1 < size[1] && !board[x][y+1])
+        {
             board[x][y+1] = new Obstacle(x,y+1);
+            obstacle_number--;
+         }
 
         if(x+1 < size[0] && !board[x+1][y])
+        {
             board[x+1][y] = new Obstacle(x+1,y);
+            obstacle_number--;
+         }
 
         if(x+1 < size[0] && y+1 < size[1] && !board[x+1][y+1])
+        {
             board[x+1][y+1] = new Obstacle(x+1,y+1);
+            obstacle_number--;
+         }
 
-        obstacle_number -= 4;
         break;
 
     //pattern :
@@ -204,18 +249,29 @@ void Environnement::template_obstacle(int x, int y) {
     // ■
     case 6:
         if(!board[x][y])
+        {
             board[x][y] = new Obstacle(x,y);
+            obstacle_number--;
+         }
 
         if(x+1 < size[0] && y+1 < size[1] && !board[x+1][y+1])
+        {
             board[x+1][y+1] = new Obstacle(x+1,y+1);
+            obstacle_number--;
+         }
 
         if(x+1 < size[0] && y+2 < size[1] && !board[x+1][y+2])
+        {
             board[x+1][y+2] = new Obstacle(x+1,y+2);
+            obstacle_number--;
+         }
 
         if(x+1 < size[0] && y+3 < size[1] && !board[x+1][y+3])
+        {
             board[x+1][y+3] = new Obstacle(x+1,y+3);
+            obstacle_number--;
+         }
 
-        obstacle_number -= 4;
         break;
     }
 }

@@ -89,7 +89,13 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
         }
 
         //recalculating probs (because for now it can be over 100)
-        float sum_prob = tiles[0].prob + tiles[1].prob + tiles[2].prob + tiles[3].prob;
+        float sum_prob = 0;
+
+        for(auto& box: tiles)
+        {
+            sum_prob += box.prob;
+        }
+
         for(auto& box: tiles)
         {
             box.prob = (box.prob / sum_prob) * 100;
@@ -100,12 +106,18 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
 
         float lower_threshold = 1;
         float upper_threshold = 0;
+        std::cout << "-----------------------" << std::endl;
         for(auto& box: tiles)
         {
             upper_threshold += box.prob;
+            std::cout << "random number : " << rand << std::endl;
+            std::cout << "lower_treshold : " << lower_threshold << std::endl;
+            std::cout << "upper_threshold : " << upper_threshold << std::endl;
+            std::cout << "prob : " << box.prob << std::endl;
             if((rand >= lower_threshold) && (rand <= upper_threshold))
             {
                 //display the ant's tile picture without the ant on it
+
                 switch (warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType())
                 {
                    //case anthill
@@ -132,6 +144,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
 
                 //displaying the ant pictures on its new tile
 
+                //handle west and east movement
                 switch(box.tile->get_coordinates().x - x)
                 {
                 case -1:
@@ -144,6 +157,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                     break;
                 }
 
+                //handle north and south movement
                 switch(box.tile->get_coordinates().y - y)
                 {
                 case -1:
@@ -161,7 +175,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
             lower_threshold += box.prob;
         }
     }
-
+    std::cout << "-----------------------" << std::endl;
     //    if(false) // Une condition pr passer à un nouvelle état
     //        return std::make_unique<UnAutreEtat>();
         return nullptr;
@@ -173,8 +187,8 @@ std::vector<nearby_tiles> MovingState::get_nearby_tiles(Warrior* _warrior)
     int x = _warrior->get_coordinates().x;
     int y = _warrior->get_coordinates().y;
 
-    int max_x = _warrior->get_env().getSizeX() - 1;
-    int max_y = _warrior->get_env().getSizeY() - 1;
+    int max_x = _warrior->get_env().getSizeX();
+    int max_y = _warrior->get_env().getSizeY();
 
     coord new_coord1 = {x-1,y};
     coord new_coord2 = {x,y+1};
@@ -184,7 +198,7 @@ std::vector<nearby_tiles> MovingState::get_nearby_tiles(Warrior* _warrior)
     std::vector<nearby_tiles> tiles;
 
     auto check_bounds = [max_x, max_y, _warrior, &tiles](const coord& new_coord){
-        if(new_coord.x >= 0 && new_coord.x <= max_x && new_coord.y >= 0 && new_coord.y <= max_y)
+        if(new_coord.x >= 0 && new_coord.x < max_x && new_coord.y >= 0 && new_coord.y < max_y)
         {
             nearby_tiles tile = {_warrior->get_env().getTile(new_coord.x, new_coord.y), 0.25};
             tiles.push_back(tile);
