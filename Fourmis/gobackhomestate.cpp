@@ -51,7 +51,6 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     int y = warrior.get_coordinates().y;
 
     warrior.increase_food_need();
-    warrior.set_time_to_transition(warrior.get_time_to_transition()-1);
 
     if((warrior.get_max_food_need() - warrior.get_food_need()) <= 5)
     {

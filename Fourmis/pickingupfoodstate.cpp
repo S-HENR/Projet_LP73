@@ -13,7 +13,6 @@ std::unique_ptr<State> PickingUpFoodState::Action(Ant& ant)
 {
     Warrior& warrior = dynamic_cast<Warrior&>(ant);
     warrior.increase_food_need();
-    warrior.set_time_to_transition(warrior.get_time_to_transition()-1);
 
     int rest_warrior_carrying_capacity = warrior.get_carrying_capacity() - warrior.get_quantity_carried();
 

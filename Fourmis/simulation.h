@@ -7,6 +7,8 @@
 #include "environnement.h"
 #include "anthillstatus.h"
 
+class Ant;
+
 class Simulation
 {
 public:
@@ -22,6 +24,7 @@ private:
     void generate_environnement();
     void display_anthill_status();
     void apply_disappearance_rate();
+    void transition(std::shared_ptr<Ant>&  ant);
 };
 
 #endif // SIMULATION_H

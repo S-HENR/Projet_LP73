@@ -16,8 +16,6 @@ std::unique_ptr<State> IdleWorker::Action(Ant& ant)
     Worker& worker = dynamic_cast<Worker&>(ant);
 
     worker.increase_food_need();
-    worker.set_time_to_transition(worker.get_time_to_transition()-1);
-
     //seeking for a dependantAnt in need of food
     for(auto& ant: worker.get_anthill()->get_ants())
     {
