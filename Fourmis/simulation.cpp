@@ -67,7 +67,7 @@ void Simulation::start()
 //            }
 
             std::cout << "Tour : " << incr/5 << std::endl;
-            display_anthill_status();
+            display_anthill_status(incr/5);
             //apply_disappearance_rate();
         }
 
@@ -97,17 +97,19 @@ void Simulation::apply_disappearance_rate()
     }
 }
 
-void Simulation::display_anthill_status()
+void Simulation::display_anthill_status(int current_round)
 {
     int nb_ant = env.get_anthill()->get_ants().size();
     int nb_egg = env.get_anthill()->get_nb_ant_type(0);
     int nb_larva = env.get_anthill()->get_nb_ant_type(1);
     int nb_worker = env.get_anthill()->get_nb_ant_type(2);
     int nb_warrior = env.get_anthill()->get_nb_ant_type(3);
+    int nb_queen = env.get_anthill()->get_nb_ant_type(4);
     int nb_max_ant = env.get_anthill()->get_max_ants_nb();
     int amount_food = env.get_anthill()->get_quantity_food_stock();
     int max_amount_food = env.get_anthill()->get_max_quantity_food_stock();
-    anthill_status.display(nb_ant, nb_egg, nb_larva, nb_worker, nb_warrior, nb_max_ant, amount_food, max_amount_food);
+
+    anthill_status.display(current_round, nb_ant, nb_egg, nb_larva, nb_worker, nb_warrior, nb_queen, nb_max_ant, amount_food, max_amount_food);
     anthill_status.show();
 }
 
