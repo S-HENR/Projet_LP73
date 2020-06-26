@@ -31,7 +31,7 @@ public:
     bool get_is_queen() const;
     void set_is_queen(bool value);
 
-    Anthill* get_anthill() const;
+    Anthill* get_anthill();
     void set_anthill(Anthill *anthill);
 
     Environnement& get_env() const;

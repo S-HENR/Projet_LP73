@@ -70,7 +70,7 @@ void Ant::set_is_queen(bool value)
     is_queen = value;
 }
 
-Anthill* Ant::get_anthill() const
+Anthill* Ant::get_anthill()
 {
     return m_anthill;
 }

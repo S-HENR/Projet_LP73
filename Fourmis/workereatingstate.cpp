@@ -25,8 +25,8 @@ std::unique_ptr<State> WorkerEatingState::Action(Ant& ant)
         else
         {
             //if the anthill has not enough food stock to fully satisfy the ant's needs
-            worker.decrease_food_need(worker.get_anthill()->get_quantity_food_stock());
             worker.get_anthill()->decrease_quantity_food_stock(worker.get_anthill()->get_quantity_food_stock());
+            worker.decrease_food_need(worker.get_anthill()->get_quantity_food_stock());
         }
     }
 

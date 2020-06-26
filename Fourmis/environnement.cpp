@@ -334,15 +334,15 @@ int Environnement::generate_random(const int range_from, const int range_to)
     return distr(generator);
 }
 
-//std::map<int, bool>& Environnement::get_to_recreate()
-//{
-//    return toRecreate;
-//}
+std::multimap<int, bool>& Environnement::get_to_recreate()
+{
+    return toRecreate;
+}
 
-//void Environnement::set_to_recreate(const std::map<int, bool> &value)
-//{
-//    toRecreate = value;
-//}
+void Environnement::set_to_recreate(const std::multimap<int, bool> &value)
+{
+    toRecreate = value;
+}
 
 int Environnement::get_typeof_tile(int x, int y)
 {

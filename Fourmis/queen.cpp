@@ -14,7 +14,7 @@ Queen::~Queen()
 
 void Queen::increase_food_need()
 {
-    set_food_need(get_food_need() + 0.25 );
+    set_food_need(get_food_need() + 0.5 );
 }
 
 void Queen::eat()

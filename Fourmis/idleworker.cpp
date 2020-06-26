@@ -35,7 +35,7 @@ std::unique_ptr<State> IdleWorker::Action(Ant& ant)
     }
 
     //if the worker is hungry
-    if ((worker.get_max_food_need() - worker.get_food_need()) <= 5)
+    if ((worker.get_max_food_need() - worker.get_food_need()) <= 20)
     {
         return std::make_unique<WorkerEatingState>();
     }

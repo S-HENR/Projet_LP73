@@ -8,7 +8,7 @@ Food::Food(int _x, int _y) :
     //random de 8 à 12 à affecter à quantity?
     //quantity = rand() % 13 + 7;
 
-    std::uniform_int_distribution<int> distr(8, 12);
+    std::uniform_int_distribution<int> distr(10, 20);
     int rand = distr(generator);
 
     quantity = rand;

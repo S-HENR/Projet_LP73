@@ -12,7 +12,7 @@ Anthill::Anthill(Environnement& env, Parameters& parameters, int _x, int _y) :
     max_quantity_food_stock(parameters.nb_max_food)
 
 {
-    generate_ants(env, parameters.nb_init_workers, parameters.nb_init_warriors, parameters.amount_food_need, parameters.time_to_transition, parameters.carrying_capacity);
+    generate_ants(env, parameters.nb_init_larvas, parameters.nb_init_workers, parameters.nb_init_warriors, parameters.amount_food_need, parameters.time_to_transition, parameters.carrying_capacity);
 }
 
 Anthill::~Anthill()
@@ -25,7 +25,7 @@ int Anthill::getType()
     return 0;
 }
 
-void Anthill::generate_ants(Environnement& env, int nb_workers, int nb_warriors, int food_need, int time_to_trans, int carrying_cap)
+void Anthill::generate_ants(Environnement& env, int nb_larvas, int nb_workers, int nb_warriors, int food_need, int time_to_trans, int carrying_cap)
 {
     //temp liste of ants for tests
 
@@ -35,14 +35,14 @@ void Anthill::generate_ants(Environnement& env, int nb_workers, int nb_warriors,
     //     auto e = std::make_shared<Egg>(this, false);
     //     ants.emplace_back(e);
     // }
-//     for(int i = 0; i < 7; i++)
-//     {
-//         auto l = std::make_shared<Larva>(env, this, false);
-//         ants.emplace_back(l);
-//     }
 
-    if((nb_workers + nb_warriors + 1) < max_ants_nb)
+    if((nb_larvas + nb_workers + nb_warriors + 1) < max_ants_nb)
     {
+        for(int i = 0; i < nb_larvas; i++)
+        {
+            auto l = std::make_shared<Larva>(env, this, false, food_need, time_to_trans);
+            ants.emplace_back(l);
+        }
         for(int i = 0; i < nb_workers; i++)
         {
             auto wk = std::make_shared<Worker>(env, this, false, food_need, time_to_trans);
@@ -53,7 +53,7 @@ void Anthill::generate_ants(Environnement& env, int nb_workers, int nb_warriors,
             auto wr = std::make_shared<Warrior>(env, this, false, food_need, time_to_trans, carrying_cap);
             ants.emplace_back(wr);
         }
-        auto q = std::make_shared<Queen>(env, this, false, food_need, time_to_trans);
+        auto q = std::make_shared<Queen>(env, this, true, food_need, time_to_trans);
         ants.emplace_back(q);
     }
     else
@@ -76,7 +76,7 @@ int Anthill::queens_counter()
     return queens_nb;
 }
 
-std::vector<std::shared_ptr<Ant> > Anthill::get_ants()
+std::vector<std::shared_ptr<Ant>>& Anthill::get_ants()
 {
     return ants;
 }

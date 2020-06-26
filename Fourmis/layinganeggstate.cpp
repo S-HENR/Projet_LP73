@@ -15,14 +15,13 @@ std::unique_ptr<State> LayingAnEggState::Action(Ant& ant)
 
     queen.increase_food_need();
 
-    if( queen.get_anthill()->get_ants().size() == static_cast<size_t>(queen.get_anthill()->get_max_ants_nb() - 1) && (queen.get_anthill()->queens_counter() < 2))
+    /*if( queen.get_anthill()->get_ants().size() == static_cast<size_t>(queen.get_anthill()->get_max_ants_nb() - 1) && (queen.get_anthill()->queens_counter() < 2))
     {
-        //queen.get_env().get_to_recreate().push_back(-1, false);
-        //Egg e = Egg(queen.get_env(), queen.get_anthill(), true);
+        queen.get_env().get_to_recreate().insert(std::pair<int, bool>(-1, true));
     }
-    else if( queen.get_anthill()->get_ants().size() < static_cast<size_t>(queen.get_anthill()->get_max_ants_nb() - 1))
+    else*/ if( queen.get_anthill()->get_ants().size() < static_cast<size_t>(queen.get_anthill()->get_max_ants_nb() - 1))
     {
-        //Egg e = Egg(queen.get_env(), queen.get_anthill(), false);
+        queen.get_env().get_to_recreate().insert(std::pair<int, bool>(-1, false));
     }
     return std::make_unique<IdleQueen>();
 

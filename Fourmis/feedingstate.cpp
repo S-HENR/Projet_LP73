@@ -24,14 +24,14 @@ std::unique_ptr<State> FeedingState::Action(Ant& ant)
         if(worker.get_anthill()->get_quantity_food_stock() >= hungry_ant->get_food_need())
         {
             //if the anthill has enough food stock to fully satisfy the ant's needs
-            hungry_ant->decrease_food_need(hungry_ant->get_food_need());
             worker.get_anthill()->decrease_quantity_food_stock(hungry_ant->get_food_need());
+            hungry_ant->decrease_food_need(hungry_ant->get_food_need());
         }
         else
         {
             //if the anthill has not enough food stock to fully satisfy the ant's needs
-            hungry_ant->decrease_food_need(worker.get_anthill()->get_quantity_food_stock());
             worker.get_anthill()->decrease_quantity_food_stock(worker.get_anthill()->get_quantity_food_stock());
+            hungry_ant->decrease_food_need(worker.get_anthill()->get_quantity_food_stock());
         }
     }
 
