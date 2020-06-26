@@ -22,7 +22,7 @@ private:
     AnthillStatus anthill_status;
     void fill_in_parameters();
     void generate_environnement();
-    void display_anthill_status();
+    void display_anthill_status(int current_round);
     void apply_disappearance_rate();
     void transition(std::shared_ptr<Ant>&  ant);
 };
