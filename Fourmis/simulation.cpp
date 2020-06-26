@@ -1,6 +1,11 @@
 #include "simulation.h"
 #include "anthill.h"
 #include "ant.h"
+#include "larva.h"
+#include "worker.h"
+#include "warrior.h"
+#include "queen.h"
+#include "egg.h"
 
 Simulation::Simulation(int argc, char *argv[]) : application(argc, argv)
 {
@@ -30,14 +35,14 @@ void Simulation::start()
 
         if(incr%10 == 0)
         {
-            std::vector<int> toRecreate;
+
             for(auto& ant : env.get_anthill()->get_ants())
             {
                 ant->Action();
-                if((ant->get_max_food_need() - ant->get_food_need()) <=0)
-                {
-                    //toRecreate.push_back(ant.);
-                }
+//                if((ant->get_max_food_need() - ant->get_food_need()) <=0)
+//                {
+//                    env.toRecreate.push_back(ant->getType(), ant->get_is_queen());
+//                }
             }
 
 //            env.get_anthill()->get_ants().erase(std::remove_if(
@@ -46,6 +51,40 @@ void Simulation::start()
 //                                                     [](Ant& _ant){return (_ant.get_max_food_need() - _ant.get_food_need()) <=0;}),
 //                                                     env.get_anthill()->get_ants().end()
 //                                               );
+//            for(auto& ant : env.toRecreate)
+//            {
+//                std::shared_ptr<Ant> newAnt;
+//                switch (ant[0])
+//                {
+//                    case -1:
+//                        newAnt = std::make_shared<Egg>(env, env.get_anthill(), ant[1], parameters.nb_max_food, parameters.time_to_transition);
+//                        env.get_anthill()->get_ants().emplace_back(ant);
+//                        break;
+//                    case 0:
+//                        newAnt = std::make_shared<Larva>(env, env.get_anthill(), ant[1], parameters.nb_max_food, parameters.time_to_transition);
+//                        env.get_anthill()->get_ants().emplace_back(ant);
+//                        break;
+//                    case 1:
+//                        newAnt = std::make_shared<Worker>(env, env.get_anthill(), ant[1], parameters.nb_max_food, parameters.time_to_transition);
+//                        env.get_anthill()->get_ants().emplace_back(ant);
+//                        break;
+//                    case 2:
+//                        newAnt = std::make_shared<Warrior>(env, env.get_anthill(), ant[1], parameters.nb_max_food, parameters.time_to_transition, parameters.carrying_capacity));
+//                        env.get_anthill()->get_ants().emplace_back(ant);
+//                        break;
+//                    case 3:
+//                        if(ant[1] == true)
+//                        {
+//                            newAnt = std::make_shared<Queen>(env, env.get_anthill(), ant[1], parameters.nb_max_food, parameters.time_to_transition, parameters.carrying_capacity));
+//                            env.get_anthill()->get_ants().emplace_back(ant);
+//                        }
+//                        break;
+//                    case 4 :
+//                        break;
+//                    default:
+//                        std::cout << "Switch case error in simulation, recreating ants after transition";
+//                }
+//            }
 
 
             std::cout << "Tour : " << incr/10 << std::endl;

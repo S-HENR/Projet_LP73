@@ -282,3 +282,12 @@ tmp/
 # qbs builds
 /*-debug/
 /*-release/
+build/img/anthill.jpg
+build/img/dirt-ant-east.jpg
+build/img/dirt-ant-north.jpg
+build/img/dirt-ant-south.jpg
+build/img/dirt-ant-west.jpg
+build/img/dirt.jpg
+build/img/food.jpg
+build/img/obstacle.jpg
+build/save.txt

@@ -38,6 +38,9 @@ public:
 
     int generate_random(const int range_from, const int range_to);
 
+//    std::map<int, bool>& get_to_recreate();
+//    void set_to_recreate(const std::map<int, bool> &value);
+
 private:
     int size[2];
     int food_number;
@@ -46,6 +49,7 @@ private:
     std::vector<std::vector<Ground*>> board;
     Map_display map;
     std::mt19937 generator;
+    //std::vector<int, bool> toRecreate;
 
     void generate_anthill(int x, int y, Parameters& parameters);
     void generate_obstacle();

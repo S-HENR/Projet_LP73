@@ -34,7 +34,7 @@ public:
     Anthill* get_anthill() const;
     void set_anthill(Anthill *anthill);
 
-    Environnement &get_env() const;
+    Environnement& get_env() const;
     void set_env(const Environnement &env);
 
     coord get_coordinates() const;
