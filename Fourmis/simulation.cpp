@@ -91,6 +91,7 @@ void Simulation::apply_disappearance_rate()
         {
             if(tile->getType() == 1 && dynamic_cast<Dirt*>(tile)->get_pheromone_rate() != 0)
             {
+                //applies disappearance rate and update the map if there is no more pheromones on the block
                 if(dynamic_cast<Dirt*>(tile)->apply_disappearance_rate(parameters.pheromone_disappearance_rate) == 0)
                     env.get_map().refresh_display(1, tile->get_coordinates().x, tile->get_coordinates().y);
             }
@@ -100,6 +101,7 @@ void Simulation::apply_disappearance_rate()
 
 void Simulation::display_anthill_status(int current_round)
 {
+    //gets informations about the simulation
     int nb_ant = env.get_anthill()->get_ants().size();
     int nb_egg = env.get_anthill()->get_nb_ant_type(0);
     int nb_larva = env.get_anthill()->get_nb_ant_type(1);
@@ -110,11 +112,12 @@ void Simulation::display_anthill_status(int current_round)
     int amount_food = env.get_anthill()->get_quantity_food_stock();
     int max_amount_food = env.get_anthill()->get_max_quantity_food_stock();
 
+    //update information window (AnthillStatus)
     anthill_status.display(current_round, nb_ant, nb_egg, nb_larva, nb_worker, nb_warrior, nb_queen, nb_max_ant, amount_food, max_amount_food);
     anthill_status.show();
 }
 
-void Simulation::transition() //std::shared_ptr<Ant>& ant)
+void Simulation::transition()
 {
     for(auto& ant : env.get_to_recreate())
     {
@@ -153,22 +156,4 @@ void Simulation::transition() //std::shared_ptr<Ant>& ant)
         }
     }
     env.get_to_recreate().clear();
-
-
-//    ant->set_time_to_transition(ant->get_time_to_transition() - 1);
-//    if(ant->get_time_to_transition() == 0)
-//    {
-//        switch (ant->getType())
-//        {
-//        case 0:
-//            ant = std::make_shared<Larva>(env, env.get_anthill(), false, parameters.amount_food_need, parameters.time_to_transition);
-//            break;
-//        case 1:
-//            ant = std::make_shared<Worker>(env, env.get_anthill(), false, parameters.amount_food_need, parameters.time_to_transition);
-//            break;
-//        case 2:
-//            ant = std::make_shared<Warrior>(env, env.get_anthill(), false, parameters.amount_food_need, parameters.time_to_transition, parameters.carrying_capacity);
-//            break;
-//        }
-//    }
 }

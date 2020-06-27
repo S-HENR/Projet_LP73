@@ -31,7 +31,4 @@ std::unique_ptr<State> WorkerEatingState::Action(Ant& ant)
     }
 
     return std::make_unique<IdleWorker>();
-
-//    if(false) // Une condition pr passer à un nouvelle état
-//        return std::make_unique<UnAutreEtat>();
 }
