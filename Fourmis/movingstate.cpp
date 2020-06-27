@@ -125,23 +125,30 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
 
                 switch (warrior.get_env().getTile(x,y)->getType())
                 {
-                   //case anthill
-                   case 0:
-                      break;
-                   //case dirt
-                   case 1:
-                      warrior.get_env().get_map().refresh_display(0, x, y);
-                      break;
-                  //case obstacle
-                  case 2:
-                      break;
-                  //case food
-                  case 3:
-                      warrior.get_env().get_map().refresh_display(1, x, y);
-                     break;
-                   default:
-                     return nullptr;
-                     std::cout << "Switch case 2 error in warrior moving state";
+                //case anthill
+                case 0:
+                    break;
+                //case dirt
+                case 1:
+                    if(dynamic_cast<Dirt*>(warrior.get_env().getTile(x,y))->get_pheromone_rate() > 0)
+                    {
+                        warrior.get_env().get_map().refresh_display(6, x, y);
+                    }
+                    else
+                    {
+                        warrior.get_env().get_map().refresh_display(0, x, y);
+                    }
+                    break;
+                //case obstacle
+                case 2:
+                    break;
+                //case food
+                case 3:
+                    warrior.get_env().get_map().refresh_display(1, x, y);
+                    break;
+                default:
+                    return nullptr;
+                    std::cout << "Switch case 2 error in warrior moving state";
                 }
 
                 warrior.set_old_tile(x,y);

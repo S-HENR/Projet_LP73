@@ -87,6 +87,7 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     //if tile is dirt then lay pheromone
     if(warrior.get_env().getTile(x,y)->getType() == 1){
         warrior.lay_pheromone();
+        warrior.get_env().get_map().refresh_display(6, x, y);
     }
 
     //ant moves

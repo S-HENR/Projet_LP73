@@ -50,24 +50,28 @@ void Simulation::start()
                 }
             }
 
+            //deletes ants who reached their transition state
             env.get_anthill()->get_ants().erase(std::remove_if(
                                                                  env.get_anthill()->get_ants().begin(),
                                                                  env.get_anthill()->get_ants().end(),
                                                                  [](std::shared_ptr<Ant> _ant){return _ant->get_time_to_transition() <=0;}),
                                                                  env.get_anthill()->get_ants().end()
                                                            );
-
+            //deletes ants who starved to death
             env.get_anthill()->get_ants().erase(std::remove_if(
                                                                  env.get_anthill()->get_ants().begin(),
                                                                  env.get_anthill()->get_ants().end(),
                                                                  [](std::shared_ptr<Ant> _ant){return (_ant->get_max_food_need() - _ant->get_food_need()) <=0;}),
                                                                  env.get_anthill()->get_ants().end()
                                                            );
+            //creates new ants that have a new state
             transition();
 
-            std::cout << "Tour : " << incr/5 << std::endl;
             display_anthill_status(incr/5);
+
             apply_disappearance_rate();
+
+            std::cout << "Tour : " << incr/5 << std::endl;
         }
 
         //Every 15sec
@@ -81,13 +85,14 @@ void Simulation::start()
 
 void Simulation::apply_disappearance_rate()
 {
-    for (int x = 0 ; x < env.getSizeX() ; x++)
+    for(auto& column : env.get_board())
     {
-        for (int y = 0; y < env.getSizeY() ; y++)
+        for(auto& tile : column)
         {
-            if(env.getTile(x,y)->getType() == 1 && dynamic_cast<Dirt*>(env.getTile(x,y))->get_pheromone_rate() != 0)
+            if(tile->getType() == 1 && dynamic_cast<Dirt*>(tile)->get_pheromone_rate() != 0)
             {
-                dynamic_cast<Dirt*>(env.getTile(x,y))->apply_disappearance_rate(parameters.pheromone_disappearance_rate);
+                if(dynamic_cast<Dirt*>(tile)->apply_disappearance_rate(parameters.pheromone_disappearance_rate) == 0)
+                    env.get_map().refresh_display(1, tile->get_coordinates().x, tile->get_coordinates().y);
             }
         }
     }
