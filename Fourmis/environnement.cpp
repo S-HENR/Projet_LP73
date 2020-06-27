@@ -305,7 +305,7 @@ void Environnement::generate_dirt()
 
 void Environnement::display_ground()
 {
-    map.display(board, size[0], size[1]);
+    map.display(board);
 }
 
 Anthill *Environnement::get_anthill()

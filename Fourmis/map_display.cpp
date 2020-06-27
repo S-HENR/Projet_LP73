@@ -9,15 +9,15 @@ Map_display::Map_display()
     gridLayout->setSpacing(0);
 }
 
-void Map_display::display(std::vector<std::vector<Ground*>>& board, int length, int height)
+void Map_display::display(std::vector<std::vector<Ground*>>& board)
 {
     //Initialize the grid (board) with images
-    for (int x = 0 ; x < length ; x++)
+    for(auto& column : board)
     {
-        for (int y = 0; y < height ; y++)
+        for(auto& tile : column)
         {
             label_img = new QLabel;
-            switch (board[x][y]->getType()) {
+            switch (tile->getType()) {
                 case 0:
                     label_img->setPixmap(QPixmap("../img/anthill.jpg"));
                     break;
@@ -31,9 +31,11 @@ void Map_display::display(std::vector<std::vector<Ground*>>& board, int length, 
                     label_img->setPixmap(QPixmap("../img/food.jpg"));
                     break;
             }
-            gridLayout->addWidget(label_img, y, x);
+            auto coordinates = tile->get_coordinates();
+            gridLayout->addWidget(label_img, coordinates.y, coordinates.x);
         }
     }
+
 
     widget->setLayout(gridLayout);
     //Add a scrollbar to the window
