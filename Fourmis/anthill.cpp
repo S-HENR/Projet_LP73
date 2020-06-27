@@ -12,6 +12,7 @@ Anthill::Anthill(Environnement& env, Parameters& parameters, int _x, int _y) :
     max_quantity_food_stock(parameters.nb_max_food)
 
 {
+    //Initialize vector of ants according to the parameters entered
     generate_ants(env, parameters.nb_init_larvas, parameters.nb_init_workers, parameters.nb_init_warriors, parameters.amount_food_need, parameters.time_to_transition, parameters.carrying_capacity);
 }
 
@@ -27,32 +28,32 @@ int Anthill::getType()
 
 void Anthill::generate_ants(Environnement& env, int nb_larvas, int nb_workers, int nb_warriors, int food_need, int time_to_trans, int carrying_cap)
 {
-    //temp liste of ants for tests
 
-    //std::cout << nb_workers << " - " << nb_warriors << " - " << env->getSizeX();
-    // for(int i = 0; i < 5; i++)
-    // {
-    //     auto e = std::make_shared<Egg>(this, false);
-    //     ants.emplace_back(e);
-    // }
-
+    //controls to not generate more ants than maximum defined
     if((nb_larvas + nb_workers + nb_warriors + 1) < max_ants_nb)
     {
+        //initializes larvas
         for(int i = 0; i < nb_larvas; i++)
         {
             auto l = std::make_shared<Larva>(env, this, false, food_need, time_to_trans);
             ants.emplace_back(l);
         }
+
+        //initializes workers
         for(int i = 0; i < nb_workers; i++)
         {
             auto wk = std::make_shared<Worker>(env, this, false, food_need, time_to_trans);
             ants.emplace_back(wk);
         }
+
+        //initializes warriors
         for(int i = 0; i < nb_warriors; i++)
         {
             auto wr = std::make_shared<Warrior>(env, this, false, food_need, time_to_trans, carrying_cap);
             ants.emplace_back(wr);
         }
+
+        //initializes the queen
         auto q = std::make_shared<Queen>(env, this, true, food_need, time_to_trans);
         ants.emplace_back(q);
     }
@@ -81,6 +82,7 @@ std::vector<std::shared_ptr<Ant>>& Anthill::get_ants()
     return ants;
 }
 
+//Returns the number of ants of the type entered
 int Anthill::get_nb_ant_type(int type)
 {
     int size = ants.size();

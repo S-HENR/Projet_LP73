@@ -4,7 +4,6 @@
 Environnement::Environnement(int length,int height, int obstacle, int food):
     food_number(food),
     obstacle_number(obstacle),
-    //pheromone_disappearance_rate(_pheromone_rate),
     generator((std::random_device())())
 {
     //Initialization of the map with nullptr
@@ -16,17 +15,13 @@ Environnement::Environnement(int length,int height, int obstacle, int food):
 
 Environnement::~Environnement()
 {
-//    for (int i = 0 ; i < size[0]; i++)
-//        for (int j = 0; j < size[1]; j++)
-//        {
-//            delete board[i][j];
-//        }
+
 }
 
 void Environnement::generate_ground(Parameters& parameters)
 {
     //Initialization of Anthill ground :
-    //Put the anthill in the middle of the map
+    //Put the anthill in the middle of the map surronded by dirt
     int x = size[0]/2;
     int y = size[1]/2;
     this->generate_anthill(x,y, parameters);
@@ -78,6 +73,7 @@ void Environnement::generate_obstacle()
 {
     int x;
     int y;
+
     while(obstacle_number > 0)
     {
         x = rand()%size[0];
@@ -87,25 +83,35 @@ void Environnement::generate_obstacle()
 }
 
 void Environnement::template_obstacle(int x, int y) {
+    //Ramdom choice between 6 different patterns according number of obstacles remaining
+
     int pattern_chosen = 0;
+
+    //Every pattern except the first are eligible to be chosen.
     if(obstacle_number >= 4)
     {
         pattern_chosen = rand() % 6 + 1;
     }
+
+    //Patterns with 3 or less obstacles except the first are eligible to be chosen.
     if(obstacle_number < 4)
     {
         pattern_chosen = rand() % 3 + 1;
     }
+
+    //Patterns with 2 or less obstacles are eligible to be chosen.
     if(obstacle_number < 3)
     {
         pattern_chosen = rand() % 2;
     }
+
+    //Only the first pattern is eligible to be chosen
     if(obstacle_number == 1)
     {
         pattern_chosen = 0;
     }
 
-
+    //Apply pattern ramdomly selected
     switch (pattern_chosen) {
 
     //pattern : ■
@@ -295,6 +301,8 @@ void Environnement::generate_food()
 
 void Environnement::generate_dirt()
 {
+
+
     for (int x = 0 ; x < size[0]; x++)
         for (int y = 0; y < size[1]; y++)
         {
@@ -352,6 +360,8 @@ int Environnement::get_typeof_tile(int x, int y)
 int Environnement::collect_food(int x, int y, int amount)
 {
     int amount_food_collected = dynamic_cast<Food*>(board[x][y])->decrease_quantity(amount);
+
+    //if food block empty, it is replaced by a dirt block and the map is refreshed
     if(dynamic_cast<Food*>(board[x][y])->get_quantity_food() <= 0)
     {
         food_number--;

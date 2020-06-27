@@ -88,5 +88,5 @@ void Map_display::refresh_display(int choice, int x, int y)
     gridLayout->addWidget(label_img, y, x);
     scrollArea->setWidget(widget);
     //display the map updated
-    scrollArea->showMaximized();
+    scrollArea->show();
 }

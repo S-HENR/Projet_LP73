@@ -13,17 +13,19 @@ GoBackHomeState::GoBackHomeState(std::array<int, 2> size, const std::vector<std:
     AStar::Generator generator;
     // Set 2d map size.
     generator.setWorldSize({size[0],size[1]});
-    // You can use a few heuristics : manhattan, euclidean or octagonal.
     generator.setHeuristic(AStar::Heuristic::euclidean);
     generator.setDiagonalMovement(false);
 
-
-    for(int x = 0 ; x < size[0] ; x++)
+    //adds obstacles to the 2d map
+    for(auto& column : board)
     {
-        for(int y = 0 ; y < size[1] ; y++)
+        for(auto& tile : column)
         {
-            if(!board[x][y]->getCrossable())
-                generator.addCollision({x,y});
+            if(!tile->getCrossable())
+            {
+                auto coordinates = tile->get_coordinates();
+                generator.addCollision({coordinates.x,coordinates.y});
+            }
         }
     }
 
@@ -31,13 +33,15 @@ GoBackHomeState::GoBackHomeState(std::array<int, 2> size, const std::vector<std:
     // This method returns vector of coordinates from target to source.
     auto path = generator.findPath({coordinates_anthill.x, coordinates_anthill.y}, {coordinates_ant.x, coordinates_ant.y});
 
+    //convert path to vector of coordinates to make easier manipulations
     std::vector<int> coordinates(2);
-
     for(auto& coordinate : path) {
         coordinates[0] = coordinate.x;
         coordinates[1] = coordinate.y;
         steps.push_back(coordinates);
     }
+
+    //Erases the first entry, because this is the current coordinates of the ant
     steps.erase(steps.begin());
 }
 
@@ -125,10 +129,3 @@ std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
     }
     return std::make_unique<PuttingDownFoodState>();
 }
-
-
-//while(steps.size() > 0)
-//{
-//    std::cout << steps[0][0] << " " << steps[0][1] << std::endl;
-//    steps.erase(steps.begin());
-//}

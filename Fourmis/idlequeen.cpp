@@ -19,8 +19,6 @@ std::unique_ptr<State> IdleQueen::Action(Ant& ant)
         return std::make_unique<LayingAnEggState>();
     }
 
-//    if(false) // Une condition pr passer à un nouvelle état
-//        return std::make_unique<UnAutreEtat>();
     return nullptr;
 }
 

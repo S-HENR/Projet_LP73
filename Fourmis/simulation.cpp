@@ -18,9 +18,11 @@ void Simulation::fill_in_parameters()
 }
 void Simulation::initialize_simulation()
 {
-
+    //Shows parameters window
     fill_in_parameters();
     application.exec();
+
+    //Generates Environnement
     env = Environnement(parameters.sizeX, parameters.sizeY, parameters.nb_obstacles, parameters.nb_foods);
     env.generate_ground(parameters);
     env.display_ground();
@@ -31,16 +33,18 @@ void Simulation::start()
     int incr = 0;
     while(1)
     {
+        //Refreshes display
         application.processEvents();
 
+        //Every 500ms
         if(incr%5 == 0)
         {
-
+            //Each ant do an action
             for(auto& ant : env.get_anthill()->get_ants())
             {
                 ant->Action();
                 ant->set_time_to_transition(ant->get_time_to_transition() - 1);
-                if(ant->get_time_to_transition() <=0) //ant->get_max_food_need() - ant->get_food_need()) <=0)
+                if(ant->get_time_to_transition() <=0)
                 {
                     env.get_to_recreate().insert(std::pair<int, bool>(ant->getType(), ant->get_is_queen()));
                 }
@@ -61,25 +65,17 @@ void Simulation::start()
                                                            );
             transition();
 
-//            for(auto& ant : env.get_anthill()->get_ants())
-//            {
-//                transition(ant);
-//            }
-
             std::cout << "Tour : " << incr/5 << std::endl;
             display_anthill_status(incr/5);
             apply_disappearance_rate();
         }
 
+        //Every 15sec
         if(incr%150 == 0)
             env.regenerate_food(2);
 
         std::this_thread::sleep_for (std::chrono::milliseconds(100));
         incr++;
-//        if(incr == 100)
-//        {
-//            break;
-//        }
     }
 }
 

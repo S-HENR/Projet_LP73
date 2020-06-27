@@ -5,9 +5,7 @@ Food::Food(int _x, int _y) :
     Ground(true, _x, _y),
     generator((std::random_device())())
 {
-    //random de 8 à 12 à affecter à quantity?
-    //quantity = rand() % 13 + 7;
-
+    //Generates the food block with an amount of food between 10 and 20 units
     std::uniform_int_distribution<int> distr(10, 20);
     int rand = distr(generator);
 
