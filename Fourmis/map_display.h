@@ -11,7 +11,7 @@ class Map_display
 {
 public:
     Map_display();
-    void display(std::vector<std::vector<Ground*>>& board, int x, int y);
+    void display(std::vector<std::vector<Ground*>>& board);
     void refresh_display(int choice, int x, int y);
 private:
     QWidget *widget;
