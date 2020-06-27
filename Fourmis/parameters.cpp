@@ -6,6 +6,7 @@ Parameters::Parameters(QWidget *parent) :
     ui(new Ui::Parameters)
 {
     ui->setupUi(this);
+    ui->msg_error->hide();
 }
 
 Parameters::~Parameters()
@@ -57,8 +58,16 @@ void Parameters::on_pushButton_clicked()
     carrying_capacity = ui->lineEdit_13->text().toInt() ? ui->lineEdit_13->text().toInt() : 10;
     save << carrying_capacity << '\n';
 
-    save.close();
-    this->close();
+
+    if((sizeX*sizeY*0.8) > (nb_obstacles + nb_foods))
+    {
+        save.close();
+        this->close();
+    }
+    else
+    {
+        ui->msg_error->show();
+    }
 }
 
 
