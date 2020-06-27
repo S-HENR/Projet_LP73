@@ -59,7 +59,12 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                   break;
                //case dirt, increase the prob according to presence of pheromone
                case 1:
-                  box.prob += box.prob * (dirt_tile->get_pheromone_rate() / 100);
+                  if(box.tile->get_coordinates().x == warrior.get_old_tile().x && box.tile->get_coordinates().y == warrior.get_old_tile().y)
+                  {
+                      box.prob = 0.01;
+                  }else if(dirt_tile->get_pheromone_rate() > 0){
+                    box.prob += box.prob * (dirt_tile->get_pheromone_rate() / 100);
+                  }
                   break;
               //case obstacle, prob = 0, cannot go
               case 2:
@@ -79,6 +84,10 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                       return std::make_unique<PickingUpFoodState>(*food_tile);
                   }
 
+                  if(box.tile->get_coordinates().x == warrior.get_old_tile().x && box.tile->get_coordinates().y == warrior.get_old_tile().y)
+                  {
+                      box.prob = 0.01;
+                  }
                  break;
                 }
                default:
@@ -114,27 +123,28 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
             {
                 //display the ant's tile picture without the ant on it
 
-                switch (warrior.get_env().getTile(warrior.get_coordinates().x, warrior.get_coordinates().y)->getType())
+                switch (warrior.get_env().getTile(x,y)->getType())
                 {
                    //case anthill
                    case 0:
                       break;
                    //case dirt
                    case 1:
-                      warrior.get_env().get_map().refresh_display(0, warrior.get_coordinates().x, warrior.get_coordinates().y);
+                      warrior.get_env().get_map().refresh_display(0, x, y);
                       break;
                   //case obstacle
                   case 2:
                       break;
                   //case food
                   case 3:
-                      warrior.get_env().get_map().refresh_display(1, warrior.get_coordinates().x, warrior.get_coordinates().y);
+                      warrior.get_env().get_map().refresh_display(1, x, y);
                      break;
                    default:
                      return nullptr;
                      std::cout << "Switch case 2 error in warrior moving state";
                 }
 
+                warrior.set_old_tile(x,y);
                 //moving the ant
                 warrior.movement(box.tile->get_coordinates().x, box.tile->get_coordinates().y);
 

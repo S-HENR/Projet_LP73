@@ -40,8 +40,12 @@ public:
     coord get_coordinates() const;
     void set_coordinates(const int &x, const int &y);
 
+    coord get_old_tile() const;
+    void set_old_tile(const int &x, const int &y);
+
 private:
     coord coordinates;
+    coord old_tile;
     bool is_queen;
     float food_need;
     int max_food_need;

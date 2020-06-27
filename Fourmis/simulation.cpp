@@ -68,7 +68,7 @@ void Simulation::start()
 
             std::cout << "Tour : " << incr/5 << std::endl;
             display_anthill_status(incr/5);
-            //apply_disappearance_rate();
+            apply_disappearance_rate();
         }
 
         if(incr%150 == 0)

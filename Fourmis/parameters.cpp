@@ -18,7 +18,7 @@ void Parameters::on_pushButton_clicked()
     std::ofstream save;
     save.open("../save.txt");
 
-    sizeX = ui->lineEdit_1->text().toInt() ? ui->lineEdit_1->text().toInt() : 15;
+    sizeX = ui->lineEdit_1->text().toInt() ? ui->lineEdit_1->text().toInt() : 30;
     save << sizeX << '\n';
 
     sizeY = ui->lineEdit_2->text().toInt() ? ui->lineEdit_2->text().toInt() : 15;
@@ -27,7 +27,7 @@ void Parameters::on_pushButton_clicked()
     nb_obstacles = ui->lineEdit_3->text().toInt() ? ui->lineEdit_3->text().toInt() : 50;
     save << nb_obstacles << '\n';
 
-    nb_foods = ui->lineEdit_4->text().toInt() ? ui->lineEdit_4->text().toInt() : 50;
+    nb_foods = ui->lineEdit_4->text().toInt() ? ui->lineEdit_4->text().toInt() : 30;
     save << nb_foods << '\n';
 
     pheromone_disappearance_rate = ui->lineEdit_5->text().toInt() ? ui->lineEdit_5->text().toFloat() : 0.95;
@@ -36,25 +36,25 @@ void Parameters::on_pushButton_clicked()
     nb_max_ants = ui->lineEdit_6->text().toInt() ? ui->lineEdit_6->text().toInt() : 30;
     save << nb_max_ants << '\n';
 
-    nb_max_food = ui->lineEdit_7->text().toInt() ? ui->lineEdit_7->text().toInt() : 30;
+    nb_max_food = ui->lineEdit_7->text().toInt() ? ui->lineEdit_7->text().toInt() : 500;
     save << nb_max_food << '\n';
 
-    nb_init_larvas = ui->lineEdit_8->text().toInt() ? ui->lineEdit_8->text().toInt() : 0;
+    nb_init_larvas = ui->lineEdit_8->text().toInt() ? ui->lineEdit_8->text().toInt() : 5;
     save << nb_init_larvas << '\n';
 
-    nb_init_workers = ui->lineEdit_9->text().toInt() ? ui->lineEdit_9->text().toInt() : 2;
+    nb_init_workers = ui->lineEdit_9->text().toInt() ? ui->lineEdit_9->text().toInt() : 7;
     save << nb_init_workers << '\n';
 
-    nb_init_warriors = ui->lineEdit_10->text().toInt() ? ui->lineEdit_10->text().toInt() : 3;
+    nb_init_warriors = ui->lineEdit_10->text().toInt() ? ui->lineEdit_10->text().toInt() : 10;
     save << nb_init_warriors << '\n';
 
-    amount_food_need = ui->lineEdit_11->text().toInt() ? ui->lineEdit_11->text().toInt() : 30;
+    amount_food_need = ui->lineEdit_11->text().toInt() ? ui->lineEdit_11->text().toInt() : 50;
     save << amount_food_need << '\n';
 
     time_to_transition = ui->lineEdit_12->text().toInt() ? ui->lineEdit_12->text().toInt() : 100;
     save << time_to_transition << '\n';
 
-    carrying_capacity = ui->lineEdit_13->text().toInt() ? ui->lineEdit_13->text().toInt() : 10;
+    carrying_capacity = ui->lineEdit_13->text().toInt() ? ui->lineEdit_13->text().toInt() : 6;
     save << carrying_capacity << '\n';
 
     save.close();

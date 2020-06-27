@@ -39,7 +39,7 @@ void Map_display::display(std::vector<std::vector<Ground*>>& board, int length, 
     //Add a scrollbar to the window
     scrollArea->setWidget(widget);
     //Display the map
-    scrollArea->show();
+    scrollArea->showMaximized();
 
     //Initialize the view to display the Anthill in the middle of the window
     scrollArea->verticalScrollBar()->setValue(scrollArea->verticalScrollBar()->maximum()/2);
@@ -86,5 +86,5 @@ void Map_display::refresh_display(int choice, int x, int y)
     gridLayout->addWidget(label_img, y, x);
     scrollArea->setWidget(widget);
     //display the map updated
-    scrollArea->show();
+    scrollArea->showMaximized();
 }

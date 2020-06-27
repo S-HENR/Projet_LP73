@@ -2,6 +2,7 @@
 
 Ant::Ant(Environnement& _env, Anthill* _anthill, bool _is_queen, int _max_food_need, int _time_to_transition, float _food_need, std::unique_ptr<State> _state) :
     coordinates(_anthill->get_coordinates()),
+    old_tile(_anthill->get_coordinates()),
     is_queen(_is_queen),
     food_need(_food_need),
     max_food_need(_max_food_need),
@@ -99,4 +100,15 @@ void Ant::set_coordinates(const int &x, const int &y)
 {
     coordinates.x = x;
     coordinates.y = y;
+}
+
+coord Ant::get_old_tile() const
+{
+    return old_tile;
+}
+
+void Ant::set_old_tile(const int &x, const int &y)
+{
+    old_tile.x = x;
+    old_tile.y = y;
 }
