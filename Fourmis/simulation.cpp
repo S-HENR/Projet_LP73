@@ -31,7 +31,7 @@ void Simulation::initialize_simulation()
 void Simulation::start()
 {
     int incr = 0;
-    while(1)
+    while(!anthill_status.get_stop_simu())
     {
         //Refreshes display
         application.processEvents();

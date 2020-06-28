@@ -37,8 +37,5 @@ std::unique_ptr<State> FeedingState::Action(Ant& ant)
 
     hungry_ant->set_is_being_fed(false);
     return std::make_unique<IdleWorker>();
-
-//    if(false) // Une condition pr passer à un nouvelle état
-//        return std::make_unique<UnAutreEtat>();
 }
 

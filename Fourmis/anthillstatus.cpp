@@ -6,6 +6,7 @@ AnthillStatus::AnthillStatus(QWidget *parent) :
     ui(new Ui::AnthillStatus)
 {
     ui->setupUi(this);
+    stop_simu = false;
 }
 
 AnthillStatus::~AnthillStatus()
@@ -24,4 +25,14 @@ void AnthillStatus::display(int current_round, int nb_ant, int nb_egg, int nb_la
     ui->label_nb_warrior->setText(QString::number(nb_warrior));
     ui->label_nb_queen->setText(QString::number(nb_queen));
     ui->label_amount_food->setText(QString::number(amount_food) + "/" + QString::number(max_amount_food));
+}
+
+void AnthillStatus::on_pushButton_clicked()
+{
+    stop_simu = true;
+}
+
+bool AnthillStatus::get_stop_simu()
+{
+    return stop_simu;
 }
