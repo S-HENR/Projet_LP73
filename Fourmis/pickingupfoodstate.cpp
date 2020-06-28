@@ -2,7 +2,7 @@
 #include "ant.h"
 #include "warrior.h"
 #include "movingstate.h"
-#include "gobackhomestate.h"
+#include "goingbackhomestate.h"
 
 PickingUpFoodState::PickingUpFoodState(Food& tile) : food_tile(tile)
 {
@@ -48,7 +48,7 @@ std::unique_ptr<State> PickingUpFoodState::Action(Ant& ant)
 
     if(warrior.get_quantity_carried() >= warrior.get_carrying_capacity())
     {
-        return std::make_unique<GoBackHomeState>(size, board, warrior.get_coordinates(), warrior.get_anthill()->get_coordinates());
+        return std::make_unique<GoingBackHomeState>(size, board, warrior.get_coordinates(), warrior.get_anthill()->get_coordinates());
     }
     return std::make_unique<MovingState>();
 

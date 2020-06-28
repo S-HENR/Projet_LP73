@@ -129,19 +129,21 @@ void Simulation::transition() //std::shared_ptr<Ant>& ant)
                 env.get_anthill()->get_ants().emplace_back(newAnt);
                 break;
             case 1:
-                newAnt = std::make_shared<Worker>(env, env.get_anthill(), ant.second, parameters.amount_food_need, parameters.time_to_transition);
-                env.get_anthill()->get_ants().emplace_back(newAnt);
+                if(ant.second == true)
+                {
+                    newAnt = std::make_shared<Queen>(env, env.get_anthill(), ant.second, parameters.amount_food_need, parameters.time_to_transition);
+                    env.get_anthill()->get_ants().emplace_back(newAnt);
+                }else{
+                    newAnt = std::make_shared<Worker>(env, env.get_anthill(), ant.second, parameters.amount_food_need, parameters.time_to_transition);
+                    env.get_anthill()->get_ants().emplace_back(newAnt);
+                }
                 break;
             case 2:
                 newAnt = std::make_shared<Warrior>(env, env.get_anthill(), ant.second, parameters.amount_food_need, parameters.time_to_transition, parameters.carrying_capacity);
                 env.get_anthill()->get_ants().emplace_back(newAnt);
                 break;
             case 3:
-                if(ant.second == true)
-                {
-                    newAnt = std::make_shared<Queen>(env, env.get_anthill(), ant.second, parameters.amount_food_need, parameters.time_to_transition);
-                    env.get_anthill()->get_ants().emplace_back(newAnt);
-                }
+
                 break;
             case 4 :
                 newAnt = std::make_shared<Queen>(env, env.get_anthill(), ant.second, parameters.amount_food_need, parameters.time_to_transition);

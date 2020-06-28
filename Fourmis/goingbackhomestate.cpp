@@ -1,4 +1,4 @@
-#include "gobackhomestate.h"
+#include "goingbackhomestate.h"
 #include "ant.h"
 #include "warrior.h"
 #include "AStar.hpp"
@@ -6,7 +6,7 @@
 #include "movingstate.h"
 
 
-GoBackHomeState::GoBackHomeState(std::array<int, 2> size, const std::vector<std::vector<Ground*>>& board, const coord& _coordinates_ant, const coord& _coordinates_anthill) :
+GoingBackHomeState::GoingBackHomeState(std::array<int, 2> size, const std::vector<std::vector<Ground*>>& board, const coord& _coordinates_ant, const coord& _coordinates_anthill) :
     coordinates_ant{.x = _coordinates_ant.x, .y = _coordinates_ant.y},
     coordinates_anthill{.x = _coordinates_anthill.x, .y = _coordinates_anthill.y}
 {
@@ -42,7 +42,7 @@ GoBackHomeState::GoBackHomeState(std::array<int, 2> size, const std::vector<std:
 }
 
 
-std::unique_ptr<State> GoBackHomeState::Action(Ant& ant)
+std::unique_ptr<State> GoingBackHomeState::Action(Ant& ant)
 {
     Warrior& warrior = dynamic_cast<Warrior&>(ant);
 

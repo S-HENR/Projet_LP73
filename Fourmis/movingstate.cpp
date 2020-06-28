@@ -1,5 +1,5 @@
 #include "ant.h"
-#include "gobackhomestate.h"
+#include "goingbackhomestate.h"
 #include "movingstate.h"
 #include "pickingupfoodstate.h"
 #include "puttingdownfoodstate.h"
@@ -31,7 +31,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
         static_cast<int>(board[0].size())
     };
 
-    //if the warrior is inside the anthill, will put down the food she's carrying (if anthill capacity full or if the ant doesn't have any food on her back will be take care of in the next state
+    //if the warrior is inside the anthill, will put down the food she's carrying (if anthill capacity is full or if the ant doesn't have any food on her back, it will be taken care of in the next state)
     if((warrior.get_env().getTile(x,y)->getType() == 0) && (warrior.get_quantity_carried() > 0))
     {
         return std::make_unique<PuttingDownFoodState>();
@@ -39,7 +39,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
     //if the warrior is outside the anthill and her carrying capacity is full AND she's not hungry, she's going back to the anthill to put down her food
     else if((warrior.get_quantity_carried() >= warrior.get_carrying_capacity()) && !((warrior.get_max_food_need() - warrior.get_food_need()) <= 20))
     {
-        return std::make_unique<GoBackHomeState>(size, board, warrior.get_coordinates(), warrior.get_anthill()->get_coordinates());
+        return std::make_unique<GoingBackHomeState>(size, board, warrior.get_coordinates(), warrior.get_anthill()->get_coordinates());
     }
     //if the warrior is outside the anthill and her carrying capacity is not full
     else
@@ -63,7 +63,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
                   {
                       box.prob = 0.01;
                   }else if(dirt_tile->get_pheromone_rate() > 0){
-                    box.prob += box.prob * (dirt_tile->get_pheromone_rate() / 100);
+                    box.prob += (dirt_tile->get_pheromone_rate() / 100);
                   }
                   break;
               //case obstacle, prob = 0, cannot go

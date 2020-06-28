@@ -24,7 +24,7 @@ SOURCES += \
     environnement.cpp \
     feedingstate.cpp \
     food.cpp \
-    gobackhomestate.cpp \
+    goingbackhomestate.cpp \
     ground.cpp \
     idleegg.cpp \
     idlelarva.cpp \
@@ -59,7 +59,7 @@ HEADERS += \
     environnement.h \
     feedingstate.h \
     food.h \
-    gobackhomestate.h \
+    goingbackhomestate.h \
     ground.h \
     idleegg.h \
     idlelarva.h \
