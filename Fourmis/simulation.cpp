@@ -93,7 +93,7 @@ void Simulation::apply_disappearance_rate()
             {
                 //applies disappearance rate and update the map if there is no more pheromones on the block
                 if(dynamic_cast<Dirt*>(tile)->apply_disappearance_rate(parameters.pheromone_disappearance_rate) == 0)
-                    env.get_map().refresh_display(1, tile->get_coordinates().x, tile->get_coordinates().y);
+                    env.get_map().refresh_display(0, tile->get_coordinates().x, tile->get_coordinates().y);
             }
         }
     }
