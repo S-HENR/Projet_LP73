@@ -9,7 +9,7 @@ public:
     Dirt();
     Dirt(int _x, int _y);
     ~Dirt();
-    void apply_disappearance_rate(float pheromone_disappearance_rate);
+    int apply_disappearance_rate(float pheromone_disappearance_rate);
     virtual int getType();
 
     float get_pheromone_rate() const;

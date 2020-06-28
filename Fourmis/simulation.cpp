@@ -18,9 +18,11 @@ void Simulation::fill_in_parameters()
 }
 void Simulation::initialize_simulation()
 {
-
+    //Shows parameters window
     fill_in_parameters();
     application.exec();
+
+    //Generates Environnement
     env = Environnement(parameters.sizeX, parameters.sizeY, parameters.nb_obstacles, parameters.nb_foods);
     env.generate_ground(parameters);
     env.display_ground();
@@ -31,67 +33,67 @@ void Simulation::start()
     int incr = 0;
     while(1)
     {
+        //Refreshes display
         application.processEvents();
 
+        //Every 500ms
         if(incr%5 == 0)
         {
-
+            //Each ant do an action
             for(auto& ant : env.get_anthill()->get_ants())
             {
                 ant->Action();
                 ant->set_time_to_transition(ant->get_time_to_transition() - 1);
-                if(ant->get_time_to_transition() <=0) //ant->get_max_food_need() - ant->get_food_need()) <=0)
+                if(ant->get_time_to_transition() <=0)
                 {
                     env.get_to_recreate().insert(std::pair<int, bool>(ant->getType(), ant->get_is_queen()));
                 }
             }
 
+            //deletes ants who reached their transition state
             env.get_anthill()->get_ants().erase(std::remove_if(
                                                                  env.get_anthill()->get_ants().begin(),
                                                                  env.get_anthill()->get_ants().end(),
                                                                  [](std::shared_ptr<Ant> _ant){return _ant->get_time_to_transition() <=0;}),
                                                                  env.get_anthill()->get_ants().end()
                                                            );
-
+            //deletes ants who starved to death
             env.get_anthill()->get_ants().erase(std::remove_if(
                                                                  env.get_anthill()->get_ants().begin(),
                                                                  env.get_anthill()->get_ants().end(),
                                                                  [](std::shared_ptr<Ant> _ant){return (_ant->get_max_food_need() - _ant->get_food_need()) <=0;}),
                                                                  env.get_anthill()->get_ants().end()
                                                            );
+            //creates new ants that have a new state
             transition();
 
-//            for(auto& ant : env.get_anthill()->get_ants())
-//            {
-//                transition(ant);
-//            }
+            display_anthill_status(incr/5);
+
+            apply_disappearance_rate();
 
             std::cout << "Tour : " << incr/5 << std::endl;
-            display_anthill_status(incr/5);
-            apply_disappearance_rate();
         }
 
+        //Every 15sec
         if(incr%150 == 0)
             env.regenerate_food(2);
 
         std::this_thread::sleep_for (std::chrono::milliseconds(100));
         incr++;
-//        if(incr == 100)
-//        {
-//            break;
-//        }
     }
 }
 
 void Simulation::apply_disappearance_rate()
 {
-    for (int x = 0 ; x < env.getSizeX() ; x++)
+    for(auto& column : env.get_board())
     {
-        for (int y = 0; y < env.getSizeY() ; y++)
+        for(auto& tile : column)
         {
-            if(env.getTile(x,y)->getType() == 1 && dynamic_cast<Dirt*>(env.getTile(x,y))->get_pheromone_rate() != 0)
+            if(tile->getType() == 1 && dynamic_cast<Dirt*>(tile)->get_pheromone_rate() != 0)
             {
-                dynamic_cast<Dirt*>(env.getTile(x,y))->apply_disappearance_rate(parameters.pheromone_disappearance_rate);
+                //applies disappearance rate and update the map if there is no more pheromones on the block
+                if(dynamic_cast<Dirt*>(tile)->apply_disappearance_rate(parameters.pheromone_disappearance_rate) == 0)
+                    env.get_map().refresh_display(1, tile->get_coordinates().x, tile->get_coordinates().y);
             }
         }
     }
@@ -99,6 +101,7 @@ void Simulation::apply_disappearance_rate()
 
 void Simulation::display_anthill_status(int current_round)
 {
+    //gets informations about the simulation
     int nb_ant = env.get_anthill()->get_ants().size();
     int nb_egg = env.get_anthill()->get_nb_ant_type(0);
     int nb_larva = env.get_anthill()->get_nb_ant_type(1);
@@ -109,11 +112,12 @@ void Simulation::display_anthill_status(int current_round)
     int amount_food = env.get_anthill()->get_quantity_food_stock();
     int max_amount_food = env.get_anthill()->get_max_quantity_food_stock();
 
+    //update information window (AnthillStatus)
     anthill_status.display(current_round, nb_ant, nb_egg, nb_larva, nb_worker, nb_warrior, nb_queen, nb_max_ant, amount_food, max_amount_food);
     anthill_status.show();
 }
 
-void Simulation::transition() //std::shared_ptr<Ant>& ant)
+void Simulation::transition()
 {
     for(auto& ant : env.get_to_recreate())
     {
@@ -154,22 +158,4 @@ void Simulation::transition() //std::shared_ptr<Ant>& ant)
         }
     }
     env.get_to_recreate().clear();
-
-
-//    ant->set_time_to_transition(ant->get_time_to_transition() - 1);
-//    if(ant->get_time_to_transition() == 0)
-//    {
-//        switch (ant->getType())
-//        {
-//        case 0:
-//            ant = std::make_shared<Larva>(env, env.get_anthill(), false, parameters.amount_food_need, parameters.time_to_transition);
-//            break;
-//        case 1:
-//            ant = std::make_shared<Worker>(env, env.get_anthill(), false, parameters.amount_food_need, parameters.time_to_transition);
-//            break;
-//        case 2:
-//            ant = std::make_shared<Warrior>(env, env.get_anthill(), false, parameters.amount_food_need, parameters.time_to_transition, parameters.carrying_capacity);
-//            break;
-//        }
-//    }
 }

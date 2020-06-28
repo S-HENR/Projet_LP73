@@ -13,17 +13,19 @@ GoingBackHomeState::GoingBackHomeState(std::array<int, 2> size, const std::vecto
     AStar::Generator generator;
     // Set 2d map size.
     generator.setWorldSize({size[0],size[1]});
-    // You can use a few heuristics : manhattan, euclidean or octagonal.
     generator.setHeuristic(AStar::Heuristic::euclidean);
     generator.setDiagonalMovement(false);
 
-
-    for(int x = 0 ; x < size[0] ; x++)
+    //adds obstacles to the 2d map
+    for(auto& column : board)
     {
-        for(int y = 0 ; y < size[1] ; y++)
+        for(auto& tile : column)
         {
-            if(!board[x][y]->getCrossable())
-                generator.addCollision({x,y});
+            if(!tile->getCrossable())
+            {
+                auto coordinates = tile->get_coordinates();
+                generator.addCollision({coordinates.x,coordinates.y});
+            }
         }
     }
 
@@ -31,13 +33,15 @@ GoingBackHomeState::GoingBackHomeState(std::array<int, 2> size, const std::vecto
     // This method returns vector of coordinates from target to source.
     auto path = generator.findPath({coordinates_anthill.x, coordinates_anthill.y}, {coordinates_ant.x, coordinates_ant.y});
 
+    //convert path to vector of coordinates to make easier manipulations
     std::vector<int> coordinates(2);
-
     for(auto& coordinate : path) {
         coordinates[0] = coordinate.x;
         coordinates[1] = coordinate.y;
         steps.push_back(coordinates);
     }
+
+    //Erases the first entry, because this is the current coordinates of the ant
     steps.erase(steps.begin());
 }
 
@@ -83,6 +87,7 @@ std::unique_ptr<State> GoingBackHomeState::Action(Ant& ant)
     //if tile is dirt then lay pheromone
     if(warrior.get_env().getTile(x,y)->getType() == 1){
         warrior.lay_pheromone();
+        warrior.get_env().get_map().refresh_display(6, x, y);
     }
 
     //ant moves
@@ -125,10 +130,3 @@ std::unique_ptr<State> GoingBackHomeState::Action(Ant& ant)
     }
     return std::make_unique<PuttingDownFoodState>();
 }
-
-
-//while(steps.size() > 0)
-//{
-//    std::cout << steps[0][0] << " " << steps[0][1] << std::endl;
-//    steps.erase(steps.begin());
-//}

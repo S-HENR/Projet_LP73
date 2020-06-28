@@ -82,11 +82,13 @@ void Map_display::refresh_display(int choice, int x, int y)
     case 5:
         label_img->setPixmap(QPixmap("../img/dirt-ant-west.jpg"));
         break;
+    case 6:
+        label_img->setPixmap(QPixmap("../img/pheromone.jpg"));
     }
 
     //update map[x][y]
     gridLayout->addWidget(label_img, y, x);
     scrollArea->setWidget(widget);
     //display the map updated
-    scrollArea->showMaximized();
+    scrollArea->show();
 }

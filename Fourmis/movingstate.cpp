@@ -125,23 +125,30 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
 
                 switch (warrior.get_env().getTile(x,y)->getType())
                 {
-                   //case anthill
-                   case 0:
-                      break;
-                   //case dirt
-                   case 1:
-                      warrior.get_env().get_map().refresh_display(0, x, y);
-                      break;
-                  //case obstacle
-                  case 2:
-                      break;
-                  //case food
-                  case 3:
-                      warrior.get_env().get_map().refresh_display(1, x, y);
-                     break;
-                   default:
-                     return nullptr;
-                     std::cout << "Switch case 2 error in warrior moving state";
+                //case anthill
+                case 0:
+                    break;
+                //case dirt
+                case 1:
+                    if(dynamic_cast<Dirt*>(warrior.get_env().getTile(x,y))->get_pheromone_rate() > 0)
+                    {
+                        warrior.get_env().get_map().refresh_display(6, x, y);
+                    }
+                    else
+                    {
+                        warrior.get_env().get_map().refresh_display(0, x, y);
+                    }
+                    break;
+                //case obstacle
+                case 2:
+                    break;
+                //case food
+                case 3:
+                    warrior.get_env().get_map().refresh_display(1, x, y);
+                    break;
+                default:
+                    return nullptr;
+                    std::cout << "Switch case 2 error in warrior moving state";
                 }
 
                 warrior.set_old_tile(x,y);
@@ -181,9 +188,7 @@ std::unique_ptr<State> MovingState::Action(Ant &ant)
             lower_threshold += box.prob;
         }
     }
-    //    if(false) // Une condition pr passer à un nouvelle état
-    //        return std::make_unique<UnAutreEtat>();
-        return nullptr;
+    return nullptr;
 }
 
 std::vector<nearby_tiles> MovingState::get_nearby_tiles(Warrior* _warrior)
@@ -192,6 +197,7 @@ std::vector<nearby_tiles> MovingState::get_nearby_tiles(Warrior* _warrior)
     int x = _warrior->get_coordinates().x;
     int y = _warrior->get_coordinates().y;
 
+    //size of the map
     int max_x = _warrior->get_env().getSizeX();
     int max_y = _warrior->get_env().getSizeY();
 
@@ -202,6 +208,7 @@ std::vector<nearby_tiles> MovingState::get_nearby_tiles(Warrior* _warrior)
 
     std::vector<nearby_tiles> tiles;
 
+    //searches potential movement
     auto check_bounds = [max_x, max_y, _warrior, &tiles](const coord& new_coord){
         if(new_coord.x >= 0 && new_coord.x < max_x && new_coord.y >= 0 && new_coord.y < max_y)
         {

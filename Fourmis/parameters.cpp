@@ -16,6 +16,7 @@ Parameters::~Parameters()
 
 void Parameters::on_pushButton_clicked()
 {
+    //initializes parameters and saves them in save.txt for the next run
     std::ofstream save;
     save.open("../save.txt");
 
@@ -73,6 +74,7 @@ void Parameters::on_pushButton_clicked()
 
 void Parameters::on_pushButton_2_clicked()
 {
+    //Load previous configurations and initializes parameters with this configuration
     std::string line;
     std::ifstream save("../save.txt");
 
